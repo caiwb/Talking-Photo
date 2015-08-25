@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <development version="6000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="APPViewController">
+            <connections>
+                <outlet property="view" destination="6" id="7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="6">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_mainpage_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fpz-RG-tL9">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_mainpage_ps.png" translatesAutoresizingMaskIntoConstraints="NO" id="Yy2-iD-zbf">
+                    <rect key="frame" x="149" y="246" width="77" height="24"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_mainpage_czzp.png" translatesAutoresizingMaskIntoConstraints="NO" id="4y2-LC-qG1">
+                    <rect key="frame" x="149" y="396" width="77" height="24"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大嘴说图" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3k-13-yxQ">
+                    <rect key="frame" x="147" y="600" width="80" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="让图片管理从此简单" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8e-2H-As5">
+                    <rect key="frame" x="133" y="632" width="108" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22">
+                    <rect key="frame" x="133" y="130" width="108" height="108"/>
+                    <state key="normal" image="Dzst_mainpage_icon-camera.png">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="takePhoto:" destination="-1" eventType="touchUpInside" id="44"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26">
+                    <rect key="frame" x="133" y="280" width="108" height="108"/>
+                    <state key="normal" image="Dzst_mainpage_icon_search.png">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="selectPhoto:" destination="-1" eventType="touchUpInside" id="45"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="26" firstAttribute="centerX" secondItem="4y2-LC-qG1" secondAttribute="centerX" constant="-0.5" id="3Z3-Py-XeG"/>
+                <constraint firstItem="Fpz-RG-tL9" firstAttribute="top" secondItem="6" secondAttribute="top" id="6Bq-H2-eKd"/>
+                <constraint firstAttribute="trailing" secondItem="Fpz-RG-tL9" secondAttribute="trailing" id="7V9-J3-HQq"/>
+                <constraint firstItem="22" firstAttribute="centerX" secondItem="Yy2-iD-zbf" secondAttribute="centerX" constant="-0.5" id="KlN-ok-4HQ"/>
+                <constraint firstItem="4y2-LC-qG1" firstAttribute="top" secondItem="26" secondAttribute="bottom" constant="8" symbolic="YES" id="POh-BW-XrO"/>
+                <constraint firstAttribute="bottom" secondItem="Fpz-RG-tL9" secondAttribute="bottom" id="RiY-IC-JSq"/>
+                <constraint firstItem="Fpz-RG-tL9" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="SSp-pu-PAU"/>
+                <constraint firstItem="26" firstAttribute="centerX" secondItem="Yy2-iD-zbf" secondAttribute="centerX" constant="-0.5" id="San-IG-WlO"/>
+                <constraint firstAttribute="bottom" secondItem="i8e-2H-As5" secondAttribute="bottom" constant="20" symbolic="YES" id="bWW-JM-H1G"/>
+                <constraint firstItem="i8e-2H-As5" firstAttribute="centerX" secondItem="Fpz-RG-tL9" secondAttribute="centerX" constant="-0.5" id="ciC-Nu-MPH"/>
+                <constraint firstItem="Yy2-iD-zbf" firstAttribute="top" secondItem="22" secondAttribute="bottom" constant="8" symbolic="YES" id="lSe-Ac-B9E"/>
+                <constraint firstItem="d3k-13-yxQ" firstAttribute="centerX" secondItem="i8e-2H-As5" secondAttribute="centerX" id="mbE-yG-ber"/>
+                <constraint firstItem="26" firstAttribute="centerY" secondItem="Fpz-RG-tL9" secondAttribute="centerY" constant="0.5" id="nnX-y5-6C8"/>
+                <constraint firstItem="26" firstAttribute="top" secondItem="Yy2-iD-zbf" secondAttribute="bottom" constant="10" id="qJR-2n-sg6"/>
+                <constraint firstItem="26" firstAttribute="centerX" secondItem="Fpz-RG-tL9" secondAttribute="centerX" constant="-0.5" id="wOF-1h-3u0"/>
+                <constraint firstItem="i8e-2H-As5" firstAttribute="top" secondItem="d3k-13-yxQ" secondAttribute="bottom" constant="8" symbolic="YES" id="yg8-jJ-6Nh"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="618" y="704"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Dzst_mainpage_bg.png" width="375" height="667"/>
+        <image name="Dzst_mainpage_czzp.png" width="77" height="24"/>
+        <image name="Dzst_mainpage_icon-camera.png" width="108" height="108"/>
+        <image name="Dzst_mainpage_icon_search.png" width="108" height="108"/>
+        <image name="Dzst_mainpage_ps.png" width="77" height="24"/>
+    </resources>
+</document>
