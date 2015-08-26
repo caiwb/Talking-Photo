@@ -14,6 +14,15 @@
 #import "HttpHelper.h"
 #import "IATConfig.h"
 #import "ISRDataHelper.h"
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchAPI.h>
+
+@interface MyPhotoBrowser () <MAMapViewDelegate, AMapSearchDelegate>
+{
+    AMapSearchAPI *_search;
+}
+
+@end
 
 @implementation MyPhotoBrowser
 
@@ -107,25 +116,48 @@
                                                         object:nil];
     
 //    [[AudioRecorder sharedInstance] startRecord];
-    if (_iFlySpeechRecognizer == nil){
-        [self initRecognizer];
-    }
-    
+//    if (_iFlySpeechRecognizer == nil){
+//        [self initRecognizer];
+//    }
+//    
     self.recordingAudioPlot.hidden = NO;
     [self.view bringSubviewToFront:self.recordingAudioPlot];
+//    [self.recordingAudioPlot clear];
+//    [self.microphone startFetchingAudio];
     [self.recordingAudioPlot clear];
     [self.microphone startFetchingAudio];
+    
+    if (_iFlySpeechRecognizer == nil){
+        [self initRecognizer];//初始化识别对象
+    }
+    //start SR interface
+    [_iFlySpeechRecognizer cancel];
+    //设置音频来源为麦克风
+    [_iFlySpeechRecognizer setParameter:IFLY_AUDIO_SOURCE_MIC forKey:@"audio_source"];
+    //设置听写结果格式为json
+    [_iFlySpeechRecognizer setParameter:@"json" forKey:[IFlySpeechConstant RESULT_TYPE]];
+    //保存录音文件，保存在sdk工作路径中，如未设置工作路径，则默认保存在library/cache下
+    [_iFlySpeechRecognizer setParameter:@"asr2.pcm" forKey:[IFlySpeechConstant ASR_AUDIO_PATH]];
+    [_iFlySpeechRecognizer setDelegate:self];
+    BOOL ret = [_iFlySpeechRecognizer startListening];
+    if (ret == NO){
+        NSLog(@"failed");
+    }
+
 }
 
 -(void)stopRecord{
     self.recordingAudioPlot.hidden = YES;
+//    [self.microphone stopFetchingAudio];
+//    [self foldAllPhotos];
+
+
     [self.microphone stopFetchingAudio];
-    [self foldAllPhotos];
-    
-    NSURL* url = [[AudioRecorder sharedInstance] stopRecord];
-    if (url != nil) {
-        [HttpHelper search:self withSelector:@selector(searchResponse:) voicePath:[url path] tags:tags];
-    }
+    [_iFlySpeechRecognizer stopListening];
+//    NSURL* url = [[AudioRecorder sharedInstance] stopRecord];
+//    if (url != nil) {
+//        [HttpHelper search:self withSelector:@selector(searchResponse:) voicePath:[url path] tags:tags];
+//    }
 }
 
 -(void)foldAllPhotos{
@@ -167,7 +199,7 @@
 }
 
 -(void)startUpdateRecord {
-    [[AudioRecorder sharedInstance] startRecord];
+//    [[AudioRecorder sharedInstance] startRecord];
     
     self.recordingAudioPlot.hidden = NO;
     [self.recordingAudioPlot clear];
@@ -178,32 +210,32 @@
     [super scrollToBottom];
 }
 
--(void)stopUpdateRecord:(NSString*)imageName imageData:(NSData*)imageData {
-    self.recordingAudioPlot.hidden = YES;
-    [self.microphone stopFetchingAudio];
-    NSURL* url = [[AudioRecorder sharedInstance] stopRecord];
-    
-    if (url != nil) {
-        NSMutableArray* array = [[NSMutableArray alloc] init];
-        [array addObject:imageName];
-        NSArray* arr = [[NSArray alloc] initWithArray:array];
-        [HttpHelper uploadPhoto:self withSelector:@selector(uploadResponse:) imageName:arr imageData:imageData voicePath:[url path] date:nil location: nil];
-    }
-}
-
-#pragma mark - 需要在此加入分词
-
--(void)stopUpdateRecordList:(NSArray*)imageName imageData:(NSArray*)imageData {
-    //TOOD: upload group of images and one voice to website
-    self.recordingAudioPlot.hidden = YES;
-    [self.microphone stopFetchingAudio];
-    
-    NSURL* url = [[AudioRecorder sharedInstance] stopRecord];
-    
-    if (url != nil) {
-        [HttpHelper uploadPhoto:self withSelector:@selector(uploadResponse:) imageName:imageName imageData:nil voicePath:[url path] date:nil location: nil];
-    }
-}
+//-(void)stopUpdateRecord:(NSString*)imageName imageData:(NSData*)imageData {
+//    
+//    self.recordingAudioPlot.hidden = YES;
+//    [self.microphone stopFetchingAudio];
+//    NSURL* url = [[AudioRecorder sharedInstance] stopRecord];
+//    
+//    if (url != nil) {
+//        NSMutableArray* array = [[NSMutableArray alloc] init];
+//        [array addObject:imageName];
+//        NSArray* arr = [[NSArray alloc] initWithArray:array];
+////        [[HttpHelper sharedHttpHelper] uploadPhoto:self withSelector:@selector(uploadResponse:) imageName:arr imageData:imageData voicePath:[url path] date:nil location: nil];
+//    }
+//}
+//
+//
+//-(void)stopUpdateRecordList:(NSArray*)imageName imageData:(NSArray*)imageData {
+//    //TOOD: upload group of images and one voice to website
+//    self.recordingAudioPlot.hidden = YES;
+//    [self.microphone stopFetchingAudio];
+//    
+//    NSURL* url = [[AudioRecorder sharedInstance] stopRecord];
+//    
+//    if (url != nil) {
+////        [[HttpHelper sharedHttpHelper] uploadPhoto:self withSelector:@selector(uploadResponse:) imageName:imageName imageData:nil voicePath:[url path] date:nil location: nil];
+//    }
+//}
 
 -(void)uploadResponse:(NSData*)data {
     NSError *error2;
@@ -252,6 +284,23 @@
     
 }
 
+//地址转经纬度回调
+- (void)onGeocodeSearchDone:(AMapGeocodeSearchRequest *)request response:(AMapGeocodeSearchResponse *)response
+{
+    
+    if(response.geocodes.count == 0)
+    {
+        NSLog(@"address not found!");
+        return;
+    }
+    //处理搜索结果
+    NSString *strCount = [NSString stringWithFormat:@"count: %ld", (long)response.count];
+    NSLog(@"%@----%@",request.description, strCount);
+    for (AMapGeocode  *p in response.geocodes) {
+        NSLog(@"%@",p.location);
+    }
+}
+
 #pragma mark - IFlySpeechRecognizerDelegate
 
 /**
@@ -288,10 +337,21 @@
     }
     
     NSString * resultFromJson =  [ISRDataHelper stringFromJson:resultString];
-    self.result = [NSString stringWithFormat:@"%@%@", self.result,resultFromJson];
     
+    if(self.result == nil)
+    {
+        self.result = resultFromJson;
+    }
+    else
+    {
+        self.result = [NSString stringWithFormat:@"%@%@", self.result,resultFromJson];
+    }
     if (isLast){
-        NSLog(@"听写结果(json)：%@测试",  self.result);
+        NSLog(@"Search--听写结果(json)：%@测试",  self.result);
+
+#pragma ---- test
+        self.result = @"北京中关村微软大厦拍的照片";
+        [[HttpHelper sharedHttpHelper]AFNetworkingForVoiceTag:self.result forInserting:nil orSearching:self];
     }
 }
 

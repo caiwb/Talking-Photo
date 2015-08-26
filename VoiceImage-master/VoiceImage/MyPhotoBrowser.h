@@ -22,7 +22,7 @@ IFlySpeechRecognizerDelegate>{
 @property (nonatomic, strong) NSString * result;
 @property (nonatomic, strong) EZAudioPlotGL *recordingAudioPlot;
 @property (nonatomic, strong) IFlySpeechRecognizer *iFlySpeechRecognizer;//不带界面的识别对象
-- (void)setNavBarAppearance:(BOOL)animated;
+-(void)setNavBarAppearance:(BOOL)animated;
 -(void)startRecord;
 -(void)stopRecord;
 

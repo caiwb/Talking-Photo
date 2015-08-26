@@ -10,6 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 #include <AssetsLibrary/AssetsLibrary.h>
 #import "MyPhotoBrowser.h"
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchAPI.h>
 
 @interface APPViewController : UIViewController <CLLocationManagerDelegate>
 

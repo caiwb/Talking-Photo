@@ -10,6 +10,10 @@
 
 NSString * const kuserId = @"userId";
 
+@interface DataHolder ()
+
+@end
+
 @implementation DataHolder
 
 - (id) init
@@ -63,5 +67,8 @@ NSString * const kuserId = @"userId";
 -(UIImage*) getDefaultImage{
     return defaultImage;
 }
+
+
+
 
 @end

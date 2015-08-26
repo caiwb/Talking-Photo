@@ -30,7 +30,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+//	 Do any additional setup after loading the view, typically from a nib.
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
     
@@ -41,11 +42,11 @@
     
     [[DataHolder sharedInstance] loadData];
     if ([[DataHolder sharedInstance] userId] == nil) {
-        [HttpHelper AFNetworingForRegistry];
+        [[HttpHelper sharedHttpHelper]AFNetworingForRegistry];
         
     } else {
         userId = [[DataHolder sharedInstance] userId];
-        [HttpHelper AFNetworingForLoginWithGUID:userId];
+        [[HttpHelper sharedHttpHelper]AFNetworingForLoginWithGUID:userId];
     }
     
     if (!_locationManager){
@@ -59,10 +60,9 @@
             [_locationManager requestWhenInUseAuthorization];
         
         [_locationManager startUpdatingLocation];
-    }
-
-    
+    } 
 }
+
 
 //-(void)applyResponse:(NSData*) data {
 //    BOOL isOK = NO;

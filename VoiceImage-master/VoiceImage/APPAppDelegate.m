@@ -45,7 +45,7 @@
 //            NSLog(@"%@",imageName);
 //
 //            [HttpHelper AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImageData:obj[@"data"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
-            [HttpHelper AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImagePath:obj[@"path"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
+            [[HttpHelper sharedHttpHelper]AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImagePath:obj[@"path"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
 //
         }
     }
@@ -56,11 +56,6 @@
 {
     sleep(1);
     _isLoop = YES;
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.viewController = [[APPViewController alloc] initWithNibName:@"APPViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
     
     //创建语音配置,appid必须要传入，仅执行一次则可
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@", IFLY_APP_ID];
@@ -79,13 +74,10 @@
             sleep(5);
         }
     });
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        while (true)
-//        {
-//            sleep(3);
-//            [self uploadDataFromDB];
-//        }
-//    });
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [[APPViewController alloc] init];
+    
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

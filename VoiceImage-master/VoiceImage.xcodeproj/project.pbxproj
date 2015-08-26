@@ -20,6 +20,12 @@
 		39EBA2B91B8B58C4009D392F /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA2AF1B8B58C4009D392F /* AFURLResponseSerialization.m */; };
 		39EBA2BA1B8B58C4009D392F /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA2B11B8B58C4009D392F /* AFURLSessionManager.m */; };
 		39EBA2BE1B8B5A69009D392F /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39EBA2BD1B8B5A69009D392F /* image.jpg */; };
+		39EBA40A1B8D95FC009D392F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA4091B8D95FC009D392F /* Security.framework */; };
+		39EBA40C1B8D9618009D392F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA40B1B8D9618009D392F /* Foundation.framework */; };
+		39EBA40E1B8D961E009D392F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA40D1B8D961E009D392F /* UIKit.framework */; };
+		39EBA4101B8D9633009D392F /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA40F1B8D9633009D392F /* libstdc++.6.0.9.dylib */; };
+		39EBA4131B8D963F009D392F /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA4111B8D963F009D392F /* AMapSearchKit.framework */; };
+		39EBA4141B8D963F009D392F /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA4121B8D963F009D392F /* MAMapKit.framework */; };
 		EB2397D51B44E066004182BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2397D41B44E066004182BC /* main.m */; };
 		EB2397EF1B44E066004182BC /* VoiceImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2397EE1B44E066004182BC /* VoiceImageTests.m */; };
 		EB2398061B44E103004182BC /* APPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2397FB1B44E103004182BC /* APPViewController.m */; };
@@ -142,6 +148,12 @@
 		39EBA2B01B8B58C4009D392F /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		39EBA2B11B8B58C4009D392F /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		39EBA2BD1B8B5A69009D392F /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image.jpg; path = ../image.jpg; sourceTree = "<group>"; };
+		39EBA4091B8D95FC009D392F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		39EBA40B1B8D9618009D392F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		39EBA40D1B8D961E009D392F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		39EBA40F1B8D9633009D392F /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		39EBA4111B8D963F009D392F /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = Extern/AMapSearchKit.framework; sourceTree = "<group>"; };
+		39EBA4121B8D963F009D392F /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = Extern/MAMapKit.framework; sourceTree = "<group>"; };
 		EB2397CF1B44E066004182BC /* 大嘴说图.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "大嘴说图.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2397D31B44E066004182BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB2397D41B44E066004182BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -252,12 +264,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39EBA4131B8D963F009D392F /* AMapSearchKit.framework in Frameworks */,
+				39EBA4141B8D963F009D392F /* MAMapKit.framework in Frameworks */,
+				39EBA4101B8D9633009D392F /* libstdc++.6.0.9.dylib in Frameworks */,
+				EBFBBA561B6F0B9E0065902F /* libz.dylib in Frameworks */,
+				39EBA40E1B8D961E009D392F /* UIKit.framework in Frameworks */,
+				39EBA40C1B8D9618009D392F /* Foundation.framework in Frameworks */,
+				39EBA40A1B8D95FC009D392F /* Security.framework in Frameworks */,
+				EBFBBA521B6F0B100065902F /* CoreTelephony.framework in Frameworks */,
 				39BDA2141B84153E00CBA988 /* libsqlite3.dylib in Frameworks */,
 				EBFBBA5A1B6F0BD00065902F /* SystemConfiguration.framework in Frameworks */,
 				EBFBBA581B6F0BB50065902F /* AddressBook.framework in Frameworks */,
-				EBFBBA561B6F0B9E0065902F /* libz.dylib in Frameworks */,
 				EBFBBA541B6F0B5F0065902F /* libSunFlower.a in Frameworks */,
-				EBFBBA521B6F0B100065902F /* CoreTelephony.framework in Frameworks */,
 				EBFBBA4D1B6F077A0065902F /* iflyMSC.framework in Frameworks */,
 				EB4A48661B4E06A300CABEB1 /* AudioToolbox.framework in Frameworks */,
 				EB4A48641B4E068900CABEB1 /* GLKit.framework in Frameworks */,
@@ -426,6 +444,12 @@
 		EB85AA9D1B5CE04900F4F4F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39EBA4111B8D963F009D392F /* AMapSearchKit.framework */,
+				39EBA4121B8D963F009D392F /* MAMapKit.framework */,
+				39EBA40F1B8D9633009D392F /* libstdc++.6.0.9.dylib */,
+				39EBA40D1B8D961E009D392F /* UIKit.framework */,
+				39EBA40B1B8D9618009D392F /* Foundation.framework */,
+				39EBA4091B8D95FC009D392F /* Security.framework */,
 				39BDA2131B84153E00CBA988 /* libsqlite3.dylib */,
 				EBFBBA591B6F0BD00065902F /* SystemConfiguration.framework */,
 				EBFBBA571B6F0BB50065902F /* AddressBook.framework */,
@@ -820,6 +844,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/Extern",
 				);
 				INFOPLIST_FILE = VoiceImage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -828,6 +853,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/lib/sunflower",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "大嘴说图";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -846,6 +872,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/Extern",
 				);
 				INFOPLIST_FILE = VoiceImage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -854,6 +881,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/lib/sunflower",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "大嘴说图";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

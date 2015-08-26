@@ -205,12 +205,12 @@
     self.view.userInteractionEnabled = NO;
     
     NSString * imagePathString = [self.imagePath absoluteString];
-    NSMutableDictionary * insertData = [NSMutableDictionary dictionary];
-    insertData[@"imageName"] = self.imageName;
-    insertData[@"imagePath"] = imagePathString;
-    insertData[@"desc"] = self.desc;
+    NSMutableDictionary * insertParams = [NSMutableDictionary dictionary];
+    insertParams[@"imageName"] = self.imageName;
+    insertParams[@"imagePath"] = imagePathString;
+    insertParams[@"desc"] = self.desc;
 
-    [HttpHelper AFNetworkingForVoiceTag:self.desc forInserting:insertData orSearching:nil];
+    [[HttpHelper sharedHttpHelper] AFNetworkingForVoiceTag:self.desc forInserting:insertParams orSearching:nil];
        
     CompleteViewController *picker = [[CompleteViewController alloc] init];
     [self presentViewController:picker animated:YES completion:NULL];
