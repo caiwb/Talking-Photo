@@ -16,15 +16,30 @@
 #import "ISRDataHelper.h"
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchAPI.h>
+#import "DataBaseHelper.h"
+
+#define SEARCH_PHOTO 0
+#define RETAG_PHOTO 1
 
 @interface MyPhotoBrowser () <MAMapViewDelegate, AMapSearchDelegate>
 {
     AMapSearchAPI *_search;
+    int _voiceSource;
 }
+@property (strong, nonatomic) NSMutableArray * imageNameArray;
 
 @end
 
 @implementation MyPhotoBrowser
+
+- (NSMutableArray *) imageNameArray
+{
+    if(_imageNameArray == nil)
+    {
+        _imageNameArray = [[NSMutableArray alloc] init];
+    }
+    return _imageNameArray;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -112,18 +127,9 @@
 }
 
 -(void)startRecord{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DISABLE_GRIDVIEW"
-                                                        object:nil];
-    
-//    [[AudioRecorder sharedInstance] startRecord];
-//    if (_iFlySpeechRecognizer == nil){
-//        [self initRecognizer];
-//    }
-//    
+    _voiceSource = 0;
     self.recordingAudioPlot.hidden = NO;
     [self.view bringSubviewToFront:self.recordingAudioPlot];
-//    [self.recordingAudioPlot clear];
-//    [self.microphone startFetchingAudio];
     [self.recordingAudioPlot clear];
     [self.microphone startFetchingAudio];
     
@@ -147,22 +153,17 @@
 }
 
 -(void)stopRecord{
+    _voiceSource = 0;
     self.recordingAudioPlot.hidden = YES;
-//    [self.microphone stopFetchingAudio];
-//    [self foldAllPhotos];
-
     [self.microphone stopFetchingAudio];
     [_iFlySpeechRecognizer stopListening];
-//    NSURL* url = [[AudioRecorder sharedInstance] stopRecord];
-//    if (url != nil) {
-//        [HttpHelper search:self withSelector:@selector(searchResponse:) voicePath:[url path] tags:tags];
-//    }
 }
 
 -(void)foldAllPhotos{
     [[NSNotificationCenter defaultCenter] postNotificationName:MWPHOTO_FOLD_PHOTO_NOTIFICATION object:nil];
 }
 
+//not use
 -(void)searchResponse:(NSData*)data {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ENABLE_GRIDVIEW"
                                                         object:nil];
@@ -180,7 +181,7 @@
         for (NSDictionary* dict in imagesList) {
             [imgs addObject:[dict valueForKey:@"ImageName"]];
         }
-//        NSMutableArray* array = [[NSMutableArray alloc] initWithObjects:@"IMG_0006.JPG", @"IMG_0007.JPG",@"IMG_0008.JPG",@"IMG_0009.JPG",nil];
+
         NSArray* arr = [[NSArray alloc] initWithArray:imgs];
         [[PhotoDataProvider sharedInstance] getPicturesByName:self withSelector:@selector(imagesRetrieved:) names:arr];
     }
@@ -198,43 +199,53 @@
 }
 
 -(void)startUpdateRecord {
-//    [[AudioRecorder sharedInstance] startRecord];
+    _voiceSource = 1;
     
     self.recordingAudioPlot.hidden = NO;
+    [self.view bringSubviewToFront:self.recordingAudioPlot];
     [self.recordingAudioPlot clear];
     [self.microphone startFetchingAudio];
+    
+    if (_iFlySpeechRecognizer == nil){
+        [self initRecognizer];//初始化识别对象
+    }
+    //start SR interface
+    [_iFlySpeechRecognizer cancel];
+    //设置音频来源为麦克风
+    [_iFlySpeechRecognizer setParameter:IFLY_AUDIO_SOURCE_MIC forKey:@"audio_source"];
+    //设置听写结果格式为json
+    [_iFlySpeechRecognizer setParameter:@"json" forKey:[IFlySpeechConstant RESULT_TYPE]];
+    //保存录音文件，保存在sdk工作路径中，如未设置工作路径，则默认保存在library/cache下
+    [_iFlySpeechRecognizer setParameter:@"asr2.pcm" forKey:[IFlySpeechConstant ASR_AUDIO_PATH]];
+    [_iFlySpeechRecognizer setDelegate:self];
+    BOOL ret = [_iFlySpeechRecognizer startListening];
+    if (ret == NO){
+        NSLog(@"failed");
+    }
+
 }
 
 -(void)scrollToBottom {
     [super scrollToBottom];
 }
 
-//-(void)stopUpdateRecord:(NSString*)imageName imageData:(NSData*)imageData {
-//    
-//    self.recordingAudioPlot.hidden = YES;
-//    [self.microphone stopFetchingAudio];
-//    NSURL* url = [[AudioRecorder sharedInstance] stopRecord];
-//    
-//    if (url != nil) {
-//        NSMutableArray* array = [[NSMutableArray alloc] init];
-//        [array addObject:imageName];
-//        NSArray* arr = [[NSArray alloc] initWithArray:array];
-////        [[HttpHelper sharedHttpHelper] uploadPhoto:self withSelector:@selector(uploadResponse:) imageName:arr imageData:imageData voicePath:[url path] date:nil location: nil];
-//    }
-//}
-//
-//
-//-(void)stopUpdateRecordList:(NSArray*)imageName imageData:(NSArray*)imageData {
-//    //TOOD: upload group of images and one voice to website
-//    self.recordingAudioPlot.hidden = YES;
-//    [self.microphone stopFetchingAudio];
-//    
-//    NSURL* url = [[AudioRecorder sharedInstance] stopRecord];
-//    
-//    if (url != nil) {
-////        [[HttpHelper sharedHttpHelper] uploadPhoto:self withSelector:@selector(uploadResponse:) imageName:imageName imageData:nil voicePath:[url path] date:nil location: nil];
-//    }
-//}
+-(void)stopUpdateRecord:(NSString*)imageName imageData:(NSData*)imageData {
+    
+    _voiceSource = 1;
+    [self.imageNameArray removeAllObjects];
+    [self.imageNameArray addObject:imageName];
+    
+    self.recordingAudioPlot.hidden = YES;
+    [self.microphone stopFetchingAudio];
+    [_iFlySpeechRecognizer stopListening];
+    
+}
+
+
+-(void)stopUpdateRecordList:(NSArray*)imageName imageData:(NSArray*)imageData {
+    //TOOD: upload group of images and one voice to website
+    
+}
 
 -(void)uploadResponse:(NSData*)data {
     NSError *error2;
@@ -286,18 +297,27 @@
 //地址转经纬度回调
 - (void)onGeocodeSearchDone:(AMapGeocodeSearchRequest *)request response:(AMapGeocodeSearchResponse *)response
 {
-    
+
     if(response.geocodes.count == 0)
     {
         NSLog(@"address not found!");
         return;
     }
     //处理搜索结果
-    NSString *strCount = [NSString stringWithFormat:@"count: %ld", (long)response.count];
-    NSLog(@"%@----%@",request.description, strCount);
-    for (AMapGeocode  *p in response.geocodes) {
-        NSLog(@"%@",p.location);
-    }
+//    NSString *strCount = [NSString stringWithFormat:@"count: %ld", (long)response.count];
+//    NSLog(@"%@----%@",request.description, strCount);
+//    for (AMapGeocode  *p in response.geocodes) {
+//        NSLog(@"%@",p.location);
+//    }
+    AMapGeocode * p = [response.geocodes objectAtIndex:0];
+    
+    NSString * loc = [NSString stringWithFormat:@"%@",p.location];
+    loc = [loc substringFromIndex:1];
+    NSRange range = [loc rangeOfString:@"}"];
+    loc = [loc substringToIndex:range.location+range.length-1];
+    loc = [NSString stringWithFormat:@"%@,%@,%@,%@",loc,p.province,p.city,p.district];
+    //发送search请求
+    [[HttpHelper sharedHttpHelper] AFNetworingForSearchWithUserId:userId Desc:self.result Tag:searchTag Loc:loc Token:token RefreshObject:self];
 }
 
 #pragma mark - IFlySpeechRecognizerDelegate
@@ -315,7 +335,7 @@
     if (error.errorCode == 0 ) {
         
     }else {
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Not Recoganized" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"说话的时间太短了" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [myAlertView show];
     }
     
@@ -346,11 +366,30 @@
         self.result = [NSString stringWithFormat:@"%@%@", self.result,resultFromJson];
     }
     if (isLast){
-        NSLog(@"Search--听写结果(json)：%@测试",  self.result);
-
-#pragma ---- test
-        self.result = @"北京中关村微软大厦拍的照片";
-        [[HttpHelper sharedHttpHelper]AFNetworkingForVoiceTag:self.result forInserting:nil orSearching:self];
+        switch (_voiceSource) {
+            case SEARCH_PHOTO:
+                NSLog(@"Search--听写结果(json)：%@测试",  self.result);
+                
+#pragma -------------- test
+                self.result = @"北京中关村微软大厦拍的照片";
+                [[HttpHelper sharedHttpHelper]AFNetworkingForVoiceTag:self.result forInserting:nil orSearching:self];
+                break;
+                
+            case RETAG_PHOTO:
+                self.result = @"杯子";
+                for (NSString * name in self.imageNameArray) {
+                    
+                    NSMutableDictionary * insertParams = [NSMutableDictionary dictionary];
+                    insertParams[@"imageName"] = name;
+                    insertParams[@"imagePath"] = @"";
+                    insertParams[@"desc"] = self.result;
+                    [[HttpHelper sharedHttpHelper] AFNetworkingForVoiceTag:self.result forInserting:insertParams orSearching:nil];
+                }
+                
+                break;
+            default:
+                break;
+        }
     }
 }
 

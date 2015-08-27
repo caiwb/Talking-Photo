@@ -20,6 +20,7 @@ NSString* token = @"";
 NSString* latitude = @"";
 NSString* longitude = @"";
 NSString* loc = @"";
+NSString* searchTag = @"";
 
 sqlite3* upload_database = nil;
 //const char * dbpath;

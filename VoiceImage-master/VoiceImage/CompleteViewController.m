@@ -40,22 +40,28 @@
 */
 
 - (IBAction)takePhotoClicked:(UIButton *)sender {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//    
+//    picker.delegate = self;
+//    picker.allowsEditing = NO;
+//    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    
+//    [self presentViewController:picker animated:YES completion:NULL];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
-    picker.delegate = self;
-    picker.allowsEditing = NO;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
+    APPAppDelegate *delegate = (APPAppDelegate*)[[UIApplication sharedApplication]delegate];
+    YRSideViewController *sideViewController=[delegate sideViewController];
+    [sideViewController showRightViewController:YES];
 }
 
 - (IBAction)browseGallery:(UIButton *)sender {
 //    APPViewController* app = [[APPViewController alloc] init];
 //    [self presentViewController:app animated:YES completion:NULL];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
     APPAppDelegate *delegate = (APPAppDelegate*)[[UIApplication sharedApplication]delegate];
-    YRSideViewController *sideViewController=[delegate sideViewController];
-    [self presentViewController:sideViewController animated:YES completion:NULL];
+    YRSideViewController *sideViewController = [delegate sideViewController];
+    [sideViewController hideSideViewController:YES];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -64,13 +70,19 @@
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     tagView.image = chosenImage;
     
-    [picker presentViewController:tagView animated:YES completion:NULL];
+    [picker pushViewController:tagView animated:YES];
     
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    APPAppDelegate *delegate = (APPAppDelegate*)[[UIApplication sharedApplication]delegate];
+    YRSideViewController *sideViewController = [delegate sideViewController];
+    [picker pushViewController:sideViewController animated:YES];
+//    [sideViewController hideSideViewController:YES];
+//    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
+
+
 @end

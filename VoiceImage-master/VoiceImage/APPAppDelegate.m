@@ -16,10 +16,14 @@
 #import "SettingViewController.h"
 #import "PhotoDataProvider.h"
 #import "TagPhotoViewController.h"
+#import "DataHolder.h"
 
 @interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, assign) BOOL isLoop;
+
+@property (strong, nonatomic) MyPhotoBrowser *browser;
+@property (strong, nonatomic) UINavigationController *mainViewController;
 
 @end
 
@@ -38,15 +42,35 @@
     dataArray = [DataBaseHelper selectDataBy:@"status" IsEqualto:[NSString stringWithFormat:@"%d",0]];
     if (dataArray) {
         for (id obj in dataArray) {
-            NSString * imageName = obj[@"name"];
+//            NSString * imageName = obj[@"name"];
             [[HttpHelper sharedHttpHelper]AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImagePath:obj[@"path"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
         }
     }
 }
 
+-(void)initUser
+{
+    [[DataHolder sharedInstance] loadData];
+    if ([[DataHolder sharedInstance] userId] == nil) {
+        [[HttpHelper sharedHttpHelper]AFNetworingForRegistry];
+        
+    } else {
+        userId = [[DataHolder sharedInstance] userId];
+        [[HttpHelper sharedHttpHelper]AFNetworingForLoginWithGUID:userId];
+    }
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self initUser];
     
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"未检测到设备的照相机" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [myAlertView show];
+        
+    }
     [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
     
     _isLoop = YES;
@@ -94,17 +118,17 @@
     [_browser setCurrentPhotoIndex:0];
     
     // Modal
-    UINavigationController * mainViewController = [[UINavigationController alloc] initWithRootViewController:_browser];
+    _mainViewController = [[UINavigationController alloc] initWithRootViewController:_browser];
     SettingViewController * leftViewController = [[SettingViewController alloc] init];
-    UIImagePickerController * rightViewController = [[UIImagePickerController alloc] init];
-    rightViewController.delegate = self;
-    rightViewController.allowsEditing = YES;
-    rightViewController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    _picker = [[UIImagePickerController alloc] init];
+    _picker.delegate = self;
+    _picker.allowsEditing = YES;
+    _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
     _sideViewController = [[YRSideViewController alloc]initWithNibName:nil bundle:nil];
     
-    _sideViewController.rootViewController = mainViewController;
-    _sideViewController.rightViewController = rightViewController;
+    _sideViewController.rootViewController = _mainViewController;
+    _sideViewController.rightViewController = _picker;
     _sideViewController.leftViewController = leftViewController;
     
     _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
@@ -124,8 +148,26 @@
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     tagView.image = chosenImage;
     
-    [picker presentViewController:tagView animated:YES completion:NULL];
+//    [picker presentViewController:tagView animated:YES completion:NULL];
+    [picker pushViewController:tagView animated:YES];
 }
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [_sideViewController hideSideViewController:YES];
+}
+
+- (YRSideViewController *)sideViewController
+{
+    
+    _picker = [[UIImagePickerController alloc] init];
+    _picker.delegate = self;
+    _picker.allowsEditing = YES;
+    _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    _sideViewController.rightViewController = _picker;
+    _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
+
+    return _sideViewController;
+}
 
 @end

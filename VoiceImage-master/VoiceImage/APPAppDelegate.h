@@ -17,6 +17,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) YRSideViewController *sideViewController;
-@property (strong, nonatomic) MyPhotoBrowser *browser;
+@property (strong, nonatomic) UIImagePickerController *picker;
 
 @end

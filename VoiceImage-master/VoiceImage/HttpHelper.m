@@ -17,6 +17,7 @@
 #import "MyPhotoBrowser.h"
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchAPI.h>
+#import "PhotoDataProvider.h"
 
 @interface HttpHelper () <MAMapViewDelegate, AMapSearchDelegate>
 {
@@ -147,51 +148,51 @@ static NSString * host1 = @"10.172.88.75:8888";
 //                           }];
 //}
 
--(void)search:(id)object withSelector:(SEL)selector voicePath:(NSString*)voicePath tags:(NSArray*)tags{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/search",host]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];
-    
-    NSString *boundary = @"01212123234347564653452345326372377546546564";
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
-    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
-    
-    NSMutableData *body = [NSMutableData data];
-    
-    if (userId == nil) {
-        return;
-    }
-    
-    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userid\"\r\n\r\n%@", userId] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    if (tags != nil) {
-        for (NSString* tag in tags) {
-            if (tag != nil) {
-                [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"tags\"\r\n\r\n%@", tag] dataUsingEncoding:NSUTF8StringEncoding]];
-            }
-        }
-    }
-    
-    if (voicePath != nil) {
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"search\"; filename=\"%@\"\r\n", @"search.wav"] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        NSData *data = [[NSFileManager defaultManager] contentsAtPath:voicePath];
-        [body appendData:[NSData dataWithData:data]];
-    }
-    
-    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    [request setHTTPBody:body];
-    
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               [object performSelector:selector withObject:data];
-                           }];
-}
+//-(void)search:(id)object withSelector:(SEL)selector voicePath:(NSString*)voicePath tags:(NSArray*)tags{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/search",host]];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//    [request setHTTPMethod:@"POST"];
+//    
+//    NSString *boundary = @"01212123234347564653452345326372377546546564";
+//    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+//    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+//    
+//    NSMutableData *body = [NSMutableData data];
+//    
+//    if (userId == nil) {
+//        return;
+//    }
+//    
+//    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userid\"\r\n\r\n%@", userId] dataUsingEncoding:NSUTF8StringEncoding]];
+//    
+//    if (tags != nil) {
+//        for (NSString* tag in tags) {
+//            if (tag != nil) {
+//                [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"tags\"\r\n\r\n%@", tag] dataUsingEncoding:NSUTF8StringEncoding]];
+//            }
+//        }
+//    }
+//    
+//    if (voicePath != nil) {
+//        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"search\"; filename=\"%@\"\r\n", @"search.wav"] dataUsingEncoding:NSUTF8StringEncoding]];
+//        [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+//        NSData *data = [[NSFileManager defaultManager] contentsAtPath:voicePath];
+//        [body appendData:[NSData dataWithData:data]];
+//    }
+//    
+//    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//    
+//    [request setHTTPBody:body];
+//    
+//    [NSURLConnection sendAsynchronousRequest:request
+//                                       queue:[NSOperationQueue mainQueue]
+//                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//                               [object performSelector:selector withObject:data];
+//                           }];
+//}
 
 - (NSString *)GetUUID
 {
@@ -273,45 +274,101 @@ static NSString * host1 = @"10.172.88.75:8888";
 
 -(void) AFNetworingForUploadWithUserId:(NSString *)guid ImageName:(NSString *)imageName ImagePath:(NSString *)imagePath Desc:(NSString *)desc Tag:(NSString *)tag Time:(NSString *)time Loc:(NSString *)loc Token:(NSString *)token
 {
+    
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
     mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
     ALAssetsLibrary   *lib = [[ALAssetsLibrary alloc] init];
     
     params[@"user_id"] = guid;
-    params[@"loc"] = loc;
     params[@"token"] = token;
-    params[@"time"] = time;
     params[@"desc"] = desc;
     params[@"tag"] = tag;
-    params[@"path"] = imagePath;
-    
-    //url -> img ->data
-    [lib assetForURL:[NSURL URLWithString:imagePath] resultBlock:^(ALAsset *asset)
-     {
-         // 使用asset来获取本地图片
-         UIImage * image = [self fullResolutionImageFromALAsset:asset];
-         NSData * imageData = UIImageJPEGRepresentation(image, 1);
-         //http request
-         [mgr POST:[NSString stringWithFormat:@"http://%@/upload",host] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-             //参数name为服务器接收文件数据所用参数
-             [formData appendPartWithFileData:imageData name:@"image" fileName:imageName mimeType:@"image"];
-         } success:^(AFHTTPRequestOperation * operation, id responseObject) {
-             NSLog(@"upload 请求成功：%@",responseObject);
+    params[@"image_name"] = imageName;
+    if ([imagePath isEqualToString:@""] == NO) { //upload
+        
+        params[@"func"] = @"UPLOAD";
+        params[@"loc"] = loc;
+        params[@"time"] = time;
+
+        //url -> img ->data
+        [lib assetForURL:[NSURL URLWithString:imagePath] resultBlock:^(ALAsset *asset)
+         {
+             // 使用asset来获取本地图片
+             UIImage * image = [self fullResolutionImageFromALAsset:asset];
+             NSData * imageData = UIImageJPEGRepresentation(image, 1);
+             //http request
+             [mgr POST:[NSString stringWithFormat:@"http://%@/upload",host] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                 //参数name为服务器接收文件数据所用参数
+                 [formData appendPartWithFileData:imageData name:@"image" fileName:imageName mimeType:@"image"];
+             } success:^(AFHTTPRequestOperation * operation, id responseObject) {
+                 NSLog(@"上传请求成功：%@",responseObject);
+                 //请求成功后将数据库中该条数据status置为1
+                 [DataBaseHelper updateData:@"status" ByValue:1 WhereImageName:imageName];
+                 
+             } failure:^(AFHTTPRequestOperation * operation, NSError * error) {
+                 NSLog(@"上传请求失败：%@",error);
+             }];
+
+         }
+            failureBlock:^(NSError *error)
+         {
+             NSLog(@"%@",error);
+         }];
+    }
+    else { //update re-tag
+        params[@"func"] = @"UPDATE";
+        params[@"loc"] = @"";
+        params[@"time"] = @"";
+        [mgr POST:[NSString stringWithFormat:@"http://%@/upload",host] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             NSLog(@"上传请求成功：%@",responseObject);
              //请求成功后将数据库中该条数据status置为1
              [DataBaseHelper updateData:@"status" ByValue:1 WhereImageName:imageName];
              
-         } failure:^(AFHTTPRequestOperation * operation, NSError * error) {
-             NSLog(@"upload 请求失败：%@",error);
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error)
+         {
+             NSLog(@"上传请求失败：%@",error);
+             
          }];
 
-     }
-        failureBlock:^(NSError *error)
-     {
-         NSLog(@"%@",error);
-     }];
-
     }
+
+}
+
+-(void) AFNetworingForSearchWithUserId:(NSString *)guid Desc:(NSString *)desc Tag:(NSString *)tag Loc:(NSString *)loc Token:(NSString *)token RefreshObject:(id)object
+{
+    
+    AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
+//    mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+   
+    params[@"user_id"] = guid;
+    params[@"loc"] = loc;
+    params[@"token"] = token;
+    params[@"desc"] = desc;
+    params[@"tag"] = tag;
+    
+    [mgr POST:[NSString stringWithFormat:@"http://%@/search",host] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSLog(@"查询请求成功：%@",responseObject);
+         NSArray * imageArray = responseObject[@"image"];
+         
+         [[PhotoDataProvider sharedInstance] getPicturesByName:object withSelector:@selector(imagesRetrieved:) names:imageArray];
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         NSLog(@"查询请求失败：%@",error);
+         
+     }];
+}
+
+-(void)imagesRetrieved:(id)object
+{
+    [object reloadData];
+    [object reloadGridView];
+}
 
 //key: o1J4T4R0F1v3X7E5I7A0NcnWpelIaVDL2G7iwVgs
 -(void) AFNetworkingForVoiceTag:(NSString *)desc forInserting:(NSDictionary *)insert orSearching:(id) object
@@ -338,12 +395,15 @@ static NSString * host1 = @"10.172.88.75:8888";
          //分词用于upload
          if (object == nil && insert != nil)
          {
-             [DataBaseHelper insertDataWithId:userId ImageName:insert[@"imageName"] ImagePath:insert[@"imagePath"] Desc:insert[desc] Time:[NSDate date] Loc:loc Token:token Tag:result Status:0];
+             NSLog(@"%@",loc);
+             
+             [DataBaseHelper insertDataWithId:userId ImageName:insert[@"imageName"] ImagePath:insert[@"imagePath"] Desc:insert[@"desc"] Time:[NSDate date] Loc:loc Token:token Tag:result Status:0];
          }
          //分词用于search
          else if(object != nil && insert == nil)
          {
              //分词结果中取出地点名词
+             searchTag = result;
              NSString * address = [self divideForLocationByDesc:desc Tag:result];
              NSLog(@"查找地址:%@",address);
              //将地点名词转换为经纬度坐标
@@ -357,6 +417,7 @@ static NSString * host1 = @"10.172.88.75:8888";
                  //    geoRequest.city = @[@"beijing"];
                  //    请求的回调在MyPhotoBrowser中
                  [_search AMapGeocodeSearch: geoRequest];
+                 
              }
              else
              {
@@ -394,7 +455,7 @@ static NSString * host1 = @"10.172.88.75:8888";
     //tag = @"我_r 想_v 找_v 去年_nt 夏天_nt 在_p 南昌_ns 八一_nt 广场_ns 拍_v 的_u 照片_n"
     //desc = 我想找去年夏天在南昌八一广场拍的照片
     tag = [NSString stringWithFormat:@" %@",tag];
-    NSString * address = [NSString string];
+    NSString * address = desc;
     NSRange range = [tag rangeOfString:@"_ns"];
     if (range.length > 0)
     {

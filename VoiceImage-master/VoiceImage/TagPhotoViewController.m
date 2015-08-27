@@ -18,8 +18,13 @@
 #import "ISRDataHelper.h"
 #import "AFNetworking.h"
 #import "DataBaseHelper.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface TagPhotoViewController ()
+@interface TagPhotoViewController () <CLLocationManagerDelegate>
+
+@property (nonatomic, strong) CLLocationManager * locationManager;
+@property (nonatomic, strong) CLGeocoder *geocoder;
+@property (nonatomic, strong) CLPlacemark *placemark;
 
 @end
 
@@ -69,12 +74,86 @@
     }
 }
 
+-(void)getLocation {
+    if (!_locationManager){
+        _locationManager = [[CLLocationManager alloc] init];
+        _geocoder = [[CLGeocoder alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.distanceFilter = kCLDistanceFilterNone;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+            [_locationManager requestWhenInUseAuthorization];
+        
+        [_locationManager startUpdatingLocation];
+    }
+
+}
+
+#pragma mark - CLLocation Manager delegate methods
+
+- (void)locationManager:(CLLocationManager*)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined: {
+            NSLog(@"User still thinking..");
+        } break;
+        case kCLAuthorizationStatusDenied: {
+            NSLog(@"User hates you");
+        } break;
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+        case kCLAuthorizationStatusAuthorizedAlways: {
+            [_locationManager startUpdatingLocation]; //Will update location immediately
+        } break;
+        default:
+            break;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    CLLocation *location = [locations lastObject];
+    NSLog(@"lat%f - lon%f", location.coordinate.latitude, location.coordinate.longitude);
+    
+    [_locationManager stopUpdatingLocation];
+    
+    // Reverse Geocoding
+    //    NSLog(@"Resolving the Address");
+    [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error == nil && [placemarks count] > 0) {
+            _placemark = [placemarks lastObject];
+            //            NSLog(@"name: %@", placemark.name);
+            //            NSLog(@"thoroughfare: %@", placemark.thoroughfare);
+            //            NSLog(@"subThoroughfare: %@", placemark.subThoroughfare);
+            //            NSLog(@"locality: %@", placemark.locality);
+            //            NSLog(@"subLocality: %@", placemark.subLocality);
+            //            NSLog(@"administrativeArea: %@", placemark.administrativeArea);
+            //            NSLog(@"subAdministrativeArea: %@", placemark.subAdministrativeArea);
+            //            NSLog(@"areasOfInterest: %@", placemark.areasOfInterest);
+            
+            name = _placemark.name;
+            if (name == nil){
+                name = @"";
+            }
+            street = _placemark.thoroughfare;
+            city = _placemark.administrativeArea;
+            country = _placemark.country;
+            longitude = [NSString stringWithFormat:@"%3.5f",location.coordinate.longitude];
+            latitude = [NSString stringWithFormat:@"%3.5f",location.coordinate.latitude];
+            loc = [NSString stringWithFormat:@"%@,%@,%@,%@",longitude,latitude,city,street];
+            //            NSLog(@"%@, %@, %@, %@, %@",longitude, latitude, street, city, country);
+            
+        } else {
+            NSLog(@"%@", error.debugDescription);
+        }
+    } ];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.imageView setImage:self.image];
     [self saveImage];
-
+    [self getLocation];
     self.desc = @"";
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;
@@ -212,8 +291,8 @@
 
     [[HttpHelper sharedHttpHelper] AFNetworkingForVoiceTag:self.desc forInserting:insertParams orSearching:nil];
        
-    CompleteViewController *picker = [[CompleteViewController alloc] init];
-    [self presentViewController:picker animated:YES completion:NULL];
+    CompleteViewController *complete = [[CompleteViewController alloc] init];
+    [self.navigationController pushViewController:complete animated:YES];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -387,6 +466,18 @@
     }
     
     self.tagSR.hidden = NO;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
+    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES; //返回NO表示要显示，返回YES将hiden
 }
 
 

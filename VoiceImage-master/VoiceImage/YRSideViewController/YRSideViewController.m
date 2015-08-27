@@ -21,6 +21,8 @@
     BOOL _panMovingRightOrLeft;//true是向右，false是向左
     
     UIButton *_coverButton;
+    
+    BOOL _statusBarHidden;
 }
 @end
 
@@ -56,6 +58,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _statusBarHidden = NO;
 	// Do any additional setup after loading the view.
     _baseView              = self.view;
     [_baseView setBackgroundColor:[UIColor colorWithRed:0.5 green:0.6 blue:0.8 alpha:1]];
@@ -149,6 +152,7 @@
         return;
     }
     _rightViewController.view.frame=_baseView.bounds;
+    
     [_baseView insertSubview:_rightViewController.view belowSubview:_currentView];
     if (_leftViewController && _leftViewController.view.superview) {
         [_leftViewController.view removeFromSuperview];
@@ -171,6 +175,10 @@
     }];
 }
 - (void)showRightViewController:(BOOL)animated{
+    
+    _statusBarHidden = YES;
+    [self setNeedsStatusBarAppearanceUpdate];
+    
     if (!_rightViewController) {
         return;
     }
@@ -187,6 +195,9 @@
     }];
 }
 - (void)hideSideViewController:(BOOL)animated{
+    _statusBarHidden = NO;
+    [self setNeedsStatusBarAppearanceUpdate];
+    
     [self showShadow:false];
     NSTimeInterval animatedTime = 0;
     if (animated) {
@@ -313,6 +324,18 @@
         [_currentView setFrame:CGRectMake(_baseView.frame.size.width * (1 - scale) + xoffset, _baseView.bounds.origin.y + (totalHeight*(1 - scale) / 2), totalWidth * scale, totalHeight * scale)];
     }
     //*/
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+    //UIStatusBarStyleDefault = 0 黑色文字，浅色背景时使用
+    //UIStatusBarStyleLightContent = 1 白色文字，深色背景时使用
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return _statusBarHidden; //返回NO表示要显示，返回YES将hiden
 }
 
 @end

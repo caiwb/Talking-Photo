@@ -35,8 +35,12 @@ extern NSString* loc;
 
 extern NSString* userId;
 extern NSString* token;
+
 //sqlite
 extern sqlite3 * upload_database;
+
+//tag for search
+extern NSString * searchTag;
 
 #define MWPHOTO_FOLD_PHOTO_NOTIFICATION @"MWPHOTO_FOLD_PHOTO_NOTIFICATION"
 
