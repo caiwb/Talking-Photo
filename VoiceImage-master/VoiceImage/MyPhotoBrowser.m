@@ -151,7 +151,6 @@
 //    [self.microphone stopFetchingAudio];
 //    [self foldAllPhotos];
 
-
     [self.microphone stopFetchingAudio];
     [_iFlySpeechRecognizer stopListening];
 //    NSURL* url = [[AudioRecorder sharedInstance] stopRecord];

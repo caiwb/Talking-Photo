@@ -22,10 +22,10 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mrk-a2-d6m">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_function_foot-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="m9F-Ss-UDp">
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Dzst_function_foot-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="m9F-Ss-UDp">
                     <rect key="frame" x="0.0" y="571" width="375" height="96"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAQ-24-Lu1">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAQ-24-Lu1">
                     <rect key="frame" x="146" y="571" width="83" height="82"/>
                     <state key="normal" image="Dzst_function_icon-yy_normal.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -61,7 +61,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_function_icon-yy_press.png" translatesAutoresizingMaskIntoConstraints="NO" id="4P8-xQ-Zqt">
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Dzst_function_icon-yy_press.png" translatesAutoresizingMaskIntoConstraints="NO" id="4P8-xQ-Zqt">
                     <rect key="frame" x="146" y="571" width="83" height="82"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEj-y7-UkK">

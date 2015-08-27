@@ -11,6 +11,7 @@
 #import "PhotoDataProvider.h"
 #import "MyPhotoBrowser.h"
 #import "APPViewController.h"
+#import "APPAppDelegate.h"
 
 @interface CompleteViewController ()
 
@@ -49,8 +50,12 @@
 }
 
 - (IBAction)browseGallery:(UIButton *)sender {
-    APPViewController* app = [[APPViewController alloc] init];
-    [self presentViewController:app animated:YES completion:NULL];
+//    APPViewController* app = [[APPViewController alloc] init];
+//    [self presentViewController:app animated:YES completion:NULL];
+    
+    APPAppDelegate *delegate = (APPAppDelegate*)[[UIApplication sharedApplication]delegate];
+    YRSideViewController *sideViewController=[delegate sideViewController];
+    [self presentViewController:sideViewController animated:YES completion:NULL];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

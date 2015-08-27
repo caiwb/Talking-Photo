@@ -64,33 +64,6 @@
 }
 
 
-//-(void)applyResponse:(NSData*) data {
-//    BOOL isOK = NO;
-//    NSError *error2;
-//    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error2];
-//    NSLog(@"%@", jsonDict);
-//    
-//    BOOL suc = [[jsonDict valueForKey:@"status"] boolValue];
-//    if (suc) {
-//        NSString* userid = (NSString*)[jsonDict valueForKey:@"userId"];
-//        userId = userid;
-//        [[DataHolder sharedInstance] setUserId: userId];
-//        [[DataHolder sharedInstance] saveData];
-//        isOK = YES;
-//    }
-//    
-//    if (!isOK) {
-//        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-//                                                              message:@"Cannot create user."
-//                                                             delegate:nil
-//                                                    cancelButtonTitle:@"OK"
-//                                                    otherButtonTitles: nil];
-//        
-//        [myAlertView show];
-//    }
-//    
-//}
-
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];

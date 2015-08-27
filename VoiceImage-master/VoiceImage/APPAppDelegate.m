@@ -7,17 +7,17 @@
 //
 
 #import "APPAppDelegate.h"
-
 #import "APPViewController.h"
 #import "IFlyFlowerCollector.h"
 #import "iflyMSC/IFlyMSC.h"
 #import "global.h"
 #import "DataBaseHelper.h"
 #import "HttpHelper.h"
+#import "SettingViewController.h"
+#import "PhotoDataProvider.h"
+#import "TagPhotoViewController.h"
 
-#define DBNAME @"upload_data.sqlite"
-
-@interface APPAppDelegate ()
+@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, assign) BOOL isLoop;
 
@@ -34,27 +34,21 @@
  */
 -(void)uploadDataFromDB
 {
-//    NSLog(@"THread___%@",[NSThread currentThread]);
-//    NSLog(@"----upload");
     NSMutableArray * dataArray = nil;
     dataArray = [DataBaseHelper selectDataBy:@"status" IsEqualto:[NSString stringWithFormat:@"%d",0]];
     if (dataArray) {
-       
         for (id obj in dataArray) {
             NSString * imageName = obj[@"name"];
-//            NSLog(@"%@",imageName);
-//
-//            [HttpHelper AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImageData:obj[@"data"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
             [[HttpHelper sharedHttpHelper]AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImagePath:obj[@"path"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
-//
         }
     }
-    
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    sleep(1);
+    
+    [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
+    
     _isLoop = YES;
     
     //创建语音配置,appid必须要传入，仅执行一次则可
@@ -74,13 +68,64 @@
             sleep(5);
         }
     });
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [[APPViewController alloc] init];
     
-    [self.window makeKeyAndVisible];
+
+    
+//    MyPhotoBrowser * mainViewController = [[MyPhotoBrowser alloc] init];
+    
     return YES;
 }
 
+- (void)dataRetrieved:(id)sender {
+    // Create browser
+    _browser = [[MyPhotoBrowser alloc] initWithDelegate:[PhotoDataProvider sharedInstance]];
+    _browser.displayActionButton = NO;
+    _browser.displayNavArrows = NO;
+    _browser.displaySelectionButtons = NO;
+    _browser.alwaysShowControls = YES;
+    _browser.zoomPhotosToFill = YES;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+    _browser.wantsFullScreenLayout = YES;
+#endif
+    _browser.enableGrid = YES;
+    _browser.startOnGrid = YES;
+    _browser.enableSwipeToDismiss = NO;
+    
+    [_browser setCurrentPhotoIndex:0];
+    
+    // Modal
+    UINavigationController * mainViewController = [[UINavigationController alloc] initWithRootViewController:_browser];
+    SettingViewController * leftViewController = [[SettingViewController alloc] init];
+    UIImagePickerController * rightViewController = [[UIImagePickerController alloc] init];
+    rightViewController.delegate = self;
+    rightViewController.allowsEditing = YES;
+    rightViewController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    _sideViewController = [[YRSideViewController alloc]initWithNibName:nil bundle:nil];
+    
+    _sideViewController.rootViewController = mainViewController;
+    _sideViewController.rightViewController = rightViewController;
+    _sideViewController.leftViewController = leftViewController;
+    
+    _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
+    _sideViewController.leftViewShowWidth = 250;
+    _sideViewController.needSwipeShowMenu = true;//默认开启的可滑动展示
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = _sideViewController;
+    [self.window makeKeyAndVisible];
+}
+
+#pragma mark - Image Picker Controller delegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    TagPhotoViewController* tagView = [[TagPhotoViewController alloc] init];
+    UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+    tagView.image = chosenImage;
+    
+    [picker presentViewController:tagView animated:YES completion:NULL];
+}
 
 
 @end

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C2055" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Dzst_mainpage_bg@2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kmq-BR-TOF">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="718"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.74013009230000004" green="1" blue="0.84595720809999997" alpha="1" colorSpace="calibratedRGB"/>
+            <point key="canvasLocation" x="275" y="-14"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Dzst_mainpage_bg@2x.png" width="203" height="49"/>
+    </resources>
+</document>
