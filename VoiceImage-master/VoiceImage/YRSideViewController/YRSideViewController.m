@@ -28,6 +28,12 @@
 
 @implementation YRSideViewController
 
+- (id)initWithDelegate:(id <YRSideViewDeleagate>)delegate {
+    if ((self = [self init])) {
+        _delegate = delegate;
+    }
+    return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -148,6 +154,7 @@
     }
 }
 - (void)willShowRightViewController{
+    
     if (!_rightViewController || _rightViewController.view.superview) {
         return;
     }
@@ -176,6 +183,7 @@
 }
 - (void)showRightViewController:(BOOL)animated{
     
+    
     _statusBarHidden = YES;
     [self setNeedsStatusBarAppearanceUpdate];
     
@@ -193,6 +201,7 @@
         [_currentView addSubview:_coverButton];
         [self showShadow:_showBoundsShadow];
     }];
+
 }
 - (void)hideSideViewController:(BOOL)animated{
     _statusBarHidden = NO;
@@ -210,7 +219,8 @@
         [_coverButton removeFromSuperview];
         [_leftViewController.view removeFromSuperview];
         [_rightViewController.view removeFromSuperview];
-    }];
+    }];                   
+
 }
 - (void)hideSideViewController{
     [self hideSideViewController:true];

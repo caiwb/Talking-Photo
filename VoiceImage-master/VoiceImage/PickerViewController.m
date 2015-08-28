@@ -1,19 +1,18 @@
-
 //
-//  SettingViewController.m
+//  PickerViewController.m
 //  VoiceImage
 //
-//  Created by caiwb on 15/8/26.
+//  Created by caiwb on 15/8/28.
 //  Copyright (c) 2015年 SPG. All rights reserved.
 //
 
-#import "SettingViewController.h"
+#import "PickerViewController.h"
 
-@interface SettingViewController ()
+@interface PickerViewController ()
 
 @end
 
-@implementation SettingViewController
+@implementation PickerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

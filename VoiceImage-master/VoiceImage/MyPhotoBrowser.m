@@ -7,7 +7,6 @@
 //
 
 #import "MyPhotoBrowser.h"
-#import "AudioRecorder.h"
 #import "global.h"
 #import "HttpHelper.h"
 #import "PhotoDataProvider.h"

@@ -18,7 +18,7 @@
 #import "TagPhotoViewController.h"
 #import "DataHolder.h"
 
-@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate>
 
 @property (nonatomic, assign) BOOL isLoop;
 
@@ -64,14 +64,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self initUser];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.window.rootViewController = [[MyPhotoBrowser alloc] init];
+//    [self.window makeKeyAndVisible];
     
+    [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"未检测到设备的照相机" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"未检测到摄像头" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [myAlertView show];
         
     }
-    [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
+
     
     _isLoop = YES;
     
@@ -92,10 +96,6 @@
             sleep(5);
         }
     });
-    
-
-    
-//    MyPhotoBrowser * mainViewController = [[MyPhotoBrowser alloc] init];
     
     return YES;
 }
@@ -122,11 +122,11 @@
     SettingViewController * leftViewController = [[SettingViewController alloc] init];
     _picker = [[UIImagePickerController alloc] init];
     _picker.delegate = self;
-    _picker.allowsEditing = YES;
+    _picker.allowsEditing = NO;
     _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
     _sideViewController = [[YRSideViewController alloc]initWithNibName:nil bundle:nil];
-    
+    _sideViewController.delegate = self;
     _sideViewController.rootViewController = _mainViewController;
     _sideViewController.rightViewController = _picker;
     _sideViewController.leftViewController = leftViewController;
@@ -144,12 +144,14 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
+    _sideViewController.needSwipeShowMenu = NO;
     TagPhotoViewController* tagView = [[TagPhotoViewController alloc] init];
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
     tagView.image = chosenImage;
-    
+    [_sideViewController hideSideViewController:NO];
 //    [picker presentViewController:tagView animated:YES completion:NULL];
-    [picker pushViewController:tagView animated:YES];
+    [_mainViewController pushViewController:tagView animated:YES];
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -162,12 +164,14 @@
     
     _picker = [[UIImagePickerController alloc] init];
     _picker.delegate = self;
-    _picker.allowsEditing = YES;
+    _picker.allowsEditing = NO;
     _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     _sideViewController.rightViewController = _picker;
     _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
-
+    _sideViewController.needSwipeShowMenu = YES;
+    [_mainViewController setNavigationBarHidden:NO];
     return _sideViewController;
 }
+
 
 @end

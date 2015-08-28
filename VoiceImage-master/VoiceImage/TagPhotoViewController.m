@@ -12,7 +12,6 @@
 #import <AVFoundation/AVFoundation.h>
 #include <AssetsLibrary/AssetsLibrary.h>
 #import "CompleteViewController.h"
-#import "AudioRecorder.h"
 #import "global.h"
 #import "IATConfig.h"
 #import "ISRDataHelper.h"
@@ -155,6 +154,7 @@
     [self saveImage];
     [self getLocation];
     self.desc = @"";
+    [self.navigationController setNavigationBarHidden:YES];
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];

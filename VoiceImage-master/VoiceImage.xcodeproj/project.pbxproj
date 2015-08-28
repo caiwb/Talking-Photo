@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39B38EC31B8ED1F00090A809 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B38EC21B8ED1F00090A809 /* MainViewController.m */; };
+		39B38ED31B9024310090A809 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B38ED11B9024310090A809 /* PickerViewController.m */; };
+		39B38ED41B9024310090A809 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39B38ED21B9024310090A809 /* PickerViewController.xib */; };
 		39BDA2141B84153E00CBA988 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39BDA2131B84153E00CBA988 /* libsqlite3.dylib */; };
 		39BDA2191B84223F00CBA988 /* APPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BDA2181B84223F00CBA988 /* APPAppDelegate.m */; };
 		39BDA2541B84719A00CBA988 /* DataBaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BDA2531B84719A00CBA988 /* DataBaseHelper.m */; };
@@ -44,7 +45,6 @@
 		EB2398251B453EA1004182BC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2398241B453EA1004182BC /* CoreLocation.framework */; };
 		EB2398281B45442C004182BC /* global.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2398271B45442C004182BC /* global.m */; };
 		EB4A48491B4A470800CABEB1 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4A48481B4A470800CABEB1 /* HttpHelper.m */; };
-		EB4A484C1B4A643D00CABEB1 /* AudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4A484B1B4A643D00CABEB1 /* AudioRecorder.m */; };
 		EB4A48641B4E068900CABEB1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4A48631B4E068900CABEB1 /* GLKit.framework */; };
 		EB4A48661B4E06A300CABEB1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4A48651B4E06A300CABEB1 /* AudioToolbox.framework */; };
 		EB5289181B462FF000E35384 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5289171B462FF000E35384 /* QuartzCore.framework */; };
@@ -128,8 +128,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		39B38EC11B8ED1F00090A809 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		39B38EC21B8ED1F00090A809 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		39B38ED01B9024310090A809 /* PickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
+		39B38ED11B9024310090A809 /* PickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
+		39B38ED21B9024310090A809 /* PickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
 		39BDA2131B84153E00CBA988 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		39BDA2181B84223F00CBA988 /* APPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPAppDelegate.m; sourceTree = "<group>"; };
 		39BDA2521B84719A00CBA988 /* DataBaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseHelper.h; sourceTree = "<group>"; };
@@ -190,8 +191,6 @@
 		EB2398271B45442C004182BC /* global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = global.m; sourceTree = "<group>"; };
 		EB4A48471B4A470800CABEB1 /* HttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpHelper.h; sourceTree = "<group>"; };
 		EB4A48481B4A470800CABEB1 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
-		EB4A484A1B4A643D00CABEB1 /* AudioRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioRecorder.h; sourceTree = "<group>"; };
-		EB4A484B1B4A643D00CABEB1 /* AudioRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioRecorder.m; sourceTree = "<group>"; };
 		EB4A48631B4E068900CABEB1 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		EB4A48651B4E06A300CABEB1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		EB5289171B462FF000E35384 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -494,6 +493,7 @@
 		EB85AA9E1B5CE1F300F4F4F3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				39B38ED21B9024310090A809 /* PickerViewController.xib */,
 				39EBA45F1B8DF526009D392F /* SettingViewController.xib */,
 				EB23980F1B44E733004182BC /* LaunchScreen.xib */,
 				EB23980D1B44E1B6004182BC /* APPViewController.xib */,
@@ -508,8 +508,8 @@
 			children = (
 				EB2397F81B44E0E2004182BC /* APPAppDelegate.h */,
 				39BDA2181B84223F00CBA988 /* APPAppDelegate.m */,
-				39B38EC11B8ED1F00090A809 /* MainViewController.h */,
-				39B38EC21B8ED1F00090A809 /* MainViewController.m */,
+				39B38ED01B9024310090A809 /* PickerViewController.h */,
+				39B38ED11B9024310090A809 /* PickerViewController.m */,
 				EB2397FA1B44E103004182BC /* APPViewController.h */,
 				EB2397FB1B44E103004182BC /* APPViewController.m */,
 				39EBA45D1B8DF526009D392F /* SettingViewController.h */,
@@ -530,8 +530,6 @@
 				EB52893C1B4A27F800E35384 /* DataHolder.m */,
 				EB4A48471B4A470800CABEB1 /* HttpHelper.h */,
 				EB4A48481B4A470800CABEB1 /* HttpHelper.m */,
-				EB4A484A1B4A643D00CABEB1 /* AudioRecorder.h */,
-				EB4A484B1B4A643D00CABEB1 /* AudioRecorder.m */,
 				39BDA2521B84719A00CBA988 /* DataBaseHelper.h */,
 				39BDA2531B84719A00CBA988 /* DataBaseHelper.m */,
 				EBFBBA4E1B6F08F10065902F /* IATConfig.h */,
@@ -671,6 +669,7 @@
 				EB85AAB41B5DED0900F4F4F3 /* Dzst_function_foot-bg@2x.png in Resources */,
 				EB2398151B44EEE7004182BC /* TagPhotoViewController.xib in Resources */,
 				EB85AAC01B5DED0900F4F4F3 /* Dzst_succeed_icon_click@2x.png in Resources */,
+				39B38ED41B9024310090A809 /* PickerViewController.xib in Resources */,
 				EB85AAC11B5DED0900F4F4F3 /* Dzst_succeed_right@2x.png in Resources */,
 				EBB4C0E71B5F80AB007235B1 /* photo_bg1@2x.png in Resources */,
 				EB85AAB31B5DED0900F4F4F3 /* Dzst_function_bg-pic.png in Resources */,
@@ -722,6 +721,7 @@
 				EB52892E1B4646D600E35384 /* MyPhotoBrowser.m in Sources */,
 				39EBA45C1B8DF3B3009D392F /* YRSideViewController.m in Sources */,
 				EB2398191B44F05B004182BC /* CompleteViewController.m in Sources */,
+				39B38ED31B9024310090A809 /* PickerViewController.m in Sources */,
 				EB52893D1B4A27F800E35384 /* DataHolder.m in Sources */,
 				EB85AA7F1B5CDFD600F4F4F3 /* EZAudioPlayer.m in Sources */,
 				39EBA2B81B8B58C4009D392F /* AFURLRequestSerialization.m in Sources */,
@@ -737,7 +737,6 @@
 				39BDA2191B84223F00CBA988 /* APPAppDelegate.m in Sources */,
 				EB85AA7A1B5CDFD600F4F4F3 /* EZAudioDevice.m in Sources */,
 				39EBA2B61B8B58C4009D392F /* AFSecurityPolicy.m in Sources */,
-				39B38EC31B8ED1F00090A809 /* MainViewController.m in Sources */,
 				39EBA2BA1B8B58C4009D392F /* AFURLSessionManager.m in Sources */,
 				39EBA4601B8DF526009D392F /* SettingViewController.m in Sources */,
 				EB85AA7E1B5CDFD600F4F4F3 /* EZAudioFloatData.m in Sources */,
@@ -745,7 +744,6 @@
 				EB85AA801B5CDFD600F4F4F3 /* EZAudioPlot.m in Sources */,
 				EB85AA831B5CDFD600F4F4F3 /* EZMicrophone.m in Sources */,
 				39EBA2B91B8B58C4009D392F /* AFURLResponseSerialization.m in Sources */,
-				EB4A484C1B4A643D00CABEB1 /* AudioRecorder.m in Sources */,
 				EB85AA7D1B5CDFD600F4F4F3 /* EZAudioFloatConverter.m in Sources */,
 				39EBA2B41B8B58C4009D392F /* AFHTTPSessionManager.m in Sources */,
 				39EBA2B51B8B58C4009D392F /* AFNetworkReachabilityManager.m in Sources */,

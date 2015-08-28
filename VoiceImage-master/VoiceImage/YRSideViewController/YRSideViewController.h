@@ -13,8 +13,17 @@
 
 typedef void(^RootViewMoveBlock)(UIView *rootView,CGRect orginFrame,CGFloat xoffset);
 
+@protocol YRSideViewDeleagate <NSObject>
+
+@optional
+-(void) whenHideSideVc;
+
+@end
 
 @interface YRSideViewController : UIViewController
+
+@property (nonatomic, weak) id<YRSideViewDeleagate> delegate;
+
 @property (assign,nonatomic) BOOL needSwipeShowMenu;//是否开启手势滑动出菜单
 
 @property (retain,nonatomic) UIViewController *rootViewController;
