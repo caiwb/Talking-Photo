@@ -325,8 +325,8 @@
 			isa = PBXGroup;
 			children = (
 				0EFEA24B17FB08B400E451B6 /* MWCommon.h */,
-				4C6F96DA14AF70BD00F8389A /* MWPhotoBrowser.h */,
 				0E3D58D818047D0B0000E3A0 /* MWPhotoBrowserPrivate.h */,
+				4C6F96DA14AF70BD00F8389A /* MWPhotoBrowser.h */,
 				4C6F96DB14AF70BD00F8389A /* MWPhotoBrowser.m */,
 				0E3D5897180467550000E3A0 /* MWGridViewController.h */,
 				0E3D5898180467550000E3A0 /* MWGridViewController.m */,

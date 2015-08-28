@@ -18,7 +18,7 @@
 #import "TagPhotoViewController.h"
 #import "DataHolder.h"
 
-@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate>
+@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate>
 
 @property (nonatomic, assign) BOOL isLoop;
 
@@ -140,18 +140,31 @@
     [self.window makeKeyAndVisible];
 }
 
+#pragma mark - Alert View click delegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+
+}
+
 #pragma mark - Image Picker Controller delegate methods
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    _sideViewController.needSwipeShowMenu = NO;
-    TagPhotoViewController* tagView = [[TagPhotoViewController alloc] init];
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-    tagView.image = chosenImage;
-    [_sideViewController hideSideViewController:NO];
-//    [picker presentViewController:tagView animated:YES completion:NULL];
-    [_mainViewController pushViewController:tagView animated:YES];
-    
+    if (chosenImage == nil) {
+        
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请重新拍照" delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定", nil];
+        [myAlertView show];
+    }
+    else
+    {
+        _sideViewController.needSwipeShowMenu = NO;
+        TagPhotoViewController* tagView = [[TagPhotoViewController alloc] init];
+        tagView.image = chosenImage;
+        [_sideViewController hideSideViewController:NO];
+        [_mainViewController pushViewController:tagView animated:YES];
+    }
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -159,9 +172,8 @@
     [_sideViewController hideSideViewController:YES];
 }
 
-- (YRSideViewController *)sideViewController
+- (YRSideViewController *)backtoSideViewControllerAndShowRightVc:(BOOL)isShow
 {
-    
     _picker = [[UIImagePickerController alloc] init];
     _picker.delegate = self;
     _picker.allowsEditing = NO;
@@ -170,7 +182,16 @@
     _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
     _sideViewController.needSwipeShowMenu = YES;
     [_mainViewController setNavigationBarHidden:NO];
+    if (isShow == YES) {
+        [_sideViewController showRightViewController:YES];
+    }
     return _sideViewController;
+}
+
+
+-(void)initNavigation
+{
+    
 }
 
 

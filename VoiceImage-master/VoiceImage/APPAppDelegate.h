@@ -19,4 +19,7 @@
 @property (strong, nonatomic) YRSideViewController *sideViewController;
 @property (strong, nonatomic) UIImagePickerController *picker;
 
+- (YRSideViewController *)backtoSideViewControllerAndShowRightVc:(BOOL)isShow;
+
+
 @end

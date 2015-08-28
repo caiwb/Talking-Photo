@@ -169,7 +169,7 @@
 
 -(instancetype)init {
     self = [super init];
-    selected = [[NSMutableArray alloc] init];
+    _selected = [[NSMutableArray alloc] init];
     return self;
 }
 
@@ -204,7 +204,7 @@
 }
 
 - (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
-    return [selected containsObject:@(index)];
+    return [_selected containsObject:[NSNumber numberWithInteger:index]];
 }
 
 //- (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
@@ -212,12 +212,12 @@
 //}
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)sel {
-    NSLog(@"Photo at index %lu selected %@", (unsigned long)index, selected ? @"YES" : @"NO");
+    NSLog(@"Photo at index %lu selected %@", (unsigned long)index, _selected ? @"YES" : @"NO");
     if (sel) {
-        [selected addObject:@(index)];
+        [_selected addObject:[NSNumber numberWithInteger:index]];
     }
     else {
-        [selected removeObject:@(index)];
+        [_selected removeObject:[NSNumber numberWithInteger:index]];
     }
 }
 

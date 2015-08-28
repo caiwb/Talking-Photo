@@ -154,6 +154,7 @@
     [self saveImage];
     [self getLocation];
     self.desc = @"";
+    
     [self.navigationController setNavigationBarHidden:YES];
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;
@@ -468,6 +469,8 @@
     self.tagSR.hidden = NO;
 }
 
+
+//donnot work
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleDefault;
@@ -477,6 +480,7 @@
 
 - (BOOL)prefersStatusBarHidden
 {
+
     return YES; //返回NO表示要显示，返回YES将hiden
 }
 

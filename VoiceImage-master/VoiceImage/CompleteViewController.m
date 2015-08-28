@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -43,8 +44,7 @@
 
 - (IBAction)takePhotoClicked:(UIButton *)sender {
     APPAppDelegate *delegate = (APPAppDelegate*)[[UIApplication sharedApplication]delegate];
-    YRSideViewController *sideViewController = [delegate sideViewController];
-    [sideViewController hideSideViewController:NO];
+    [delegate backtoSideViewControllerAndShowRightVc:YES];
     [self.navigationController popToRootViewControllerAnimated:YES];
     
 //    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -75,7 +75,7 @@
 //    [sideViewController hideSideViewController:YES];
     
     APPAppDelegate *delegate = (APPAppDelegate*)[[UIApplication sharedApplication]delegate];
-    [delegate sideViewController];
+    [delegate backtoSideViewControllerAndShowRightVc:NO];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

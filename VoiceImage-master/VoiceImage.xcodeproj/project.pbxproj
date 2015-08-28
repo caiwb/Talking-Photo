@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39B38ED31B9024310090A809 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B38ED11B9024310090A809 /* PickerViewController.m */; };
 		39B38ED41B9024310090A809 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39B38ED21B9024310090A809 /* PickerViewController.xib */; };
 		39BDA2141B84153E00CBA988 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39BDA2131B84153E00CBA988 /* libsqlite3.dylib */; };
 		39BDA2191B84223F00CBA988 /* APPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BDA2181B84223F00CBA988 /* APPAppDelegate.m */; };
@@ -128,8 +127,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		39B38ED01B9024310090A809 /* PickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
-		39B38ED11B9024310090A809 /* PickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
 		39B38ED21B9024310090A809 /* PickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
 		39BDA2131B84153E00CBA988 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		39BDA2181B84223F00CBA988 /* APPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPAppDelegate.m; sourceTree = "<group>"; };
@@ -508,8 +505,6 @@
 			children = (
 				EB2397F81B44E0E2004182BC /* APPAppDelegate.h */,
 				39BDA2181B84223F00CBA988 /* APPAppDelegate.m */,
-				39B38ED01B9024310090A809 /* PickerViewController.h */,
-				39B38ED11B9024310090A809 /* PickerViewController.m */,
 				EB2397FA1B44E103004182BC /* APPViewController.h */,
 				EB2397FB1B44E103004182BC /* APPViewController.m */,
 				39EBA45D1B8DF526009D392F /* SettingViewController.h */,
@@ -721,7 +716,6 @@
 				EB52892E1B4646D600E35384 /* MyPhotoBrowser.m in Sources */,
 				39EBA45C1B8DF3B3009D392F /* YRSideViewController.m in Sources */,
 				EB2398191B44F05B004182BC /* CompleteViewController.m in Sources */,
-				39B38ED31B9024310090A809 /* PickerViewController.m in Sources */,
 				EB52893D1B4A27F800E35384 /* DataHolder.m in Sources */,
 				EB85AA7F1B5CDFD600F4F4F3 /* EZAudioPlayer.m in Sources */,
 				39EBA2B81B8B58C4009D392F /* AFURLRequestSerialization.m in Sources */,

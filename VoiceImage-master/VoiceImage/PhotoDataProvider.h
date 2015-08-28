@@ -14,8 +14,9 @@
     ALAssetsLibrary *library;
     NSArray *imageArray;
     NSMutableArray *mutableArray;
-    NSMutableArray* selected;
 }
+
+@property (nonatomic, strong) NSMutableArray* selected;
 @property (nonatomic, strong) NSArray *photos;
 @property (nonatomic, strong) NSArray *thumbs;
 @property (nonatomic, strong) UIViewController* parentView;
@@ -24,4 +25,5 @@
 -(void)getAllPictures:(id)object withSelector:(SEL)selector;
 -(void)getPicturesByName:(id)object withSelector:(SEL)selector names:(NSArray*)names;
 -(instancetype)init;
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index;
 @end

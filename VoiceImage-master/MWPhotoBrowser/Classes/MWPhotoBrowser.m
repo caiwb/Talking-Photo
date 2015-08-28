@@ -162,6 +162,8 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     
+    _selectedPhotoArray = [NSMutableArray array];
+    
     // Validate grid settings
     if (_startOnGrid) _enableGrid = YES;
     if (_enableGrid) {
@@ -252,7 +254,7 @@
     CGRect frame = CGRectMake(bound.size.width - 60, bound.size.height - 40, 60, 40);
     _groupButton = [[UISwitch alloc] initWithFrame:frame];
     [_groupButton addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
-    //[controlView addSubview:_groupButton];
+//    [controlView addSubview:_groupButton];
     
     [self.view addSubview:controlView];
     // Update
@@ -286,6 +288,21 @@
     _gridController.view.userInteractionEnabled = enable;
 }
 
+
+- (void)changeSwitch
+{
+    
+    self.displaySelectionButtons = !self.displaySelectionButtons;
+    _gridController.selectionMode = !_gridController.selectionMode;
+    [_gridController.collectionView reloadData];
+    for (NSNumber * indexObject in _selectedPhotoArray) {
+        NSInteger index = [indexObject integerValue];
+        [self setPhotoSelected:NO atIndex:index];
+    }
+    [_selectedPhotoArray removeAllObjects];
+    [self.view setNeedsLayout];
+}
+
 - (void)changeSwitch:(id)sender{
     if([sender isOn]){
         // Execute any code when the switch is ON
@@ -316,13 +333,26 @@
     if (_gridController == nil) {
         id <MWPhoto> photo = [self photoAtIndex:_currentPageIndex];
         NSString* name = [photo caption];
-        NSData *imageData = UIImageJPEGRepresentation([photo underlyingImage], 0.7);
-        [self stopUpdateRecord:name imageData:imageData];
+//        NSData *imageData = UIImageJPEGRepresentation([photo underlyingImage], 0.7);
+        [self stopUpdateRecord:name imageData:nil];
     }
     else {
         if (_gridController.selectionMode) {
             //TODO: add multi photos to website
-            [self stopUpdateRecordList:nil imageData:nil];
+            NSMutableArray * nameArray = [NSMutableArray array];
+            
+            for (NSNumber * indexObject in self.selectedPhotoArray)
+            {
+                NSInteger index = [indexObject integerValue];
+                if ([self photoIsSelectedAtIndex:index]) {
+                    id <MWPhoto> photo = [self photoAtIndex:index];
+                    NSString* name = [photo caption];
+                    [nameArray addObject:name];
+                }
+                else
+                    continue;
+            }
+            [self stopUpdateRecordList:nameArray imageData:nil];
         }
         else {
             [self stopRecord];
@@ -850,8 +880,18 @@
     if (_displaySelectionButtons) {
         if ([self.delegate respondsToSelector:@selector(photoBrowser:photoAtIndex:selectedChanged:)]) {
             [self.delegate photoBrowser:self photoAtIndex:index selectedChanged:selected];
+            NSNumber * indexObject = [NSNumber numberWithInt: (int)index];
+            [self.selectedPhotoArray addObject:indexObject];
         }
     }
+}
+
+- (NSMutableArray *)selectedPhotoArray
+{
+    if (_selectedPhotoArray == nil) {
+        _selectedPhotoArray = [[NSMutableArray alloc] init];
+    }
+    return _selectedPhotoArray;
 }
 
 - (UIImage *)imageForPhoto:(id<MWPhoto>)photo {
@@ -1588,7 +1628,9 @@
         if ([_delegate respondsToSelector:@selector(photoBrowserDidFinishModalPresentation:)]) {
             // Call delegate method and let them dismiss us
             [_delegate photoBrowserDidFinishModalPresentation:self];
+            [self changeSwitch];
         } else  {
+            
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }

@@ -243,7 +243,19 @@
 
 -(void)stopUpdateRecordList:(NSArray*)imageName imageData:(NSArray*)imageData {
     //TOOD: upload group of images and one voice to website
+    _voiceSource = 1;
+    [self.imageNameArray removeAllObjects];
     
+    NSArray * indexArr = [[PhotoDataProvider sharedInstance] selected];
+    for (NSNumber * indexObject in indexArr) {
+        NSInteger index = [indexObject integerValue];
+        MWPhoto * photo = [[PhotoDataProvider sharedInstance] photoBrowser:self photoAtIndex:index];
+        NSString* name = [photo caption];
+        [self.imageNameArray addObject:name];
+    }
+    self.recordingAudioPlot.hidden = YES;
+    [self.microphone stopFetchingAudio];
+    [_iFlySpeechRecognizer stopListening];
 }
 
 -(void)uploadResponse:(NSData*)data {
