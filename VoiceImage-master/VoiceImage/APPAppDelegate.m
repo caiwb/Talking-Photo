@@ -189,10 +189,5 @@
 }
 
 
--(void)initNavigation
-{
-    
-}
-
 
 @end

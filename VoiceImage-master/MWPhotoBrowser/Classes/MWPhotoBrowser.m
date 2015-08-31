@@ -299,6 +299,7 @@
         NSInteger index = [indexObject integerValue];
         [self setPhotoSelected:NO atIndex:index];
     }
+    
     [_selectedPhotoArray removeAllObjects];
     [self.view setNeedsLayout];
 }
@@ -877,11 +878,12 @@
 }
 
 - (void)setPhotoSelected:(BOOL)selected atIndex:(NSUInteger)index {
+    
     if (_displaySelectionButtons) {
+        
         if ([self.delegate respondsToSelector:@selector(photoBrowser:photoAtIndex:selectedChanged:)]) {
+            
             [self.delegate photoBrowser:self photoAtIndex:index selectedChanged:selected];
-            NSNumber * indexObject = [NSNumber numberWithInt: (int)index];
-            [self.selectedPhotoArray addObject:indexObject];
         }
     }
 }
@@ -1020,7 +1022,6 @@
                 page.selectedButton = selectedButton;
                 selectedButton.selected = [self photoIsSelectedAtIndex:index];
             }
-            
 		}
 	}
 	
@@ -1298,6 +1299,7 @@
 #pragma mark - Interactions
 
 - (void)selectedButtonTapped:(id)sender {
+    
     UIButton *selectedButton = (UIButton *)sender;
     selectedButton.selected = !selectedButton.selected;
     NSUInteger index = NSUIntegerMax;
@@ -1625,9 +1627,9 @@
             }
         }
         // Dismiss view controller
-        if ([_delegate respondsToSelector:@selector(photoBrowserDidFinishModalPresentation:)]) {
+        if ([_delegate respondsToSelector:@selector(photoBrowserDidFinishModalPresentation:isSelectedModel:)]) {
             // Call delegate method and let them dismiss us
-            [_delegate photoBrowserDidFinishModalPresentation:self];
+            [_delegate photoBrowserDidFinishModalPresentation:self isSelectedModel:_gridController.selectionMode];
             [self changeSwitch];
         } else  {
             

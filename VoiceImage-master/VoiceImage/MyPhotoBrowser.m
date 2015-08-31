@@ -20,10 +20,14 @@
 #define SEARCH_PHOTO 0
 #define RETAG_PHOTO 1
 
+#define CANCEL_BTN 2
+#define TRASH_BTN 3
+
 @interface MyPhotoBrowser () <MAMapViewDelegate, AMapSearchDelegate>
 {
     AMapSearchAPI *_search;
     int _voiceSource;
+    BOOL isStarted;
 }
 @property (strong, nonatomic) NSMutableArray * imageNameArray;
 
@@ -38,6 +42,13 @@
         _imageNameArray = [[NSMutableArray alloc] init];
     }
     return _imageNameArray;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [PhotoDataProvider sharedInstance].delegate = self;
+    isStarted = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,8 +84,53 @@
     self.recordingAudioPlot.gain = 4.0;
     
     [self.view addSubview:self.recordingAudioPlot];
-    
+    _cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(leftBarButtonClick:)];
+    _cancel.tag = CANCEL_BTN;
+    _trash = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(leftBarButtonClick:)];
+    _trash.tag = TRASH_BTN;
+    self.navigationItem.leftBarButtonItem = _cancel;
 }
+
+-(void)leftBarButtonClick:(UIButton *)sender
+{
+    switch (sender.tag) {
+        case CANCEL_BTN:
+        {
+            self.result = @"";
+            break;
+        }
+        case TRASH_BTN:
+        {
+            UIAlertView * myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除照片" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定", nil];
+            [myAlertView show];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+#pragma PhotoDataProvider delegate method
+
+-(void)selectedModelPresented
+{
+    self.navigationItem.leftBarButtonItem = _trash;
+}
+
+-(void)selectedModelHidden
+{
+    self.navigationItem.leftBarButtonItem = _cancel;
+}
+
+-(void)viewSinglePhoto
+{
+    if (isStarted == YES) {
+        isStarted = NO;
+        return;
+    }
+    self.navigationItem.leftBarButtonItem = _trash;
+}
+#pragma PhotoDataProvider delegate method end
 
 -(void)initRecognizer
 {

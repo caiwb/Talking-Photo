@@ -10,16 +10,27 @@
 #include <AssetsLibrary/AssetsLibrary.h>
 #import "MWPhotoBrowser.h"
 
+@protocol PhotoDataProtocol <NSObject>
+
+@optional
+-(void)selectedModelPresented;
+-(void)selectedModelHidden;
+-(void)viewSinglePhoto;
+
+@end
+
 @interface PhotoDataProvider : NSObject<MWPhotoBrowserDelegate>{
     ALAssetsLibrary *library;
     NSArray *imageArray;
     NSMutableArray *mutableArray;
 }
 
+@property (weak, nonatomic) id <PhotoDataProtocol> delegate;
 @property (nonatomic, strong) NSMutableArray* selected;
 @property (nonatomic, strong) NSArray *photos;
 @property (nonatomic, strong) NSArray *thumbs;
 @property (nonatomic, strong) UIViewController* parentView;
+@property (assign, nonatomic) BOOL isSelectedModel;
 
 + (instancetype)sharedInstance;
 -(void)getAllPictures:(id)object withSelector:(SEL)selector;

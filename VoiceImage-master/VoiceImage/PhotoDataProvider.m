@@ -8,6 +8,11 @@
 
 #import "PhotoDataProvider.h"
 #import "ImageInfo.h"
+#import "MyPhotoBrowser.h"
+
+@interface PhotoDataProvider()
+
+@end
 
 @implementation PhotoDataProvider
 
@@ -38,8 +43,6 @@
         }
         
     };
-    
-    
     
     NSMutableArray *assetGroups = [[NSMutableArray alloc] init];
     void (^ assetGroupEnumerator) ( ALAssetsGroup *, BOOL *)= ^(ALAssetsGroup *group, BOOL *stop) {
@@ -117,7 +120,6 @@
         }
         
     };
-    
     
     
     NSMutableArray *assetGroups = [[NSMutableArray alloc] init];
@@ -200,6 +202,7 @@
 //}
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
+    [self.delegate viewSinglePhoto];
     NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
 }
 
@@ -212,7 +215,8 @@
 //}
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)sel {
-    NSLog(@"Photo at index %lu selected %@", (unsigned long)index, _selected ? @"YES" : @"NO");
+    
+    NSLog(@"Photo at index %lu selected %@", (unsigned long)index, sel ? @"YES" : @"NO");
     if (sel) {
         [_selected addObject:[NSNumber numberWithInteger:index]];
     }
@@ -221,9 +225,18 @@
     }
 }
 
-- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser {
+- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser isSelectedModel:(BOOL)selected{
     // If we subscribe to this method we must dismiss the view controller ourselves
-    NSLog(@"Did finish modal presentation");
+    [_selected removeAllObjects];
+    _isSelectedModel = selected;
+    if (_isSelectedModel == NO) {
+        NSLog(@"Did finish modal presentation ,selected model:YES");
+        [self.delegate selectedModelPresented];
+    }
+    else {
+        NSLog(@"Did finish modal presentation ,selected model:NO");
+        [self.delegate selectedModelHidden];
+    }
     [self.parentView dismissViewControllerAnimated:YES completion:nil];
 }
 
