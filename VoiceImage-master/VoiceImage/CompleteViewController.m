@@ -45,26 +45,8 @@
 - (IBAction)takePhotoClicked:(UIButton *)sender {
     APPAppDelegate *delegate = (APPAppDelegate*)[[UIApplication sharedApplication]delegate];
     [delegate backtoSideViewControllerAndShowRightVc:YES];
+    [[PhotoDataProvider sharedInstance] getAllPictures:delegate.browser withSelector:@selector(imagesRetrieved:)];
     [self.navigationController popToRootViewControllerAnimated:YES];
-    
-//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//    
-//    picker.delegate = self;
-//    picker.allowsEditing = NO;
-//    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    
-//    [self presentViewController:picker animated:YES completion:NULL];
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-//    
-//    APPAppDelegate *delegate = (APPAppDelegate*)[[UIApplication sharedApplication]delegate];
-//    YRSideViewController *sideViewController=[delegate sideViewController];
-//    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-//    picker.delegate = self;
-//    picker.allowsEditing = YES;
-//    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    sideViewController.rightViewController = picker;
-//    
-//    [sideViewController showRightViewController:YES];
 }
 
 - (IBAction)browseGallery:(UIButton *)sender {
@@ -76,6 +58,7 @@
     
     APPAppDelegate *delegate = (APPAppDelegate*)[[UIApplication sharedApplication]delegate];
     [delegate backtoSideViewControllerAndShowRightVc:NO];
+    [[PhotoDataProvider sharedInstance] getAllPictures:delegate.browser withSelector:@selector(imagesRetrieved:)];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

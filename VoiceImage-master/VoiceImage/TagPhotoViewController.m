@@ -428,14 +428,6 @@
     }else {
         self.tagSR.text = @"识别错误，请重试！";
         self.tagSR.hidden = NO;
-//        dispatch_after(200, dispatch_get_global_queue(0, 0), ^{
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                self.tagSR.text = self.desc;
-//                if ([self.desc isEqualToString:@""]) {
-//                    self.tagSR.text = @"大嘴没听清！";
-//                }
-//            });
-//        });
     }
     
 }
@@ -462,10 +454,9 @@
     if ([self.desc isEqualToString:@""]) {
         self.tagSR.text = @"大嘴没听清！";
     }
-    if (isLast){
+    if (isLast) {
 //        NSLog(@"听写结果(json)：%@测试",  self.tagSR.text);
     }
-    
     self.tagSR.hidden = NO;
 }
 
@@ -480,7 +471,6 @@
 
 - (BOOL)prefersStatusBarHidden
 {
-
     return YES; //返回NO表示要显示，返回YES将hiden
 }
 

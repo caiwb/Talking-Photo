@@ -9,6 +9,7 @@
 #import "PhotoDataProvider.h"
 #import "ImageInfo.h"
 #import "MyPhotoBrowser.h"
+#import "DataBaseHelper.h"
 
 @interface PhotoDataProvider()
 
@@ -35,6 +36,19 @@
                     info.fullImageUrl = result.defaultRepresentation.url;
                     NSString* name = [[result defaultRepresentation] filename];
                     info.name = name;
+//                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                        NSArray * selectResult = nil;
+//                        selectResult = [DataBaseHelper selectDataBy:@"image_name" IsEqualto:name];
+//                        if ([selectResult count] == 0) {
+//                            NSString * path = [result valueForProperty:ALAssetPropertyURLs][@"public.jpeg"];
+//                            NSString * date = [result valueForProperty:ALAssetPropertyDate];
+//                            NSString * location = [result valueForProperty:ALAssetPropertyLocation];
+//                            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//                            
+//                        
+//                            
+//                        }
+//                    });
                     [mutableArray addObject:info];
                 }
                 

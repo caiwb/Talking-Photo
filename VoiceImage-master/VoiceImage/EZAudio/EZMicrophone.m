@@ -325,7 +325,9 @@ static OSStatus EZAudioMicrophoneCallback(void                       *inRefCon,
 - (void)microphoneRouteChanged:(NSNotification *)notification
 {
     EZAudioDevice *device = [EZAudioDevice currentInputDevice];
-    [self setDevice:device];
+    if (device != nil) {
+        [self setDevice:device];
+    }
 }
 
 #elif TARGET_OS_MAC

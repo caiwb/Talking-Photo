@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) YRSideViewController *sideViewController;
 @property (strong, nonatomic) UIImagePickerController *picker;
+@property (strong, nonatomic) MyPhotoBrowser *browser;
 
 - (YRSideViewController *)backtoSideViewControllerAndShowRightVc:(BOOL)isShow;
 

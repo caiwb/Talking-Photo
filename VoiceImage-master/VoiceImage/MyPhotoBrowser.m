@@ -97,6 +97,7 @@
         case CANCEL_BTN:
         {
             self.result = @"";
+            [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(imagesRetrieved:)];
             break;
         }
         case TRASH_BTN:
@@ -124,11 +125,7 @@
 
 -(void)viewSinglePhoto
 {
-    if (isStarted == YES) {
-        isStarted = NO;
-        return;
-    }
-    self.navigationItem.leftBarButtonItem = _trash;
+
 }
 #pragma PhotoDataProvider delegate method end
 

@@ -21,8 +21,6 @@
 @interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate>
 
 @property (nonatomic, assign) BOOL isLoop;
-
-@property (strong, nonatomic) MyPhotoBrowser *browser;
 @property (strong, nonatomic) UINavigationController *mainViewController;
 
 @end
@@ -43,7 +41,7 @@
     if (dataArray) {
         for (id obj in dataArray) {
 //            NSString * imageName = obj[@"name"];
-            [[HttpHelper sharedHttpHelper]AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImagePath:obj[@"path"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
+            [[HttpHelper sharedHttpHelper] AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImagePath:obj[@"path"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
         }
     }
 }
@@ -64,9 +62,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self initUser];
-//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    self.window.rootViewController = [[MyPhotoBrowser alloc] init];
-//    [self.window makeKeyAndVisible];
+    //加载数据库
+    [DataBaseHelper initDB];
     
     [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -83,9 +80,6 @@
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@", IFLY_APP_ID];
     //所有服务启动前，需要确保执行createUtility
     [IFlySpeechUtility createUtility:initString];
-    
-    //加载数据库
-    [DataBaseHelper initDB];
     
     //异步上传
     dispatch_queue_t queue = dispatch_queue_create("upload_queue", NULL);
