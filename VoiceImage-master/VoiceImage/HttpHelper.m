@@ -93,14 +93,14 @@ static NSString * host1 = @"10.172.88.75:8888";
             isOK = YES;
         }
         if (!isOK) {
-            UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot create user." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"注册失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [myAlertView show];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
         NSLog(@"注册请求失败：%@",error);
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot create user." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"注册失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [myAlertView show];
     }];
 }
@@ -122,14 +122,14 @@ static NSString * host1 = @"10.172.88.75:8888";
              isOK = YES;
          }
          if (!isOK) {
-             UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot login." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+             UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"登录失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
              [myAlertView show];
          }
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          NSLog(@"登录请求失败：%@",error);
-         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Cannot login." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"登录失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
          [myAlertView show];
      }];
 

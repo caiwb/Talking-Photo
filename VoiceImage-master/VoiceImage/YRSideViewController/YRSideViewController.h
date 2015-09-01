@@ -17,6 +17,7 @@ typedef void(^RootViewMoveBlock)(UIView *rootView,CGRect orginFrame,CGFloat xoff
 
 @optional
 -(void) whenHideSideVc;
+-(void) whenShowRightVc;
 
 @end
 

@@ -17,11 +17,13 @@
 #import "PhotoDataProvider.h"
 #import "TagPhotoViewController.h"
 #import "DataHolder.h"
+#import "CameraOverlayController.h"
 
 @interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate>
 
 @property (nonatomic, assign) BOOL isLoop;
-@property (strong, nonatomic) UINavigationController *mainViewController;
+@property (strong, nonatomic) UINavigationController * mainViewController;
+@property (strong, nonatomic) CameraOverlayController * cameraViewController;
 
 @end
 
@@ -61,20 +63,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self initUser];
-    //加载数据库
-    [DataBaseHelper initDB];
-    
-    [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
+    dispatch_async(dispatch_queue_create("init_data", NULL), ^{
+        [self initUser];
+        //加载数据库
+        [DataBaseHelper initDB];
+        //加载相册图片 dataRetrieved:中初始化browser
+        [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
+    });
+    //保持LaunchScreen 等待照片数据加载完成
+    sleep(1);
+
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"未检测到摄像头" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [myAlertView show];
         
     }
-
-    
-    _isLoop = YES;
     
     //创建语音配置,appid必须要传入，仅执行一次则可
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@", IFLY_APP_ID];
@@ -82,19 +86,19 @@
     [IFlySpeechUtility createUtility:initString];
     
     //异步上传
-    dispatch_queue_t queue = dispatch_queue_create("upload_queue", NULL);
-    dispatch_async(queue, ^{
-        while (_isLoop == YES)
+    dispatch_queue_t upload_queue = dispatch_queue_create("upload_queue", NULL);
+    dispatch_async(upload_queue, ^{
+        while (true)
         {
             [self uploadDataFromDB];
             sleep(5);
         }
     });
-    
     return YES;
 }
 
 - (void)dataRetrieved:(id)sender {
+    NSLog(@"3--------------%@",[NSThread currentThread]);
     // Create browser
     _browser = [[MyPhotoBrowser alloc] initWithDelegate:[PhotoDataProvider sharedInstance]];
     _browser.displayActionButton = NO;
@@ -111,14 +115,21 @@
     
     [_browser setCurrentPhotoIndex:0];
     
-    // Modal
     _mainViewController = [[UINavigationController alloc] initWithRootViewController:_browser];
     SettingViewController * leftViewController = [[SettingViewController alloc] init];
+    
+    //picker
     _picker = [[UIImagePickerController alloc] init];
     _picker.delegate = self;
     _picker.allowsEditing = NO;
     _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+  
+    _cameraViewController = [[CameraOverlayController alloc] init];
+    _cameraViewController.view.backgroundColor = [UIColor clearColor];
+    _picker.cameraOverlayView = _cameraViewController.view;
+    _cameraViewController.picker = _picker;
     
+    //side main view controller
     _sideViewController = [[YRSideViewController alloc]initWithNibName:nil bundle:nil];
     _sideViewController.delegate = self;
     _sideViewController.rootViewController = _mainViewController;
@@ -129,9 +140,11 @@
     _sideViewController.leftViewShowWidth = 250;
     _sideViewController.needSwipeShowMenu = true;//默认开启的可滑动展示
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = _sideViewController;
-    [self.window makeKeyAndVisible];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window.rootViewController = _sideViewController;
+        [self.window makeKeyAndVisible];
+    });
 }
 
 #pragma mark - Alert View click delegate
@@ -172,6 +185,7 @@
     _picker.delegate = self;
     _picker.allowsEditing = NO;
     _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+     _picker.cameraOverlayView = _cameraViewController.view;
     _sideViewController.rightViewController = _picker;
     _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
     _sideViewController.needSwipeShowMenu = YES;
@@ -182,6 +196,68 @@
     return _sideViewController;
 }
 
+#pragma sideVc delegate methods
+
+- (void)whenShowRightVc
+{
+    [self cameraOpenAnimation];
+}
+
+- (void)whenHideSideVc
+{
+//    UIImagePickerController * newPicker = [[UIImagePickerController alloc] init];
+//    newPicker.delegate = self;
+//    newPicker.allowsEditing = NO;
+//    newPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    newPicker.cameraOverlayView = _cameraViewController.view;
+//    _picker = newPicker;
+    
+//    _picker = [[UIImagePickerController alloc] init];
+//    _picker.delegate = self;
+//    _picker.allowsEditing = NO;
+//    _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    _sideViewController.rightViewController = _picker;
+//    _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
+//    _sideViewController.needSwipeShowMenu = YES;
+    
+}
+
+- (void)cameraOpenAnimation
+{
+    
+    _cameraViewController.view.hidden = NO;
+    CGRect initRect = _cameraViewController.startImageUp.frame;
+    initRect.origin.x = 0;
+    initRect.origin.y = 0;
+    
+    _cameraViewController.startImageUp.frame = initRect;
+    _cameraViewController.startImageDown.frame = initRect;
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.7 * NSEC_PER_SEC), dispatch_get_global_queue(0, 0), ^{
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:0.6];
+            
+            CGRect rectImageUp = _cameraViewController.startImageUp.frame;
+            CGRect rectImageDown = _cameraViewController.startImageDown.frame;
+            
+            rectImageUp.origin.x -= 250;
+            rectImageUp.origin.y -= 250;
+            rectImageDown.origin.x += 320;
+            rectImageDown.origin.y += 320;
+            
+            _cameraViewController.startImageUp.frame = rectImageUp;
+            _cameraViewController.startImageDown.frame = rectImageDown;
+            
+            [UIView commitAnimations];
+        });
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        _cameraViewController.view.hidden = YES;
+    });
+}
 
 
 @end

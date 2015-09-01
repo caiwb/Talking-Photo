@@ -171,13 +171,14 @@
     
     self.microphone = [EZMicrophone microphoneWithDelegate:self];
     self.recordingAudioPlot.color           = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-    UIColor* color = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.3];
+    UIColor * color = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.3];
     self.recordingAudioPlot.backgroundColor = color;
     self.recordingAudioPlot.plotType        = EZPlotTypeBuffer;
     self.recordingAudioPlot.shouldFill      = NO;
     self.recordingAudioPlot.shouldMirror    = YES;
     self.recordingAudioPlot.gain = 4.0;
-    
+//    UIColor * labelColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Dzst_take-photo_upbg.png"]];
+    [_tagSR setBackgroundColor:color];
     self.tagSR.hidden = YES;
     self.recordingAudioPlot.hidden = YES;
     self.pressCircle.hidden = YES;

@@ -164,6 +164,7 @@
     if (_leftViewController && _leftViewController.view.superview) {
         [_leftViewController.view removeFromSuperview];
     }
+    [self.delegate whenShowRightVc];
 }
 - (void)showLeftViewController:(BOOL)animated{
     if (!_leftViewController) {
@@ -224,6 +225,7 @@
 }
 - (void)hideSideViewController{
     [self hideSideViewController:true];
+    [self.delegate whenHideSideVc];
 }
 
 #pragma mark UIGestureRecognizerDelegate
@@ -307,10 +309,10 @@
         self.rootViewMoveBlock(_currentView,_baseView.bounds,xoffset);
         return;
     }
-    /*平移的动画
+    //平移的动画
      [_currentView setFrame:CGRectMake(xoffset, _baseView.bounds.origin.y, _baseView.frame.size.width, _baseView.frame.size.height)];
     return;
-    //*/
+    
     
 //    /*平移带缩放效果的动画
     static CGFloat h2w = 0;
