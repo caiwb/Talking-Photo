@@ -71,7 +71,7 @@
         [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
     });
     //保持LaunchScreen 等待照片数据加载完成
-    sleep(1);
+    sleep(2);
 
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
@@ -125,9 +125,6 @@
     _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
   
     _cameraViewController = [[CameraOverlayController alloc] init];
-    _cameraViewController.view.backgroundColor = [UIColor clearColor];
-    _picker.cameraOverlayView = _cameraViewController.view;
-    _cameraViewController.picker = _picker;
     
     //side main view controller
     _sideViewController = [[YRSideViewController alloc]initWithNibName:nil bundle:nil];
@@ -141,6 +138,9 @@
     _sideViewController.needSwipeShowMenu = true;//默认开启的可滑动展示
     
     dispatch_sync(dispatch_get_main_queue(), ^{
+        
+        _picker.cameraOverlayView = _cameraViewController.view;
+        _cameraViewController.view.backgroundColor = [UIColor clearColor];
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window.rootViewController = _sideViewController;
         [self.window makeKeyAndVisible];
@@ -151,7 +151,7 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-
+    [self backtoSideViewControllerAndShowRightVc:YES];
 }
 
 #pragma mark - Image Picker Controller delegate methods
@@ -185,7 +185,7 @@
     _picker.delegate = self;
     _picker.allowsEditing = NO;
     _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-     _picker.cameraOverlayView = _cameraViewController.view;
+    _picker.cameraOverlayView = _cameraViewController.view;
     _sideViewController.rightViewController = _picker;
     _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
     _sideViewController.needSwipeShowMenu = YES;
@@ -224,15 +224,17 @@
 
 - (void)cameraOpenAnimation
 {
-    
     _cameraViewController.view.hidden = NO;
     CGRect initRect = _cameraViewController.startImageUp.frame;
+    
     initRect.origin.x = 0;
     initRect.origin.y = 0;
     
     _cameraViewController.startImageUp.frame = initRect;
     _cameraViewController.startImageDown.frame = initRect;
-
+//    NSLog(@"up-----%f-----%f",_cameraViewController.startImageUp.frame.size.height,_cameraViewController.startImageDown.frame.size.width);
+    
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.7 * NSEC_PER_SEC), dispatch_get_global_queue(0, 0), ^{
         
         dispatch_sync(dispatch_get_main_queue(), ^{

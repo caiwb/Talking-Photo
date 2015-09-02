@@ -281,6 +281,10 @@
     if (self.imageName == nil) {
         return;
     }
+    if ([loc isEqualToString:@""] == YES)
+    {
+        return;
+    }
     self.desc = @"这是我在北京微软大厦拍的照片";
     self.loading.hidden = NO;
     self.view.userInteractionEnabled = NO;

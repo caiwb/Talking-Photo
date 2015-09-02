@@ -10,6 +10,9 @@
 #import "global.h"
 
 NSString* host = @"10.172.88.75:8888";
+//NSString* host = @"10.172.88.78:8888";
+//NSString* host = @"192.168.191.1:8888";
+//NSString* host = @"vophoto.chinacloudapp.cn";
 
 NSString* city = @"";
 NSString* name = @"";

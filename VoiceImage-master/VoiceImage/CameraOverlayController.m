@@ -17,6 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    CGRect initRect = CGRectMake(0, 0, 375, 667);
+    _startImageDown.frame = initRect;
+    _startImageUp.frame = initRect;
     // Do any additional setup after loading the view from its nib.
 }
 

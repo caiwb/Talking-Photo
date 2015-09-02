@@ -29,9 +29,6 @@ static id _instance;
 
 @implementation HttpHelper
 
-//static NSString* host = @"vophoto.chinacloudapp.cn";
-static NSString * host1 = @"10.172.88.75:8888";
-
 +(instancetype) sharedHttpHelper
 {
     if (_instance == nil) { //防止频繁加锁
@@ -261,6 +258,7 @@ static NSString * host1 = @"10.172.88.75:8888";
              NSLog(@"%@",loc);
              
              [DataBaseHelper insertDataWithId:userId ImageName:insert[@"imageName"] ImagePath:insert[@"imagePath"] Desc:insert[@"desc"] Time:[NSDate date] Loc:loc Token:token Tag:result Status:0];
+             loc = @"";
          }
          //分词用于search
          else if(object != nil && insert == nil)
