@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>0CC3F359-3E24-4B07-8A29-C4D098AA08C9</string>
 	<key>IDESourceControlProjectName</key>
-	<string>VoiceImage</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C7B26DDC2F82660EA7D58315062845030C8577A7</key>
 		<string>https://github.com/whenbber/Talking-Photo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>VoiceImage-master/VoiceImage.xcodeproj</string>
+	<string>VoiceImage-master/VoiceImage.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C7B26DDC2F82660EA7D58315062845030C8577A7</key>

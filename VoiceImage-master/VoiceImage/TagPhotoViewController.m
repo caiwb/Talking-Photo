@@ -285,7 +285,7 @@
     {
         return;
     }
-    self.desc = @"这是我在北京微软大厦拍的照片";
+//    self.desc = @"这是我在北京微软大厦拍的照片";
     self.loading.hidden = NO;
     self.view.userInteractionEnabled = NO;
     

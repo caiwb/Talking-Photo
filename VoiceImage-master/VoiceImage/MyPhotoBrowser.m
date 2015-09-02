@@ -84,11 +84,17 @@
     self.recordingAudioPlot.gain = 4.0;
     
     [self.view addSubview:self.recordingAudioPlot];
+    
     _cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(leftBarButtonClick:)];
     _cancel.tag = CANCEL_BTN;
     _trash = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(leftBarButtonClick:)];
     _trash.tag = TRASH_BTN;
     self.navigationItem.leftBarButtonItem = _cancel;
+    
+    UIColor * naviBtnColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Dzst_color"]];
+    self.navigationItem.rightBarButtonItem.tintColor = naviBtnColor;
+    _trash.tintColor = naviBtnColor;
+    _cancel.tintColor = naviBtnColor;
 }
 
 -(void)leftBarButtonClick:(UIButton *)sender
@@ -215,35 +221,35 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:MWPHOTO_FOLD_PHOTO_NOTIFICATION object:nil];
 }
 
-//not use
--(void)searchResponse:(NSData*)data {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ENABLE_GRIDVIEW"
-                                                        object:nil];
-    
-    if (data == nil) {
-        return;
-    }
-    NSError *error2;
-    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error2];
-    NSLog(@"%@", jsonDict);
-    BOOL suc = [[jsonDict valueForKey:@"Status"] boolValue];
-    if (suc) {
-        NSArray* imagesList = (NSArray*)[jsonDict valueForKey:@"Images"];
-        NSMutableArray* imgs = [[NSMutableArray alloc] init];
-        for (NSDictionary* dict in imagesList) {
-            [imgs addObject:[dict valueForKey:@"ImageName"]];
-        }
-
-        NSArray* arr = [[NSArray alloc] initWithArray:imgs];
-        [[PhotoDataProvider sharedInstance] getPicturesByName:self withSelector:@selector(imagesRetrieved:) names:arr];
-    }
-    else{
-        [PhotoDataProvider sharedInstance].photos = nil;
-        [PhotoDataProvider sharedInstance].thumbs = nil;
-        [self reloadData];
-        [self reloadGridView];
-    }
-}
+////not use
+//-(void)searchResponse:(NSData*)data {
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"ENABLE_GRIDVIEW"
+//                                                        object:nil];
+//    
+//    if (data == nil) {
+//        return;
+//    }
+//    NSError *error2;
+//    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error2];
+//    NSLog(@"%@", jsonDict);
+//    BOOL suc = [[jsonDict valueForKey:@"Status"] boolValue];
+//    if (suc) {
+//        NSArray* imagesList = (NSArray*)[jsonDict valueForKey:@"Images"];
+//        NSMutableArray* imgs = [[NSMutableArray alloc] init];
+//        for (NSDictionary* dict in imagesList) {
+//            [imgs addObject:[dict valueForKey:@"ImageName"]];
+//        }
+//
+//        NSArray* arr = [[NSArray alloc] initWithArray:imgs];
+//        [[PhotoDataProvider sharedInstance] getPicturesByName:self withSelector:@selector(imagesRetrieved:) names:arr];
+//    }
+//    else{
+//        [PhotoDataProvider sharedInstance].photos = nil;
+//        [PhotoDataProvider sharedInstance].thumbs = nil;
+//        [self reloadData];
+//        [self reloadGridView];
+//    }
+//}
 
 -(void)imagesRetrieved:(id)object{
     [self reloadData];
@@ -365,6 +371,7 @@
     if(response.geocodes.count == 0)
     {
         NSLog(@"address not found!");
+        [[HttpHelper sharedHttpHelper] AFNetworingForSearchWithUserId:userId Desc:self.result Tag:searchTag Loc:@"" Token:token RefreshObject:self];
         return;
     }
     //处理搜索结果
@@ -435,7 +442,7 @@
                 NSLog(@"Search--听写结果(json)：%@测试",  self.result);
                 
 #pragma -------------- test
-                self.result = @"北京中关村微软大厦拍的照片";
+//                self.result = @"北京中关村微软大厦拍的照片";
                 [[HttpHelper sharedHttpHelper]AFNetworkingForVoiceTag:self.result forInserting:nil orSearching:self];
                 break;
                 

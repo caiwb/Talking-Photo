@@ -134,7 +134,7 @@
     _sideViewController.leftViewController = leftViewController;
     
     _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
-    _sideViewController.leftViewShowWidth = 250;
+    _sideViewController.leftViewShowWidth = 260;
     _sideViewController.needSwipeShowMenu = true;//默认开启的可滑动展示
     
     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -151,7 +151,7 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    [self backtoSideViewControllerAndShowRightVc:YES];
+//    [self backtoSideViewControllerAndShowRightVc:NO];
 }
 
 #pragma mark - Image Picker Controller delegate methods
@@ -205,21 +205,7 @@
 
 - (void)whenHideSideVc
 {
-//    UIImagePickerController * newPicker = [[UIImagePickerController alloc] init];
-//    newPicker.delegate = self;
-//    newPicker.allowsEditing = NO;
-//    newPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    newPicker.cameraOverlayView = _cameraViewController.view;
-//    _picker = newPicker;
-    
-//    _picker = [[UIImagePickerController alloc] init];
-//    _picker.delegate = self;
-//    _picker.allowsEditing = NO;
-//    _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    _sideViewController.rightViewController = _picker;
-//    _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
-//    _sideViewController.needSwipeShowMenu = YES;
-    
+ 
 }
 
 - (void)cameraOpenAnimation

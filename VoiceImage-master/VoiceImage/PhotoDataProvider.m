@@ -102,6 +102,7 @@
 }
 
 -(void)getPicturesByName:(id)object withSelector:(SEL)selector names:(NSArray*)names {
+    
     imageArray=[[NSArray alloc] init];
     mutableArray =[[NSMutableArray alloc]init];
     NSMutableArray* assetURLDictionaries = [[NSMutableArray alloc] init];
@@ -119,7 +120,6 @@
                         ImageInfo* info = [[ImageInfo alloc] init];
                         info.image = theThumbnail;
                         info.fullImageUrl = result.defaultRepresentation.url;
-                        
                         info.name = name;
                         [mutableArray addObject:info];
                     }
@@ -170,6 +170,7 @@
     [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
                            usingBlock:assetGroupEnumerator
                          failureBlock:^(NSError *error) {NSLog(@"There is an error");}];
+    
 }
 
 + (instancetype)sharedInstance

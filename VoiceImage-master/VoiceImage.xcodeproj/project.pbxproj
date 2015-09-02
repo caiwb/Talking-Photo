@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3933742D1B96CD1C002455BB /* Dzst_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3933742C1B96CD1C002455BB /* Dzst_color.png */; };
+		397135791B96BF350092B846 /* Dzst_cbl_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3971356E1B96BF350092B846 /* Dzst_cbl_avatar.png */; };
+		3971357A1B96BF350092B846 /* Dzst_cbl_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */; };
+		3971357B1B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */; };
+		3971357C1B96BF350092B846 /* Dzst_cbl_icon_arrow_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135711B96BF350092B846 /* Dzst_cbl_icon_arrow_normal.png */; };
+		3971357D1B96BF350092B846 /* Dzst_cbl_icon_language.psd in Resources */ = {isa = PBXBuildFile; fileRef = 397135721B96BF350092B846 /* Dzst_cbl_icon_language.psd */; };
+		3971357E1B96BF350092B846 /* Dzst_cbl_icon_QQ.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135731B96BF350092B846 /* Dzst_cbl_icon_QQ.png */; };
+		3971357F1B96BF350092B846 /* Dzst_cbl_icon_Wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135741B96BF350092B846 /* Dzst_cbl_icon_Wechat.png */; };
+		397135801B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135751B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png */; };
+		397135811B96BF350092B846 /* Dzst_cbl_icon_wifi_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135761B96BF350092B846 /* Dzst_cbl_icon_wifi_on.png */; };
+		397135821B96BF350092B846 /* Dzst_cbl_icon_wifi.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135771B96BF350092B846 /* Dzst_cbl_icon_wifi.png */; };
+		397135831B96BF350092B846 /* Dzst_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135781B96BF350092B846 /* Dzst_line.png */; };
 		3991139E1B9566A000D6F672 /* CameraOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3991139C1B9566A000D6F672 /* CameraOverlayController.m */; };
 		3991139F1B9566A000D6F672 /* CameraOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3991139D1B9566A000D6F672 /* CameraOverlayController.xib */; };
 		39B38ED41B9024310090A809 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39B38ED21B9024310090A809 /* PickerViewController.xib */; };
@@ -138,6 +150,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3933742C1B96CD1C002455BB /* Dzst_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_color.png; sourceTree = "<group>"; };
+		3971356E1B96BF350092B846 /* Dzst_cbl_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_avatar.png; sourceTree = "<group>"; };
+		3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_bg.png; sourceTree = "<group>"; };
+		397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_arrow_click.png; sourceTree = "<group>"; };
+		397135711B96BF350092B846 /* Dzst_cbl_icon_arrow_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_arrow_normal.png; sourceTree = "<group>"; };
+		397135721B96BF350092B846 /* Dzst_cbl_icon_language.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dzst_cbl_icon_language.psd; sourceTree = "<group>"; };
+		397135731B96BF350092B846 /* Dzst_cbl_icon_QQ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_QQ.png; sourceTree = "<group>"; };
+		397135741B96BF350092B846 /* Dzst_cbl_icon_Wechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_Wechat.png; sourceTree = "<group>"; };
+		397135751B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_wifi_off.png; sourceTree = "<group>"; };
+		397135761B96BF350092B846 /* Dzst_cbl_icon_wifi_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_wifi_on.png; sourceTree = "<group>"; };
+		397135771B96BF350092B846 /* Dzst_cbl_icon_wifi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_wifi.png; sourceTree = "<group>"; };
+		397135781B96BF350092B846 /* Dzst_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_line.png; sourceTree = "<group>"; };
 		3991139B1B9566A000D6F672 /* CameraOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayController.h; sourceTree = "<group>"; };
 		3991139C1B9566A000D6F672 /* CameraOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayController.m; sourceTree = "<group>"; };
 		3991139D1B9566A000D6F672 /* CameraOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayController.xib; sourceTree = "<group>"; };
@@ -333,6 +357,18 @@
 		39B38F621B954EAB0090A809 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3971356E1B96BF350092B846 /* Dzst_cbl_avatar.png */,
+				3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */,
+				397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */,
+				397135711B96BF350092B846 /* Dzst_cbl_icon_arrow_normal.png */,
+				397135721B96BF350092B846 /* Dzst_cbl_icon_language.psd */,
+				397135731B96BF350092B846 /* Dzst_cbl_icon_QQ.png */,
+				397135741B96BF350092B846 /* Dzst_cbl_icon_Wechat.png */,
+				397135751B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png */,
+				397135761B96BF350092B846 /* Dzst_cbl_icon_wifi_on.png */,
+				397135771B96BF350092B846 /* Dzst_cbl_icon_wifi.png */,
+				397135781B96BF350092B846 /* Dzst_line.png */,
+				3933742C1B96CD1C002455BB /* Dzst_color.png */,
 				39B38F631B954EAB0090A809 /* Dzst_function_bg-pic.png */,
 				39B38F641B954EAB0090A809 /* Dzst_function_foot-bg@2x.png */,
 				39B38F651B954EAB0090A809 /* Dzst_function_icon-arrow@2x.png */,
@@ -695,7 +731,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3971357A1B96BF350092B846 /* Dzst_cbl_bg.png in Resources */,
 				39B38F991B954EAB0090A809 /* photo_bg1@2x.png in Resources */,
+				397135801B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png in Resources */,
 				39B38F881B954EAB0090A809 /* Dzst_mainpage_icon-camera@2x.png in Resources */,
 				39B38F981B954EAB0090A809 /* icon.png in Resources */,
 				39B38F921B954EAB0090A809 /* Dzst_tag.png in Resources */,
@@ -705,31 +743,41 @@
 				39B38F8E1B954EAB0090A809 /* Dzst_succeed_icon2@2x.png in Resources */,
 				39B38F961B954EAB0090A809 /* Dzst_take-photo_icon_click.png in Resources */,
 				39B38ED41B9024310090A809 /* PickerViewController.xib in Resources */,
+				3971357F1B96BF350092B846 /* Dzst_cbl_icon_Wechat.png in Resources */,
 				39B38F891B954EAB0090A809 /* Dzst_mainpage_icon_search@2x.png in Resources */,
+				3971357B1B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png in Resources */,
 				39B38F861B954EAB0090A809 /* Dzst_mainpage_bg@2x.png in Resources */,
 				39EBA4611B8DF526009D392F /* SettingViewController.xib in Resources */,
 				39B38F851B954EAB0090A809 /* Dzst_loading_microsoft-logo@2x.png in Resources */,
 				39B38F8C1B954EAB0090A809 /* Dzst_start1.png in Resources */,
 				39B38F831B954EAB0090A809 /* Dzst_function_icon-yy_press@2x.png in Resources */,
 				39B38F7F1B954EAB0090A809 /* Dzst_function_bg-pic.png in Resources */,
+				3971357D1B96BF350092B846 /* Dzst_cbl_icon_language.psd in Resources */,
+				397135791B96BF350092B846 /* Dzst_cbl_avatar.png in Resources */,
 				39B38F871B954EAB0090A809 /* Dzst_mainpage_czzp@2x.png in Resources */,
 				EB85AA881B5CDFD600F4F4F3 /* CHANGELOG in Resources */,
 				39B38F9C1B954FCC0090A809 /* Dzst_loading.png in Resources */,
 				3991139F1B9566A000D6F672 /* CameraOverlayController.xib in Resources */,
+				3971357C1B96BF350092B846 /* Dzst_cbl_icon_arrow_normal.png in Resources */,
 				39B38F8D1B954EAB0090A809 /* Dzst_start2.png in Resources */,
+				3971357E1B96BF350092B846 /* Dzst_cbl_icon_QQ.png in Resources */,
 				39B38F971B954EAB0090A809 /* Dzst_take-photo_upbg.png in Resources */,
 				39B38F801B954EAB0090A809 /* Dzst_function_foot-bg@2x.png in Resources */,
+				3933742D1B96CD1C002455BB /* Dzst_color.png in Resources */,
 				EB5289291B46348B00E35384 /* MWPhotoBrowser.bundle in Resources */,
 				39B38F951B954EAB0090A809 /* Dzst_take-photo_icon.png in Resources */,
 				39B38F941B954EAB0090A809 /* Dzst_take-photo_down.png in Resources */,
+				397135811B96BF350092B846 /* Dzst_cbl_icon_wifi_on.png in Resources */,
 				39B38F8B1B954EAB0090A809 /* Dzst_start.png in Resources */,
 				39B38F911B954EAB0090A809 /* Dzst_succeed_right@2x.png in Resources */,
 				39B38F9A1B954EAB0090A809 /* photo_bg2@2x.png in Resources */,
 				39B38F8F1B954EAB0090A809 /* Dzst_succeed_icon@2x.png in Resources */,
 				EB23981A1B44F05B004182BC /* CompleteViewController.xib in Resources */,
+				397135831B96BF350092B846 /* Dzst_line.png in Resources */,
 				EB2398101B44E733004182BC /* LaunchScreen.xib in Resources */,
 				39B38F821B954EAB0090A809 /* Dzst_function_icon-yy_normal@2x.png in Resources */,
 				39B38F901B954EAB0090A809 /* Dzst_succeed_icon_click@2x.png in Resources */,
+				397135821B96BF350092B846 /* Dzst_cbl_icon_wifi.png in Resources */,
 				39B38F811B954EAB0090A809 /* Dzst_function_icon-arrow@2x.png in Resources */,
 				39B38F841B954EAB0090A809 /* Dzst_loading_icon@2x.png in Resources */,
 				39B38F931B954EAB0090A809 /* Dzst_take-photo.png in Resources */,

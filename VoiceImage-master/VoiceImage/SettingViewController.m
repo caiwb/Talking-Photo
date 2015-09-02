@@ -10,6 +10,8 @@
 #import "SettingViewController.h"
 
 @interface SettingViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *btnQQ;
+@property (weak, nonatomic) IBOutlet UIButton *btnWechat;
 
 @end
 
@@ -17,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [_btnQQ setImage:[UIImage imageNamed:@"Dzst_cbl_icon_QQ"] forState:UIControlStateNormal];
+    [_btnWechat setImage:[UIImage imageNamed:@"Dzst_cbl_icon_Wechat"] forState:UIControlStateNormal];
     // Do any additional setup after loading the view from its nib.
 }
 

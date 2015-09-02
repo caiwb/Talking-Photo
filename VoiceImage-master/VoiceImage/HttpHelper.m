@@ -182,13 +182,13 @@ static id _instance;
         params[@"time"] = @"";
         [mgr POST:[NSString stringWithFormat:@"http://%@/upload",host] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
-             NSLog(@"上传请求成功：%@",responseObject);
+             NSLog(@"更新请求成功：%@",responseObject);
              //请求成功后将数据库中该条数据status置为1
              [DataBaseHelper updateData:@"status" ByValue:1 WhereImageName:imageName];
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error)
          {
-             NSLog(@"上传请求失败：%@",error);
+             NSLog(@"更新请求失败：%@",error);
              
          }];
 
@@ -214,9 +214,12 @@ static id _instance;
      {
          NSLog(@"查询请求成功：%@",responseObject);
          NSArray * imageArray = responseObject[@"image"];
-         
-         [[PhotoDataProvider sharedInstance] getPicturesByName:object withSelector:@selector(imagesRetrieved:) names:imageArray];
-         
+         //服务器返回的null为NSNULL类型，不能直接判断是否为空
+         if([imageArray isEqual:[NSNull null]] == NO) {
+             
+            [[PhotoDataProvider sharedInstance] getPicturesByName:object withSelector:@selector(imagesRetrieved:) names:imageArray];
+             
+         }
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          NSLog(@"查询请求失败：%@",error);
@@ -291,7 +294,7 @@ static id _instance;
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          result = desc;
-         NSLog(@"分次失败————%@",error);
+         NSLog(@"分词失败————%@",error);
      }];
     
 }
