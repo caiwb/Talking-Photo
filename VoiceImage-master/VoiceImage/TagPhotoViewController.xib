@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TagPhotoViewController">
             <connections>
+                <outlet property="deleteDescBtn" destination="tB7-Dw-KOc" id="ziz-dt-qes"/>
                 <outlet property="imageView" destination="Mrk-a2-d6m" id="HdN-uI-rad"/>
                 <outlet property="loading" destination="hUo-k6-Ye1" id="0Vy-5C-HYx"/>
                 <outlet property="pressCircle" destination="4P8-xQ-Zqt" id="JTI-83-8zL"/>
@@ -81,9 +82,18 @@
                         <constraint firstAttribute="height" constant="50" id="V38-uj-AZf"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tB7-Dw-KOc">
+                    <rect key="frame" x="337" y="445" width="30" height="30"/>
+                    <state key="normal" backgroundImage="Dzst_delete_desc.png">
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="deleteDesc:" destination="-1" eventType="touchUpInside" id="adh-M2-ftQ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -113,6 +123,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Dzst_delete_desc.png" width="512" height="512"/>
         <image name="Dzst_function_foot-bg.png" width="375" height="96"/>
         <image name="Dzst_function_icon-arrow.png" width="25" height="26"/>
         <image name="Dzst_function_icon-yy_normal.png" width="83" height="82"/>

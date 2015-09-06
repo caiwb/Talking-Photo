@@ -532,7 +532,9 @@ static OSStatus EZAudioMicrophoneCallback(void                       *inRefCon,
     
     // store device
     _device = device;
-    
+    if (_device == nil) {
+        return;
+    }
     // notify delegate
     if ([self.delegate respondsToSelector:@selector(microphone:changedDevice:)])
     {

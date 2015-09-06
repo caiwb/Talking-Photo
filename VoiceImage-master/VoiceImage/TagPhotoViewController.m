@@ -25,6 +25,7 @@
 @property (nonatomic, strong) CLLocationManager * locationManager;
 @property (nonatomic, strong) CLGeocoder *geocoder;
 @property (nonatomic, strong) CLPlacemark *placemark;
+@property (weak, nonatomic) IBOutlet UIButton *deleteDescBtn;
 
 @end
 
@@ -155,6 +156,9 @@
     [self saveImage];
     [self getLocation];
     self.desc = @"";
+    self.tagSR.text = @"";
+    [self.deleteDescBtn setImage:[UIImage imageNamed:@"Dzst_delect_desc"] forState:UIControlStateNormal];
+    self.deleteDescBtn.hidden = YES;
     
     [self.navigationController setNavigationBarHidden:YES];
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -181,6 +185,7 @@
 //    UIColor * labelColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Dzst_take-photo_upbg.png"]];
     [_tagSR setBackgroundColor:color];
     self.tagSR.hidden = YES;
+    self.deleteDescBtn.hidden = YES;
     self.recordingAudioPlot.hidden = YES;
     self.pressCircle.hidden = YES;
     self.loading.hidden = YES;
@@ -191,15 +196,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)tagUp:(UIButton *)sender {
     //TODO: http post the image and voice to server
@@ -212,22 +208,6 @@
     [_iFlySpeechRecognizer stopListening];
 }
 
-//-(void)uploadResponse:(NSData*)data {
-//    NSError *error2;
-//    if (data != nil) {
-//        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error2];
-//        NSLog(@"%@", jsonDict);
-//        BOOL suc = [[jsonDict valueForKey:@"status"] boolValue];
-//        if (suc) {
-//            
-//        }
-//    }
-//    self.view.userInteractionEnabled = YES;
-//    self.loading.hidden = YES;
-//    CompleteViewController *picker = [[CompleteViewController alloc] init];
-//    [self presentViewController:picker animated:YES completion:NULL];
-//}
-
 - (IBAction)tagDown:(UIButton *)sender {
     //TODO: start record the voice
     self.pressCircle.hidden = NO;
@@ -235,6 +215,7 @@
 //    [[AudioRecorder sharedInstance] startRecord];
     
     self.tagSR.hidden = YES;
+    self.deleteDescBtn.hidden = YES;
     self.tagSR.text = @"";
     self.recordingAudioPlot.hidden = NO;
     [self.recordingAudioPlot clear];
@@ -294,7 +275,7 @@
     }
 
 #pragma -----test
-    self.desc = @"这是我在北京微软大厦拍的照片";
+//    self.desc = @"这是我在北京微软大厦拍的照片";
     self.loading.hidden = NO;
     self.view.userInteractionEnabled = NO;
     
@@ -305,7 +286,7 @@
     insertParams[@"desc"] = self.desc;
 
     [[HttpHelper sharedHttpHelper] AFNetworkingForVoiceTag:self.desc forInserting:insertParams orSearching:nil];
-       
+    
     CompleteViewController *complete = [[CompleteViewController alloc] init];
     [self.navigationController pushViewController:complete animated:YES];
 }
@@ -442,6 +423,7 @@
     }else {
         self.tagSR.text = @"识别错误，请重试！";
         self.tagSR.hidden = NO;
+        self.deleteDescBtn.hidden = NO;
     }
     
 }
@@ -472,8 +454,14 @@
 //        NSLog(@"听写结果(json)：%@测试",  self.tagSR.text);
     }
     self.tagSR.hidden = NO;
+    self.deleteDescBtn.hidden = NO;
 }
 
+
+- (IBAction)deleteDesc:(id)sender {
+    self.desc = @"";
+    self.tagSR.text = @"";
+}
 
 //donnot work
 - (UIStatusBarStyle)preferredStatusBarStyle

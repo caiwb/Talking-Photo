@@ -77,6 +77,7 @@ static id _instance;
 //    [mgr.requestSerializer setAuthorizationHeaderFieldWithUsername:@"XYZ" password:@"xyzzzz"];
     [mgr POST:[NSString stringWithFormat:@"http://%@/register",host] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
+        
         BOOL isOK = NO;
         NSLog(@"注册请求成功：%@",responseObject);
         BOOL suc = responseObject[@"status"];
@@ -87,6 +88,9 @@ static id _instance;
             [[DataHolder sharedInstance] setUserId: userId];
             [[DataHolder sharedInstance] saveData];
             token = responseObject[@"token"];
+            if (!token) {
+                token = @"";
+            }
             isOK = YES;
         }
         if (!isOK) {
@@ -116,6 +120,9 @@ static id _instance;
          BOOL suc = responseObject[@"status"];
          if (suc) {
              token = responseObject[@"token"];
+             if (!token) {
+                 token = @"";
+             }
              isOK = YES;
          }
          if (!isOK) {
@@ -156,7 +163,7 @@ static id _instance;
          {
              // 使用asset来获取本地图片
              UIImage * image = [self fullResolutionImageFromALAsset:asset];
-             NSData * imageData = UIImageJPEGRepresentation(image, 1);
+             NSData * imageData = UIImageJPEGRepresentation(image, 0);
              //http request
              [mgr POST:[NSString stringWithFormat:@"http://%@/upload",host] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                  //参数name为服务器接收文件数据所用参数
@@ -216,7 +223,7 @@ static id _instance;
          NSArray * imageArray = responseObject[@"image"];
          //服务器返回的null为NSNULL类型，不能直接判断是否为空
          if([imageArray isEqual:[NSNull null]] == NO) {
-             
+            
             [[PhotoDataProvider sharedInstance] getPicturesByName:object withSelector:@selector(imagesRetrieved:) names:imageArray];
              
          }
@@ -236,7 +243,10 @@ static id _instance;
 //key: o1J4T4R0F1v3X7E5I7A0NcnWpelIaVDL2G7iwVgs
 -(void) AFNetworkingForVoiceTag:(NSString *)desc forInserting:(NSDictionary *)insert orSearching:(id) object
 {
-    
+    //避免分词报错
+    if ([desc isEqualToString:@""] || desc == nil) {
+        desc = @"。";
+    }
     __block NSString * result;
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
     mgr.requestSerializer = [AFHTTPRequestSerializer serializer];

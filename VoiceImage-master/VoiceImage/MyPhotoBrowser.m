@@ -44,6 +44,7 @@
     return _imageNameArray;
 }
 
+//确保只加载一次，否则报错GL ERROR，拍照完返回首页不显示音波
 - (EZAudioPlotGL *)recordingAudioPlot
 {
     if (_recordingAudioPlot == nil) {
@@ -447,7 +448,7 @@
                 NSLog(@"Search--听写结果(json)：%@测试",  self.result);
                 
 #pragma -------------- test
-                self.result = @"西安兵马俑";
+//                self.result = @"西安兵马俑";
                 [[HttpHelper sharedHttpHelper]AFNetworkingForVoiceTag:self.result forInserting:nil orSearching:self];
                 break;
                 

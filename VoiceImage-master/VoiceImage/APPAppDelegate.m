@@ -18,10 +18,12 @@
 #import "TagPhotoViewController.h"
 #import "DataHolder.h"
 #import "CameraOverlayController.h"
+#import "NewFeatureController.h"
 
-@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate>
+@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate ,StartDelegate>
 
-@property (nonatomic, assign) BOOL isLoop;
+@property (nonatomic, assign) BOOL isNotLoop;//LaunchScreen 持续时间，默认为NO
+@property (nonatomic, assign) BOOL isFirst;
 @property (strong, nonatomic) UINavigationController * mainViewController;
 @property (strong, nonatomic) CameraOverlayController * cameraViewController;
 
@@ -35,6 +37,7 @@
  Status :  
             0--未上传
             1--已上传
+            2--正在上传
  */
 -(void)uploadDataFromDB
 {
@@ -53,16 +56,19 @@
     [[DataHolder sharedInstance] loadData];
     if ([[DataHolder sharedInstance] userId] == nil) {
         [[HttpHelper sharedHttpHelper]AFNetworingForRegistry];
+        _isFirst = YES;
+        _isNotLoop = YES;
         
     } else {
         userId = [[DataHolder sharedInstance] userId];
         [[HttpHelper sharedHttpHelper]AFNetworingForLoginWithGUID:userId];
+        _isFirst = YES;
     }
-    
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     dispatch_async(dispatch_queue_create("init_data", NULL), ^{
         [self initUser];
         //加载数据库
@@ -70,14 +76,18 @@
         //加载相册图片 dataRetrieved:中初始化browser
         [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
     });
-    //保持LaunchScreen 等待照片数据加载完成
-    sleep(2);
-
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"未检测到摄像头" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [myAlertView show];
-        
+    
+    while (_isNotLoop == NO) {
+        //保持LaunchScreen直到照片加载完成
+    }
+    
+    if (_isFirst == YES) {
+        self.window = [[UIWindow alloc] init];
+        self.window.frame = [UIScreen mainScreen].bounds;
+        NewFeatureController * newFeature = [[NewFeatureController alloc] init];
+        newFeature.delegate = self;
+        self.window.rootViewController = newFeature;
+        [self.window makeKeyAndVisible];
     }
     
     //创建语音配置,appid必须要传入，仅执行一次则可
@@ -91,7 +101,7 @@
         while (true)
         {
             [self uploadDataFromDB];
-            sleep(5);
+            sleep(3);
         }
     });
     return YES;
@@ -136,15 +146,35 @@
     _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
     _sideViewController.leftViewShowWidth = 260;
     _sideViewController.needSwipeShowMenu = true;//默认开启的可滑动展示
+    _isNotLoop = YES;
     
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        
-        _picker.cameraOverlayView = _cameraViewController.view;
-        _cameraViewController.view.backgroundColor = [UIColor clearColor];
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        self.window.rootViewController = _sideViewController;
-        [self.window makeKeyAndVisible];
-    });
+    if (_isFirst == NO) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self showBrowser];
+        });
+    }
+}
+
+-(void)showBrowser
+{
+    _picker.cameraOverlayView = _cameraViewController.view;
+    _cameraViewController.view.backgroundColor = [UIColor clearColor];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = _sideViewController;
+    [self.window makeKeyAndVisible];
+
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"未检测到摄像头" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [myAlertView show];
+    }
+}
+
+#pragma mark - StartApp delegate
+
+-(void)startApp
+{
+    [self showBrowser];
 }
 
 #pragma mark - Alert View click delegate

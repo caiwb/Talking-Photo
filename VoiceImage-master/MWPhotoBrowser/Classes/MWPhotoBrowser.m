@@ -1242,7 +1242,7 @@
     NSUInteger numberOfPhotos = [self numberOfPhotos];
     if (_gridController) {
         if (_gridController.selectionMode) {
-            self.title = NSLocalizedString(@"Select Photos", nil);
+            self.title = NSLocalizedString(@"请选择图片", nil);
         } else {
             NSString *photosText;
             if (numberOfPhotos == 1) {
@@ -1250,6 +1250,7 @@
             } else {
                 photosText = NSLocalizedString(@"photos", @"Used in the context: '3 photos'");
             }
+            photosText = @"张照片";
             self.title = [NSString stringWithFormat:@"%lu %@", (unsigned long)numberOfPhotos, photosText];
         }
     } else if (numberOfPhotos > 1) {
