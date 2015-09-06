@@ -18,6 +18,7 @@
 #import "AFNetworking.h"
 #import "DataBaseHelper.h"
 #import <CoreLocation/CoreLocation.h>
+#import "Reachability.h"
 
 @interface TagPhotoViewController () <CLLocationManagerDelegate>
 
@@ -285,6 +286,13 @@
     {
         return;
     }
+    Reachability *r = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+    if ([r currentReachabilityStatus]==NotReachable) {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"无网络连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+
 #pragma -----test
     self.desc = @"这是我在北京微软大厦拍的照片";
     self.loading.hidden = NO;

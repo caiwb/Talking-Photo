@@ -44,6 +44,18 @@
     return _imageNameArray;
 }
 
+- (EZAudioPlotGL *)recordingAudioPlot
+{
+    if (_recordingAudioPlot == nil) {
+        CGRect rect = [[UIScreen mainScreen] bounds];
+        rect.origin.x = 0;
+        rect.origin.y = rect.size.height / 2 - 95;
+        rect.size.height = 190;
+        self.recordingAudioPlot = [[EZAudioPlotGL alloc] initWithFrame:rect];
+    }
+    return _recordingAudioPlot;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -68,12 +80,7 @@
     }
     
     self.microphone = [EZMicrophone microphoneWithDelegate:self];
-    CGRect rect = [[UIScreen mainScreen] bounds];
-    rect.origin.x = 0;
-    rect.origin.y = rect.size.height / 2 - 95;
-    rect.size.height = 190;
-    
-    self.recordingAudioPlot = [[EZAudioPlotGL alloc] initWithFrame:rect];
+
     self.recordingAudioPlot.color           = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     UIColor* color = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.3];
     self.recordingAudioPlot.backgroundColor = color;
@@ -84,7 +91,7 @@
     self.recordingAudioPlot.gain = 4.0;
     
     [self.view addSubview:self.recordingAudioPlot];
-    
+        
     _cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(leftBarButtonClick:)];
     _cancel.tag = CANCEL_BTN;
     _trash = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(leftBarButtonClick:)];
@@ -95,6 +102,7 @@
     self.navigationItem.rightBarButtonItem.tintColor = naviBtnColor;
     _trash.tintColor = naviBtnColor;
     _cancel.tintColor = naviBtnColor;
+    
 }
 
 -(void)leftBarButtonClick:(UIButton *)sender
@@ -133,6 +141,7 @@
 {
 
 }
+
 #pragma PhotoDataProvider delegate method end
 
 -(void)initRecognizer
@@ -374,14 +383,10 @@
         [[HttpHelper sharedHttpHelper] AFNetworingForSearchWithUserId:userId Desc:self.result Tag:searchTag Loc:@"" Token:token RefreshObject:self];
         return;
     }
-    //处理搜索结果
-//    NSString *strCount = [NSString stringWithFormat:@"count: %ld", (long)response.count];
-//    NSLog(@"%@----%@",request.description, strCount);
-//    for (AMapGeocode  *p in response.geocodes) {
-//        NSLog(@"%@",p.location);
-//    }
+
     AMapGeocode * p = [response.geocodes objectAtIndex:0];
     
+    //处理回调结果
     NSString * loc = [NSString stringWithFormat:@"%@",p.location];
     loc = [loc substringFromIndex:1];
     NSRange range = [loc rangeOfString:@"}"];
@@ -442,7 +447,7 @@
                 NSLog(@"Search--听写结果(json)：%@测试",  self.result);
                 
 #pragma -------------- test
-                self.result = @"北京中关村微软大厦拍的照片";
+                self.result = @"西安兵马俑";
                 [[HttpHelper sharedHttpHelper]AFNetworkingForVoiceTag:self.result forInserting:nil orSearching:self];
                 break;
                 

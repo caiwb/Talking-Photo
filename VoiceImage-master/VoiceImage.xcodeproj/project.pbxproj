@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3933742D1B96CD1C002455BB /* Dzst_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3933742C1B96CD1C002455BB /* Dzst_color.png */; };
-		393374301B9BD849002455BB /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 3933742F1B9BD849002455BB /* Foundation+Log.m */; };
+		393374371B9C0C09002455BB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 393374361B9C0C09002455BB /* Reachability.m */; };
 		397135791B96BF350092B846 /* Dzst_cbl_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3971356E1B96BF350092B846 /* Dzst_cbl_avatar.png */; };
 		3971357A1B96BF350092B846 /* Dzst_cbl_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */; };
 		3971357B1B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */; };
@@ -152,7 +152,8 @@
 
 /* Begin PBXFileReference section */
 		3933742C1B96CD1C002455BB /* Dzst_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_color.png; sourceTree = "<group>"; };
-		3933742F1B9BD849002455BB /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		393374351B9C0C09002455BB /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		393374361B9C0C09002455BB /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3971356E1B96BF350092B846 /* Dzst_cbl_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_avatar.png; sourceTree = "<group>"; };
 		3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_bg.png; sourceTree = "<group>"; };
 		397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_arrow_click.png; sourceTree = "<group>"; };
@@ -356,6 +357,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		393374341B9C0C09002455BB /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				393374351B9C0C09002455BB /* Reachability.h */,
+				393374361B9C0C09002455BB /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		39B38F621B954EAB0090A809 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,6 +473,7 @@
 		EB2397D11B44E066004182BC /* VoiceImage */ = {
 			isa = PBXGroup;
 			children = (
+				393374341B9C0C09002455BB /* Reachability */,
 				39B38F621B954EAB0090A809 /* images */,
 				39EBA4591B8DF3B3009D392F /* YRSideViewController */,
 				39EBA29E1B8B58C4009D392F /* AFNetworking */,
@@ -601,7 +612,6 @@
 		EB85AA9F1B5CE22700F4F4F3 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				3933742F1B9BD849002455BB /* Foundation+Log.m */,
 				EB2397F81B44E0E2004182BC /* APPAppDelegate.h */,
 				39BDA2181B84223F00CBA988 /* APPAppDelegate.m */,
 				3991139B1B9566A000D6F672 /* CameraOverlayController.h */,
@@ -812,6 +822,7 @@
 				EB52892E1B4646D600E35384 /* MyPhotoBrowser.m in Sources */,
 				39EBA45C1B8DF3B3009D392F /* YRSideViewController.m in Sources */,
 				EB2398191B44F05B004182BC /* CompleteViewController.m in Sources */,
+				393374371B9C0C09002455BB /* Reachability.m in Sources */,
 				EB52893D1B4A27F800E35384 /* DataHolder.m in Sources */,
 				EB85AA7F1B5CDFD600F4F4F3 /* EZAudioPlayer.m in Sources */,
 				39EBA2B81B8B58C4009D392F /* AFURLRequestSerialization.m in Sources */,
@@ -831,7 +842,6 @@
 				39EBA4601B8DF526009D392F /* SettingViewController.m in Sources */,
 				EB85AA7E1B5CDFD600F4F4F3 /* EZAudioFloatData.m in Sources */,
 				39EBA2B31B8B58C4009D392F /* AFHTTPRequestOperationManager.m in Sources */,
-				393374301B9BD849002455BB /* Foundation+Log.m in Sources */,
 				EB85AA801B5CDFD600F4F4F3 /* EZAudioPlot.m in Sources */,
 				EB85AA831B5CDFD600F4F4F3 /* EZMicrophone.m in Sources */,
 				39EBA2B91B8B58C4009D392F /* AFURLResponseSerialization.m in Sources */,

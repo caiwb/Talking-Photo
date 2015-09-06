@@ -47,7 +47,6 @@
                             </constraints>
                         </activityIndicatorView>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="375" id="GzR-br-nsv"/>
                         <constraint firstAttribute="height" constant="186" id="yqe-aq-mNs"/>
