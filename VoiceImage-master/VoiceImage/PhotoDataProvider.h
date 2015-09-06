@@ -35,6 +35,7 @@
 + (instancetype)sharedInstance;
 -(void)getAllPictures:(id)object withSelector:(SEL)selector;
 -(void)getPicturesByName:(id)object withSelector:(SEL)selector names:(NSArray*)names;
+-(void)getPictureByName:(id)object withSelector:(SEL)selector names:(NSString*)imageName;
 -(instancetype)init;
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index;
 @end

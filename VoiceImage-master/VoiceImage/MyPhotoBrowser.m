@@ -442,7 +442,7 @@
                 NSLog(@"Search--听写结果(json)：%@测试",  self.result);
                 
 #pragma -------------- test
-//                self.result = @"北京中关村微软大厦拍的照片";
+                self.result = @"北京中关村微软大厦拍的照片";
                 [[HttpHelper sharedHttpHelper]AFNetworkingForVoiceTag:self.result forInserting:nil orSearching:self];
                 break;
                 

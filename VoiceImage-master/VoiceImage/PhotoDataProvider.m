@@ -25,6 +25,7 @@
     library = [[ALAssetsLibrary alloc] init];
     void (^assetEnumerator)( ALAsset *, NSUInteger, BOOL *) = ^(ALAsset *result, NSUInteger index, BOOL *stop) {
         if(result != nil) {
+            
             if([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
                 [assetURLDictionaries addObject:[result valueForProperty:ALAssetPropertyURLs]];
                 CGImageRef iref = [result thumbnail];
@@ -36,26 +37,11 @@
                     info.fullImageUrl = result.defaultRepresentation.url;
                     NSString* name = [[result defaultRepresentation] filename];
                     info.name = name;
-//                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//                        NSArray * selectResult = nil;
-//                        selectResult = [DataBaseHelper selectDataBy:@"image_name" IsEqualto:name];
-//                        if ([selectResult count] == 0) {
-//                            NSString * path = [result valueForProperty:ALAssetPropertyURLs][@"public.jpeg"];
-//                            NSString * date = [result valueForProperty:ALAssetPropertyDate];
-//                            NSString * location = [result valueForProperty:ALAssetPropertyLocation];
-//                            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//                            
-//                        
-//                            
-//                        }
-//                    });
+
                     [mutableArray addObject:info];
                 }
-                
             }
-            
         }
-        
     };
     
     NSMutableArray *assetGroups = [[NSMutableArray alloc] init];
@@ -105,8 +91,11 @@
     
     imageArray=[[NSArray alloc] init];
     mutableArray =[[NSMutableArray alloc]init];
+    NSMutableArray * photoInfoBySort = [[NSMutableArray alloc] init];
+    
     NSMutableArray* assetURLDictionaries = [[NSMutableArray alloc] init];
     library = [[ALAssetsLibrary alloc] init];
+
     void (^assetEnumerator)( ALAsset *, NSUInteger, BOOL *) = ^(ALAsset *result, NSUInteger index, BOOL *stop) {
         if(result != nil) {
             if([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
@@ -123,18 +112,14 @@
                         info.name = name;
                         [mutableArray addObject:info];
                     }
-                    
                 }
-                
             }
-            
         }
+        
         else {
             
         }
-        
     };
-    
     
     NSMutableArray *assetGroups = [[NSMutableArray alloc] init];
     void (^ assetGroupEnumerator) ( ALAssetsGroup *, BOOL *)= ^(ALAssetsGroup *group, BOOL *stop) {
@@ -144,12 +129,28 @@
             [assetGroups addObject:group];
         }
         else{
-            imageArray=[[NSArray alloc] initWithArray:mutableArray];
             NSMutableArray *photos = [[NSMutableArray alloc] init];
             NSMutableArray *thumbs = [[NSMutableArray alloc] init];
             MWPhoto *photo;
             
-            for (ImageInfo *imgInfo in mutableArray) {
+            //将查找按返回顺序排序的照片按返回顺序排序
+            NSMutableArray * imageNameBySort = [NSMutableArray array];
+            for(ImageInfo * info in mutableArray)
+            {
+                [imageNameBySort addObject:info.name];
+            }
+#pragma ----待优化……
+            for (NSString * imageName in names) {
+                if ([imageNameBySort containsObject:imageName]) {
+                    for (ImageInfo * info in mutableArray) {
+                        if ([info.name isEqualToString:imageName]) {
+                            [photoInfoBySort addObject:info];
+                        }
+                    }
+                }
+            }
+            
+            for (ImageInfo *imgInfo in photoInfoBySort) {
                 photo = [MWPhoto photoWithURL:imgInfo.fullImageUrl];
                 photo.caption = imgInfo.name;
                 [photos addObject:photo];
@@ -159,8 +160,8 @@
             }
             
             
-            self.photos = [[photos reverseObjectEnumerator] allObjects];
-            self.thumbs = [[thumbs reverseObjectEnumerator] allObjects];
+            self.photos = [[photos objectEnumerator] allObjects];
+            self.thumbs = [[thumbs objectEnumerator] allObjects];
             
             [object performSelector:selector withObject:object];
         }
@@ -169,9 +170,79 @@
     assetGroups = [[NSMutableArray alloc] init];
     [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
                            usingBlock:assetGroupEnumerator
-                         failureBlock:^(NSError *error) {NSLog(@"There is an error");}];
+                         failureBlock:^(NSError *error) {NSLog(@"There is an error--%@",error);}];
     
 }
+
+//-(void)getPictureByName:(id)object withSelector:(SEL)selector names:(NSString*)imageName {
+//    
+//    imageArray=[[NSArray alloc] init];
+//    mutableArray =[[NSMutableArray alloc]init];
+//    NSMutableArray* assetURLDictionaries = [[NSMutableArray alloc] init];
+//    library = [[ALAssetsLibrary alloc] init];
+//    
+//    void (^assetEnumerator)( ALAsset *, NSUInteger, BOOL *) = ^(ALAsset *result, NSUInteger index, BOOL *stop) {
+//        if(result != nil) {
+//            if([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
+//                [assetURLDictionaries addObject:[result valueForProperty:ALAssetPropertyURLs]];
+//                //                NSURL *url= (NSURL*) [[result defaultRepresentation]url];
+//                CGImageRef iref = [result thumbnail];
+//                if (iref) {
+//                    NSString* name = [[result defaultRepresentation] filename];
+//                    if ([imageName isEqualToString:name]) {
+//                        UIImage *theThumbnail = [UIImage imageWithCGImage:iref];
+//                        ImageInfo* info = [[ImageInfo alloc] init];
+//                        info.image = theThumbnail;
+//                        info.fullImageUrl = result.defaultRepresentation.url;
+//                        info.name = name;
+//                        [mutableArray addObject:info];
+//                    }
+//                }
+//            }
+//        }
+//        
+//        else {
+//            
+//        }
+//        
+//    };
+//    
+//    NSMutableArray *assetGroups = [[NSMutableArray alloc] init];
+//    void (^ assetGroupEnumerator) ( ALAssetsGroup *, BOOL *)= ^(ALAssetsGroup *group, BOOL *stop) {
+//        if(group != nil) {
+//            [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+//            [group enumerateAssetsUsingBlock:assetEnumerator];
+//            [assetGroups addObject:group];
+//        }
+//        else{
+//            imageArray=[[NSArray alloc] initWithArray:mutableArray];
+//            NSMutableArray *photos = [[NSMutableArray alloc] init];
+//            NSMutableArray *thumbs = [[NSMutableArray alloc] init];
+//            MWPhoto *photo;
+//            
+//            for (ImageInfo *imgInfo in mutableArray) {
+//                photo = [MWPhoto photoWithURL:imgInfo.fullImageUrl];
+//                photo.caption = imgInfo.name;
+//                [photos addObject:photo];
+//                
+//                photo = [MWPhoto photoWithImage: imgInfo.image];
+//                [thumbs addObject:photo];
+//            }
+//            
+//            
+//            self.photos = [[photos reverseObjectEnumerator] allObjects];
+//            self.thumbs = [[thumbs reverseObjectEnumerator] allObjects];
+//            
+//            [object performSelector:selector withObject:object];
+//        }
+//    };
+//    
+//    assetGroups = [[NSMutableArray alloc] init];
+//    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
+//                           usingBlock:assetGroupEnumerator
+//                         failureBlock:^(NSError *error) {NSLog(@"There is an error--%@",error);}];
+//    
+//}
 
 + (instancetype)sharedInstance
 {
