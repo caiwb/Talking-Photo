@@ -12,6 +12,7 @@
                 <outlet property="pressCircle" destination="4P8-xQ-Zqt" id="JTI-83-8zL"/>
                 <outlet property="recordingAudioPlot" destination="H20-m6-kg7" id="d2N-ID-FeM"/>
                 <outlet property="tagSR" destination="BdU-6l-Sh5" id="3yV-Zd-7Jo"/>
+                <outlet property="topBar" destination="6tp-wP-7XT" id="dXF-kA-RmK"/>
                 <outlet property="uploadBtn" destination="HEj-y7-UkK" id="6cw-Q3-3Iw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -95,6 +96,9 @@
                         <action selector="deleteDesc:" destination="-1" eventType="touchUpInside" id="adh-M2-ftQ"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6tp-wP-7XT">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

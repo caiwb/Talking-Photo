@@ -92,8 +92,9 @@
     self.recordingAudioPlot.gain = 4.0;
     
     [self.view addSubview:self.recordingAudioPlot];
-        
-    _cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(leftBarButtonClick:)];
+    
+    //NavigationBar
+    _cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(leftBarButtonClick:)];
     _cancel.tag = CANCEL_BTN;
     _trash = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(leftBarButtonClick:)];
     _trash.tag = TRASH_BTN;
@@ -103,7 +104,6 @@
     self.navigationItem.rightBarButtonItem.tintColor = naviBtnColor;
     _trash.tintColor = naviBtnColor;
     _cancel.tintColor = naviBtnColor;
-    
 }
 
 -(void)leftBarButtonClick:(UIButton *)sender
@@ -440,7 +440,8 @@
     }
     else
     {
-        self.result = [NSString stringWithFormat:@"%@%@", self.result,resultFromJson];
+//        self.result = [NSString stringWithFormat:@"%@%@", self.result,resultFromJson];
+        self.result = resultFromJson;
     }
     if (isLast){
         switch (_voiceSource) {

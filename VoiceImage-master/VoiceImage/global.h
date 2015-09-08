@@ -11,7 +11,6 @@
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
-#import "MyLock.h"
 
 //api key
 #define AMAP_KEY @"3db808c8819de8a8c5582e8ebeaed5cc"

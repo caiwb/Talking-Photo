@@ -7,12 +7,8 @@
 //
 
 #import "DataBaseHelper.h"
-#import "MyLock.h"
-
-
 
 @implementation DataBaseHelper
-
 
 +(NSString *) getDBPath
 {

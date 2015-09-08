@@ -18,8 +18,13 @@
 #import "DataHolder.h"
 #import "CameraOverlayController.h"
 #import "NewFeatureController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate ,StartDelegate>
+@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate ,StartDelegate , CLLocationManagerDelegate>
+
+@property (nonatomic, strong) CLLocationManager * locationManager;
+@property (nonatomic, strong) CLGeocoder *geocoder;
+@property (nonatomic, strong) CLPlacemark *placemark;
 
 @property (nonatomic, assign) BOOL isNotLoop;//LaunchScreen 持续时间，默认为NO
 @property (nonatomic, assign) BOOL isFirst;
@@ -72,6 +77,7 @@
         [self initUser];
         //加载数据库
         [DataBaseHelper initDB];
+        //数据库锁
         myLock = [[NSObject alloc] init];
         //加载相册图片 dataRetrieved:中初始化browser
         [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
@@ -92,6 +98,8 @@
     
     //创建语音配置,appid必须要传入，仅执行一次则可
     NSString *initString = [[NSString alloc] initWithFormat:@"appid=%@", IFLY_APP_ID];
+    //获取定位
+    [self getLocation];
     //所有服务启动前，需要确保执行createUtility
     [IFlySpeechUtility createUtility:initString];
     
@@ -290,6 +298,70 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         _cameraViewController.view.hidden = YES;
     });
+}
+
+-(void)getLocation {
+    if (!_locationManager){
+        _locationManager = [[CLLocationManager alloc] init];
+        _geocoder = [[CLGeocoder alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.distanceFilter = kCLDistanceFilterNone;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+            [_locationManager requestWhenInUseAuthorization];
+        
+        [_locationManager startUpdatingLocation];
+    }
+    
+}
+
+#pragma mark - CLLocation Manager delegate methods
+
+- (void)locationManager:(CLLocationManager*)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined: {
+            NSLog(@"User still thinking..");
+        } break;
+        case kCLAuthorizationStatusDenied: {
+            NSLog(@"User hates you");
+        } break;
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+        case kCLAuthorizationStatusAuthorizedAlways: {
+            
+            [_locationManager startUpdatingLocation]; //Will update location immediately
+        } break;
+        default:
+            break;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    CLLocation *location = [locations lastObject];
+    NSLog(@"lat%f - lon%f", location.coordinate.latitude, location.coordinate.longitude);
+    
+    [_locationManager stopUpdatingLocation];
+    
+    // Reverse Geocoding
+    [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error == nil && [placemarks count] > 0) {
+            _placemark = [placemarks lastObject];
+            name = _placemark.name;
+            if (name == nil){
+                name = @"";
+            }
+            street = _placemark.thoroughfare;
+            city = _placemark.administrativeArea;
+            country = _placemark.country;
+            longitude = [NSString stringWithFormat:@"%3.5f",location.coordinate.longitude];
+            latitude = [NSString stringWithFormat:@"%3.5f",location.coordinate.latitude];
+            loc = [NSString stringWithFormat:@"%@,%@,%@,%@",longitude,latitude,city,street];
+        } else {
+            NSLog(@"%@", error.debugDescription);
+        }
+    } ];
 }
 
 

@@ -29,7 +29,6 @@
 		397135831B96BF350092B846 /* Dzst_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135781B96BF350092B846 /* Dzst_line.png */; };
 		39809E761B9D6A5C00014A0C /* Dzst_cbl_icon_language.png in Resources */ = {isa = PBXBuildFile; fileRef = 39809E751B9D6A5C00014A0C /* Dzst_cbl_icon_language.png */; };
 		39809E791B9D6D6E00014A0C /* DropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 39809E781B9D6D6E00014A0C /* DropdownMenu.m */; };
-		39809E7E1B9E95E100014A0C /* MyLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 39809E7D1B9E95E100014A0C /* MyLock.m */; };
 		3991139E1B9566A000D6F672 /* CameraOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3991139C1B9566A000D6F672 /* CameraOverlayController.m */; };
 		3991139F1B9566A000D6F672 /* CameraOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3991139D1B9566A000D6F672 /* CameraOverlayController.xib */; };
 		39B38ED41B9024310090A809 /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39B38ED21B9024310090A809 /* PickerViewController.xib */; };
@@ -186,8 +185,6 @@
 		39809E751B9D6A5C00014A0C /* Dzst_cbl_icon_language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_language.png; sourceTree = "<group>"; };
 		39809E771B9D6D6E00014A0C /* DropdownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropdownMenu.h; sourceTree = "<group>"; };
 		39809E781B9D6D6E00014A0C /* DropdownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropdownMenu.m; sourceTree = "<group>"; };
-		39809E7C1B9E95E100014A0C /* MyLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLock.h; sourceTree = "<group>"; };
-		39809E7D1B9E95E100014A0C /* MyLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLock.m; sourceTree = "<group>"; };
 		3991139B1B9566A000D6F672 /* CameraOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayController.h; sourceTree = "<group>"; };
 		3991139C1B9566A000D6F672 /* CameraOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayController.m; sourceTree = "<group>"; };
 		3991139D1B9566A000D6F672 /* CameraOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayController.xib; sourceTree = "<group>"; };
@@ -667,8 +664,6 @@
 				EB52893C1B4A27F800E35384 /* DataHolder.m */,
 				EB4A48471B4A470800CABEB1 /* HttpHelper.h */,
 				EB4A48481B4A470800CABEB1 /* HttpHelper.m */,
-				39809E7C1B9E95E100014A0C /* MyLock.h */,
-				39809E7D1B9E95E100014A0C /* MyLock.m */,
 				39BDA2521B84719A00CBA988 /* DataBaseHelper.h */,
 				39BDA2531B84719A00CBA988 /* DataBaseHelper.m */,
 				EBFBBA4E1B6F08F10065902F /* IATConfig.h */,
@@ -892,7 +887,6 @@
 				3991139E1B9566A000D6F672 /* CameraOverlayController.m in Sources */,
 				EB85AA861B5CDFD600F4F4F3 /* EZRecorder.m in Sources */,
 				39EBA2B21B8B58C4009D392F /* AFHTTPRequestOperation.m in Sources */,
-				39809E7E1B9E95E100014A0C /* MyLock.m in Sources */,
 				EB23981D1B450A73004182BC /* ImageInfo.m in Sources */,
 				EB2397D51B44E066004182BC /* main.m in Sources */,
 				EB85AA811B5CDFD600F4F4F3 /* EZAudioPlotGL.m in Sources */,

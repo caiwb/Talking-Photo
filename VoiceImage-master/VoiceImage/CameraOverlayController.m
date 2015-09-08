@@ -10,7 +10,6 @@
 
 @interface CameraOverlayController ()
 
-
 @end
 
 @implementation CameraOverlayController
