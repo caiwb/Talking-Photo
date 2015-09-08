@@ -190,7 +190,8 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-//    [self backtoSideViewControllerAndShowRightVc:YES];
+    [self.sideViewController hideSideViewController:YES];
+    [self backtoSideViewControllerAndShowRightVc:NO];
 }
 
 #pragma mark - Image Picker Controller delegate methods
@@ -225,16 +226,18 @@
     newPicker.allowsEditing = NO;
     newPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     newPicker.cameraOverlayView = _cameraViewController.view;
-    
 
     _sideViewController.needSwipeShowMenu = YES;
     [_mainViewController setNavigationBarHidden:NO];
-    if (isShow == YES) {
-        [_sideViewController showRightViewController:YES];
-    }
-    _sideViewController.rightViewController = newPicker;
-    _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
-    _picker = newPicker;
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _sideViewController.rightViewController = newPicker;
+        _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
+        _picker = newPicker;
+        if (isShow == YES) {
+            [_sideViewController showRightViewController:YES];
+        }
+    });
     return _sideViewController;
 }
 
