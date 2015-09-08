@@ -11,6 +11,7 @@
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
+#import "MyLock.h"
 
 //api key
 #define AMAP_KEY @"3db808c8819de8a8c5582e8ebeaed5cc"
@@ -19,6 +20,9 @@
 
 //host ip
 extern NSString* host;
+
+//database sync
+extern BOOL isDatabaseOpera;
 
 //upload data
 extern NSString* city;
@@ -41,6 +45,8 @@ extern sqlite3 * upload_database;
 
 //tag for search
 extern NSString * searchTag;
+
+extern NSObject * myLock;
 
 #define MWPHOTO_FOLD_PHOTO_NOTIFICATION @"MWPHOTO_FOLD_PHOTO_NOTIFICATION"
 

@@ -12,6 +12,7 @@
                 <outlet property="pressCircle" destination="4P8-xQ-Zqt" id="JTI-83-8zL"/>
                 <outlet property="recordingAudioPlot" destination="H20-m6-kg7" id="d2N-ID-FeM"/>
                 <outlet property="tagSR" destination="BdU-6l-Sh5" id="3yV-Zd-7Jo"/>
+                <outlet property="uploadBtn" destination="HEj-y7-UkK" id="6cw-Q3-3Iw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

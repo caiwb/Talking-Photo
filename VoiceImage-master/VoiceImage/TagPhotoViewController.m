@@ -26,6 +26,7 @@
 @property (nonatomic, strong) CLGeocoder *geocoder;
 @property (nonatomic, strong) CLPlacemark *placemark;
 @property (weak, nonatomic) IBOutlet UIButton *deleteDescBtn;
+@property (weak, nonatomic) IBOutlet UIButton *uploadBtn;
 
 @end
 
@@ -142,7 +143,10 @@
             latitude = [NSString stringWithFormat:@"%3.5f",location.coordinate.latitude];
             loc = [NSString stringWithFormat:@"%@,%@,%@,%@",longitude,latitude,city,street];
             //            NSLog(@"%@, %@, %@, %@, %@",longitude, latitude, street, city, country);
-            
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:1];
+            self.uploadBtn.hidden = NO;
+            [UIView commitAnimations];
         } else {
             NSLog(@"%@", error.debugDescription);
         }
@@ -153,13 +157,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.imageView setImage:self.image];
+    
     [self saveImage];
     [self getLocation];
     self.desc = @"";
     self.tagSR.text = @"";
     [self.deleteDescBtn setImage:[UIImage imageNamed:@"Dzst_delect_desc"] forState:UIControlStateNormal];
     self.deleteDescBtn.hidden = YES;
-    
+    self.uploadBtn.hidden = YES;
     [self.navigationController setNavigationBarHidden:YES];
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;

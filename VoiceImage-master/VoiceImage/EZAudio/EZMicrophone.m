@@ -280,10 +280,10 @@ static OSStatus EZAudioMicrophoneCallback(void                       *inRefCon,
                                              selector:@selector(microphoneWasInterrupted:)
                                                  name:AVAudioSessionInterruptionNotification
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(microphoneRouteChanged:)
-                                                 name:AVAudioSessionRouteChangeNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(microphoneRouteChanged:)
+//                                                 name:AVAudioSessionRouteChangeNotification
+//                                               object:nil];
 #elif TARGET_OS_MAC
 #endif
 }
@@ -325,7 +325,10 @@ static OSStatus EZAudioMicrophoneCallback(void                       *inRefCon,
 - (void)microphoneRouteChanged:(NSNotification *)notification
 {
     EZAudioDevice *device = [EZAudioDevice currentInputDevice];
-    if (device != nil) {
+    if (device.name != nil && device != nil) {
+        
+        NSLog(@"-----%@",device.name);
+        
         [self setDevice:device];
     }
 }
@@ -530,10 +533,9 @@ static OSStatus EZAudioMicrophoneCallback(void                       *inRefCon,
                         operation:"Couldn't set default device on I/O unit"];
 #endif
     
-    // store device
-    _device = device;
-    if (_device == nil) {
-        return;
+    if (device != nil || device.name != nil) {
+        // store device
+        _device = device;
     }
     // notify delegate
     if ([self.delegate respondsToSelector:@selector(microphone:changedDevice:)])

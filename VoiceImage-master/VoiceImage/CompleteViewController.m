@@ -10,7 +10,6 @@
 #import "TagPhotoViewController.h"
 #import "PhotoDataProvider.h"
 #import "MyPhotoBrowser.h"
-#import "APPViewController.h"
 #import "APPAppDelegate.h"
 
 @interface CompleteViewController ()

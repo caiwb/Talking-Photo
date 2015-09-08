@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "global.h"
 
-//NSString* host = @"10.172.88.75:8888";
-NSString* host = @"10.172.88.78:8888";
+NSString* host = @"10.172.88.75:8888";
+//NSString* host = @"10.172.88.78:8888";
 //NSString* host = @"192.168.191.1:8888";
-//NSString* host = @"vophoto.chinacloudapp.cn";
+//NSString* host = @"vophoto-test.chinacloudapp.cn:8888";
+
+BOOL isDatabaseOpera = NO;
 
 NSString* city = @"";
 NSString* name = @"";
@@ -27,3 +29,5 @@ NSString* searchTag = @"";
 
 sqlite3* upload_database = nil;
 //const char * dbpath;
+
+NSObject * myLock = nil;

@@ -141,7 +141,7 @@ static id _instance;
 
 -(void) AFNetworingForUploadWithUserId:(NSString *)guid ImageName:(NSString *)imageName ImagePath:(NSString *)imagePath Desc:(NSString *)desc Tag:(NSString *)tag Time:(NSString *)time Loc:(NSString *)loc Token:(NSString *)token
 {
-    
+    [DataBaseHelper updateData:@"status" ByValue:2 WhereImageName:imageName];
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
     mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
@@ -200,7 +200,6 @@ static id _instance;
          }];
 
     }
-
 }
 
 -(void) AFNetworingForSearchWithUserId:(NSString *)guid Desc:(NSString *)desc Tag:(NSString *)tag Loc:(NSString *)loc Token:(NSString *)token RefreshObject:(id)object

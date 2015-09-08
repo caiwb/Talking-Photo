@@ -7,7 +7,6 @@
 //
 
 #import "APPAppDelegate.h"
-#import "APPViewController.h"
 #import "IFlyFlowerCollector.h"
 #import "iflyMSC/IFlyMSC.h"
 #import "global.h"
@@ -62,7 +61,7 @@
     } else {
         userId = [[DataHolder sharedInstance] userId];
         [[HttpHelper sharedHttpHelper]AFNetworingForLoginWithGUID:userId];
-        _isFirst = YES;
+        _isFirst = NO;
     }
 }
 
@@ -73,6 +72,7 @@
         [self initUser];
         //加载数据库
         [DataBaseHelper initDB];
+        myLock = [[NSObject alloc] init];
         //加载相册图片 dataRetrieved:中初始化browser
         [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
     });
@@ -98,10 +98,19 @@
     //异步上传
     dispatch_queue_t upload_queue = dispatch_queue_create("upload_queue", NULL);
     dispatch_async(upload_queue, ^{
+        NSMutableArray * uploadingArray = nil;
+        uploadingArray = [DataBaseHelper selectDataBy:@"status" IsEqualto:[NSString stringWithFormat:@"%d",2]];
+        for(id obj in uploadingArray) {
+            
+            NSString * uploadingName = obj[@"name"];
+            [DataBaseHelper updateData:@"status" ByValue:0 WhereImageName:uploadingName];
+        }
         while (true)
         {
-            [self uploadDataFromDB];
-            sleep(3);
+ 
+                [self uploadDataFromDB];
+                sleep(0.1);
+            
         }
     });
     return YES;
@@ -181,7 +190,7 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-//    [self backtoSideViewControllerAndShowRightVc:NO];
+//    [self backtoSideViewControllerAndShowRightVc:YES];
 }
 
 #pragma mark - Image Picker Controller delegate methods
@@ -211,18 +220,21 @@
 
 - (YRSideViewController *)backtoSideViewControllerAndShowRightVc:(BOOL)isShow
 {
-    _picker = [[UIImagePickerController alloc] init];
-    _picker.delegate = self;
-    _picker.allowsEditing = NO;
-    _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    _picker.cameraOverlayView = _cameraViewController.view;
-    _sideViewController.rightViewController = _picker;
-    _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
+    UIImagePickerController * newPicker = [[UIImagePickerController alloc] init];
+    newPicker.delegate = self;
+    newPicker.allowsEditing = NO;
+    newPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    newPicker.cameraOverlayView = _cameraViewController.view;
+    
+
     _sideViewController.needSwipeShowMenu = YES;
     [_mainViewController setNavigationBarHidden:NO];
     if (isShow == YES) {
         [_sideViewController showRightViewController:YES];
     }
+    _sideViewController.rightViewController = newPicker;
+    _sideViewController.rightViewShowWidth = [[UIScreen mainScreen] bounds].size.width;
+    _picker = newPicker;
     return _sideViewController;
 }
 
