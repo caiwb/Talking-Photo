@@ -220,6 +220,9 @@ static id _instance;
     
     [mgr POST:[NSString stringWithFormat:@"http://%@/search",host] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
+         if (self.delegate) {
+             [self.delegate isSearchDone:@""];
+         }
          NSLog(@"查询请求成功：%@",responseObject);
          NSArray * imageArray = responseObject[@"image"];
          //服务器返回的null为NSNULL类型，不能直接判断是否为空
@@ -228,15 +231,12 @@ static id _instance;
             [[PhotoDataProvider sharedInstance] getPicturesByName:object withSelector:@selector(imagesRetrieved:) names:imageArray];
              
          }
-         dispatch_sync(dispatch_get_main_queue(), ^{
-             [SVProgressHUD dismiss];
-         });
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         if (self.delegate) {
+             [self.delegate isSearchDone:desc];
+         }
          NSLog(@"查询请求失败：%@",error);
-         dispatch_sync(dispatch_get_main_queue(), ^{
-             [SVProgressHUD dismiss];
-         });
      }];
 }
 
@@ -282,7 +282,6 @@ static id _instance;
          //分词用于search
          else if(object != nil && insert == nil)
          {
-             [SVProgressHUD show];
              if ([desc isEqualToString:@"。"]) {
                  return ;
              }

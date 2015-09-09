@@ -10,7 +10,18 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+@protocol HttpProtocl <NSObject>
+
+@optional
+
+-(void)isSearchDone:(NSString *)searchTag;
+
+@end
+
 @interface HttpHelper : NSObject
+
+@property (nonatomic, weak) id<HttpProtocl> delegate;
+
 
 +(instancetype) sharedHttpHelper;
 

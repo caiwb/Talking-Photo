@@ -113,6 +113,7 @@
         case CANCEL_BTN:
         {
             self.result = @"";
+            [SVProgressHUD dismiss];
             [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(imagesRetrieved:)];
             break;
         }
@@ -462,6 +463,9 @@
                     return;
                 
                 [[HttpHelper sharedHttpHelper]AFNetworkingForVoiceTag:self.result forInserting:nil orSearching:self];
+                [HttpHelper sharedHttpHelper].delegate = self;
+                [SVProgressHUD dismiss];
+                [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"正在查找：%@。。",self.result]];
                 break;
                 
             case RETAG_PHOTO:
@@ -480,6 +484,11 @@
                 break;
         }
     }
+}
+
+-(void)isSearchDone:(NSString *)searchTag
+{
+    [SVProgressHUD dismiss];
 }
 
 @end
