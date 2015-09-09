@@ -28,7 +28,7 @@
 
 - (void)showFrom:(UIView *)from;
 
-- (void)dismiss;
+//- (void)dismiss;
 
 
 @end

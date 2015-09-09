@@ -27,7 +27,6 @@
 @property (weak, nonatomic) IBOutlet EZAudioPlotGL *recordingAudioPlot;
 @property (nonatomic, assign) BOOL isRecording;
 @property (weak, nonatomic) IBOutlet UIImageView *pressCircle;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loading;
 @property (weak, nonatomic) IBOutlet UILabel *tagSR;
 @property (nonatomic, strong) IFlySpeechRecognizer *iFlySpeechRecognizer;//不带界面的识别对象
 

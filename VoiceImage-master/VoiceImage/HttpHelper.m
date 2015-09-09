@@ -220,12 +220,16 @@ static id _instance;
     
     [mgr POST:[NSString stringWithFormat:@"http://%@/search",host] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
-         if (self.delegate) {
-             [self.delegate isSearchDone:@""];
-         }
          NSLog(@"查询请求成功：%@",responseObject);
          NSArray * imageArray = responseObject[@"image"];
          //服务器返回的null为NSNULL类型，不能直接判断是否为空
+         if (self.delegate) {
+             if ([imageArray count] == 0) {
+                 [self.delegate isSearchDone:NO];
+             }
+             else
+                 [self.delegate isSearchDone:YES];
+         }
          if([imageArray isEqual:[NSNull null]] == NO) {
             
             [[PhotoDataProvider sharedInstance] getPicturesByName:object withSelector:@selector(imagesRetrieved:) names:imageArray];
@@ -234,7 +238,7 @@ static id _instance;
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          if (self.delegate) {
-             [self.delegate isSearchDone:desc];
+             [self.delegate isSearchDone:NO];
          }
          NSLog(@"查询请求失败：%@",error);
      }];

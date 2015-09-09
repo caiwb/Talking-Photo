@@ -8,7 +8,6 @@
             <connections>
                 <outlet property="deleteDescBtn" destination="tB7-Dw-KOc" id="ziz-dt-qes"/>
                 <outlet property="imageView" destination="Mrk-a2-d6m" id="HdN-uI-rad"/>
-                <outlet property="loading" destination="hUo-k6-Ye1" id="0Vy-5C-HYx"/>
                 <outlet property="pressCircle" destination="4P8-xQ-Zqt" id="JTI-83-8zL"/>
                 <outlet property="recordingAudioPlot" destination="H20-m6-kg7" id="d2N-ID-FeM"/>
                 <outlet property="tagSR" destination="BdU-6l-Sh5" id="3yV-Zd-7Jo"/>
@@ -40,20 +39,8 @@
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H20-m6-kg7" customClass="EZAudioPlotGL">
                     <rect key="frame" x="0.0" y="275" width="414" height="186"/>
-                    <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="hUo-k6-Ye1">
-                            <rect key="frame" x="186.5" y="73" width="40" height="40"/>
-                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="40" id="cb2-s5-F0J"/>
-                                <constraint firstAttribute="height" constant="40" id="fRG-VH-zDi"/>
-                            </constraints>
-                        </activityIndicatorView>
-                    </subviews>
                     <constraints>
-                        <constraint firstItem="hUo-k6-Ye1" firstAttribute="centerX" secondItem="H20-m6-kg7" secondAttribute="centerX" id="6fL-b0-MYG"/>
                         <constraint firstAttribute="width" constant="414" id="GzR-br-nsv"/>
-                        <constraint firstItem="hUo-k6-Ye1" firstAttribute="centerY" secondItem="H20-m6-kg7" secondAttribute="centerY" id="Qkn-2E-z3G"/>
                         <constraint firstAttribute="height" constant="186" id="yqe-aq-mNs"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -78,13 +65,10 @@
                         <action selector="skipClicked:" destination="-1" eventType="touchUpInside" id="ApU-3Z-cT6"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tags" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdU-6l-Sh5">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="tags" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdU-6l-Sh5">
                     <rect key="frame" x="0.0" y="469" width="414" height="50"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="V38-uj-AZf"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>

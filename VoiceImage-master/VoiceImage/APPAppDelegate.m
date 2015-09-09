@@ -217,9 +217,11 @@
         _sideViewController.needSwipeShowMenu = NO;
         TagPhotoViewController* tagView = [[TagPhotoViewController alloc] init];
         tagView.image = chosenImage;
-        [_sideViewController hideSideViewController:NO];
-        [_mainViewController pushViewController:tagView animated:YES];
-//        _mainViewController.navigationBar.barStyle = UIBarStyleBlack ;
+        [tagView.imageView setImage:chosenImage];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [_sideViewController hideSideViewController:YES];
+            [_mainViewController pushViewController:tagView animated:NO];
+        });
     }
 }
 

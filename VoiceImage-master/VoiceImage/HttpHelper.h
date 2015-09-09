@@ -14,7 +14,7 @@
 
 @optional
 
--(void)isSearchDone:(NSString *)searchTag;
+-(void)isSearchDone:(BOOL)suc;
 
 @end
 

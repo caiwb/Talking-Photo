@@ -119,7 +119,6 @@
     self.deleteDescBtn.hidden = YES;
     self.recordingAudioPlot.hidden = YES;
     self.pressCircle.hidden = YES;
-    self.loading.hidden = YES;
 }
 
 
@@ -135,7 +134,6 @@
     self.pressCircle.hidden = YES;
     [self.pressCircle.layer removeAllAnimations];
 //    self.view.userInteractionEnabled = NO;
-//    self.loading.hidden = NO;
     [self.microphone stopFetchingAudio];
     [_iFlySpeechRecognizer stopListening];
 }
@@ -201,7 +199,6 @@
 
 #pragma -----test
 //    self.desc = @"这是我在北京微软大厦拍的照片";
-    self.loading.hidden = NO;
     self.view.userInteractionEnabled = NO;
     
     NSString * imagePathString = [self.imagePath absoluteString];

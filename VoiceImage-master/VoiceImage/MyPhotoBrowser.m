@@ -24,7 +24,7 @@
 #define CANCEL_BTN 2
 #define TRASH_BTN 3
 
-@interface MyPhotoBrowser () <MAMapViewDelegate, AMapSearchDelegate>
+@interface MyPhotoBrowser () <MAMapViewDelegate, AMapSearchDelegate,HttpProtocl>
 {
     AMapSearchAPI *_search;
     int _voiceSource;
@@ -465,7 +465,7 @@
                 [[HttpHelper sharedHttpHelper]AFNetworkingForVoiceTag:self.result forInserting:nil orSearching:self];
                 [HttpHelper sharedHttpHelper].delegate = self;
                 [SVProgressHUD dismiss];
-                [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"正在查找：%@。。",self.result]];
+                [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"正在查找:%@",self.result]];
                 break;
                 
             case RETAG_PHOTO:
@@ -486,9 +486,15 @@
     }
 }
 
--(void)isSearchDone:(NSString *)searchTag
+-(void)isSearchDone:(BOOL)suc
 {
-    [SVProgressHUD dismiss];
+    if (suc == YES) {
+        [SVProgressHUD showSuccessWithStatus:nil];
+    }
+    else {
+        [SVProgressHUD showErrorWithStatus:nil];
+    }
+    [SVProgressHUD dismissWithDelay:2];
 }
 
 @end
