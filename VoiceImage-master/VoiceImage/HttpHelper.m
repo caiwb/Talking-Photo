@@ -18,6 +18,7 @@
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchAPI.h>
 #import "PhotoDataProvider.h"
+#import "SVProgressHUD.h"
 
 @interface HttpHelper () <MAMapViewDelegate, AMapSearchDelegate>
 {
@@ -66,7 +67,8 @@ static id _instance;
 {
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
-    NSString * guid = [self GetUUID];
+//    NSString * guid = [self GetUUID];
+    NSString * guid = @"f9006832-426d-4a0a-aab5-02e6ab9daf76";
     params[@"user_id"] = guid;
     params[@"user_name"] = guid;
     params[@"password"] = @"123";
@@ -226,10 +228,15 @@ static id _instance;
             [[PhotoDataProvider sharedInstance] getPicturesByName:object withSelector:@selector(imagesRetrieved:) names:imageArray];
              
          }
+         dispatch_sync(dispatch_get_main_queue(), ^{
+             [SVProgressHUD dismiss];
+         });
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          NSLog(@"查询请求失败：%@",error);
-         
+         dispatch_sync(dispatch_get_main_queue(), ^{
+             [SVProgressHUD dismiss];
+         });
      }];
 }
 
@@ -245,6 +252,7 @@ static id _instance;
     //避免分词报错
     if ([desc isEqualToString:@""] || desc == nil) {
         desc = @"。";
+        
     }
     __block NSString * result;
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
@@ -270,11 +278,14 @@ static id _instance;
              NSLog(@"%@",loc);
              
              [DataBaseHelper insertDataWithId:userId ImageName:insert[@"imageName"] ImagePath:insert[@"imagePath"] Desc:insert[@"desc"] Time:[NSDate date] Loc:loc Token:token Tag:result Status:0];
-             loc = @"";
          }
          //分词用于search
          else if(object != nil && insert == nil)
          {
+             [SVProgressHUD show];
+             if ([desc isEqualToString:@"。"]) {
+                 return ;
+             }
              //分词结果中取出地点名词
              searchTag = result;
              NSString * address = [self divideForLocationByDesc:desc Tag:result];

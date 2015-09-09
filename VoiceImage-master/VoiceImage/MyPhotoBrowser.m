@@ -16,6 +16,7 @@
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchAPI.h>
 #import "DataBaseHelper.h"
+#import "SVProgressHUD.h"
 
 #define SEARCH_PHOTO 0
 #define RETAG_PHOTO 1
@@ -180,6 +181,7 @@
             [_iFlySpeechRecognizer setParameter:instance.language forKey:[IFlySpeechConstant LANGUAGE]];
             //设置方言
             [_iFlySpeechRecognizer setParameter:instance.accent forKey:[IFlySpeechConstant ACCENT]];
+            
         }else if ([instance.language isEqualToString:[IATConfig english]]) {
             [_iFlySpeechRecognizer setParameter:instance.language forKey:[IFlySpeechConstant LANGUAGE]];
         }
@@ -196,6 +198,7 @@
 
 -(void)startRecord{
     _voiceSource = 0;
+    self.result = @"";
     self.recordingAudioPlot.hidden = NO;
     [self.view bringSubviewToFront:self.recordingAudioPlot];
     [self.recordingAudioPlot clear];
@@ -268,7 +271,7 @@
 
 -(void)startUpdateRecord {
     _voiceSource = 1;
-    
+    self.result = nil;
     self.recordingAudioPlot.hidden = NO;
     [self.view bringSubviewToFront:self.recordingAudioPlot];
     [self.recordingAudioPlot clear];
@@ -392,7 +395,8 @@
     loc = [loc substringFromIndex:1];
     NSRange range = [loc rangeOfString:@"}"];
     loc = [loc substringToIndex:range.location+range.length-1];
-    loc = [NSString stringWithFormat:@"%@,%@,%@,%@",loc,p.province,p.city,p.district];
+//    loc = [NSString stringWithFormat:@"%@,%@,%@,%@",loc,p.province,p.city,p.district];
+    loc = [NSString stringWithFormat:@"%@",loc];
     //发送search请求
     [[HttpHelper sharedHttpHelper] AFNetworingForSearchWithUserId:userId Desc:self.result Tag:searchTag Loc:loc Token:token RefreshObject:self];
 }
@@ -436,13 +440,17 @@
     
     if(self.result == nil)
     {
-        self.result = resultFromJson;
+        self.result = [NSString stringWithFormat:@"%@",resultFromJson];
     }
     else
     {
-//        self.result = [NSString stringWithFormat:@"%@%@", self.result,resultFromJson];
-        self.result = resultFromJson;
+        self.result = [NSString stringWithFormat:@"%@%@", self.result,resultFromJson];
+//        self.result = resultFromJson;
+
     }
+    
+//    self.result = [NSString stringWithFormat:@"%@",resultFromJson];
+    
     if (isLast){
         switch (_voiceSource) {
             case SEARCH_PHOTO:
@@ -450,11 +458,14 @@
                 
 #pragma -------------- test
 //                self.result = @"西安兵马俑";
+                if([self.result isEqualToString:@""])
+                    return;
+                
                 [[HttpHelper sharedHttpHelper]AFNetworkingForVoiceTag:self.result forInserting:nil orSearching:self];
                 break;
                 
             case RETAG_PHOTO:
-                self.result = @"杯子";
+//                self.result = @"杯子";
                 for (NSString * name in self.imageNameArray) {
                     
                     NSMutableDictionary * insertParams = [NSMutableDictionary dictionary];

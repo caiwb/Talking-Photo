@@ -280,7 +280,7 @@
 //- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
 //    MWPhoto *photo = [self.photos objectAtIndex:index];
 //    MWCaptionView *captionView = [[MWCaptionView alloc] initWithPhoto:photo];
-//    return [captionView autorelease];
+//    return captionView;
 //}
 
 //- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
@@ -293,10 +293,12 @@
 }
 
 - (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
+
     return [_selected containsObject:[NSNumber numberWithInteger:index]];
 }
 
 - (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
+    //view single photo
     return [NSString stringWithFormat:@"第 %lu 张照片", (unsigned long)index+1];
 }
 

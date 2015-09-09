@@ -108,7 +108,7 @@
     UIColor * color = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.3];
     self.recordingAudioPlot.backgroundColor = color;
     self.topBar.backgroundColor = color;
-    self.topBar.hidden = YES;
+    self.topBar.hidden = NO;
     self.recordingAudioPlot.plotType        = EZPlotTypeBuffer;
     self.recordingAudioPlot.shouldFill      = NO;
     self.recordingAudioPlot.shouldMirror    = YES;

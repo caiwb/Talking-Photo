@@ -19,17 +19,17 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mrk-a2-d6m">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_function_foot-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="m9F-Ss-UDp">
-                    <rect key="frame" x="0.0" y="571" width="375" height="96"/>
+                    <rect key="frame" x="0.0" y="640" width="414" height="96"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAQ-24-Lu1">
-                    <rect key="frame" x="146" y="571" width="83" height="82"/>
+                    <rect key="frame" x="165" y="640" width="83" height="82"/>
                     <state key="normal" image="Dzst_function_icon-yy_normal.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -39,10 +39,10 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H20-m6-kg7" customClass="EZAudioPlotGL">
-                    <rect key="frame" x="0.0" y="241" width="375" height="186"/>
+                    <rect key="frame" x="0.0" y="275" width="414" height="186"/>
                     <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="hUo-k6-Ye1">
-                            <rect key="frame" x="167" y="73" width="40" height="40"/>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="hUo-k6-Ye1">
+                            <rect key="frame" x="186.5" y="73" width="40" height="40"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="cb2-s5-F0J"/>
@@ -51,7 +51,9 @@
                         </activityIndicatorView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="width" constant="375" id="GzR-br-nsv"/>
+                        <constraint firstItem="hUo-k6-Ye1" firstAttribute="centerX" secondItem="H20-m6-kg7" secondAttribute="centerX" id="6fL-b0-MYG"/>
+                        <constraint firstAttribute="width" constant="414" id="GzR-br-nsv"/>
+                        <constraint firstItem="hUo-k6-Ye1" firstAttribute="centerY" secondItem="H20-m6-kg7" secondAttribute="centerY" id="Qkn-2E-z3G"/>
                         <constraint firstAttribute="height" constant="186" id="yqe-aq-mNs"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -64,10 +66,10 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_function_icon-yy_press.png" translatesAutoresizingMaskIntoConstraints="NO" id="4P8-xQ-Zqt">
-                    <rect key="frame" x="146" y="571" width="83" height="82"/>
+                    <rect key="frame" x="165" y="640" width="83" height="82"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEj-y7-UkK">
-                    <rect key="frame" x="342" y="615" width="25" height="26"/>
+                    <rect key="frame" x="381" y="684" width="25" height="26"/>
                     <state key="normal" image="Dzst_function_icon-arrow.png">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -77,7 +79,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tags" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdU-6l-Sh5">
-                    <rect key="frame" x="0.0" y="435" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="469" width="414" height="50"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -97,7 +99,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6tp-wP-7XT">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -123,7 +125,7 @@
                 <constraint firstItem="m9F-Ss-UDp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tih-7d-A9Q"/>
                 <constraint firstItem="H20-m6-kg7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vse-m6-ada"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <point key="canvasLocation" x="1060.5" y="413.5"/>
         </view>
     </objects>

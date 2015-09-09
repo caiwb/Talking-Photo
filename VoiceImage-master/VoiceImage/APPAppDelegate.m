@@ -219,6 +219,7 @@
         tagView.image = chosenImage;
         [_sideViewController hideSideViewController:NO];
         [_mainViewController pushViewController:tagView animated:YES];
+//        _mainViewController.navigationBar.barStyle = UIBarStyleBlack ;
     }
 }
 

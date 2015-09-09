@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		392CAB8B1B9FC0A3001F284A /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 392CAB841B9FC0A3001F284A /* SVIndefiniteAnimatedView.m */; };
+		392CAB8C1B9FC0A3001F284A /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 392CAB861B9FC0A3001F284A /* SVProgressHUD.bundle */; };
+		392CAB8D1B9FC0A3001F284A /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 392CAB881B9FC0A3001F284A /* SVProgressHUD.m */; };
+		392CAB8E1B9FC0A3001F284A /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 392CAB8A1B9FC0A3001F284A /* SVRadialGradientLayer.m */; };
 		3933742D1B96CD1C002455BB /* Dzst_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 3933742C1B96CD1C002455BB /* Dzst_color.png */; };
 		393374371B9C0C09002455BB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 393374361B9C0C09002455BB /* Reachability.m */; };
 		393374391B9C2A02002455BB /* Dzst_delete_desc.png in Resources */ = {isa = PBXBuildFile; fileRef = 393374381B9C2A02002455BB /* Dzst_delete_desc.png */; };
@@ -159,6 +163,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		392CAB831B9FC0A3001F284A /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		392CAB841B9FC0A3001F284A /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		392CAB851B9FC0A3001F284A /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		392CAB861B9FC0A3001F284A /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		392CAB871B9FC0A3001F284A /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		392CAB881B9FC0A3001F284A /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		392CAB891B9FC0A3001F284A /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		392CAB8A1B9FC0A3001F284A /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		3933742C1B96CD1C002455BB /* Dzst_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_color.png; sourceTree = "<group>"; };
 		393374351B9C0C09002455BB /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		393374361B9C0C09002455BB /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -375,6 +387,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		392CAB821B9FC0A3001F284A /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				392CAB831B9FC0A3001F284A /* SVIndefiniteAnimatedView.h */,
+				392CAB841B9FC0A3001F284A /* SVIndefiniteAnimatedView.m */,
+				392CAB851B9FC0A3001F284A /* SVProgressHUD-Prefix.pch */,
+				392CAB861B9FC0A3001F284A /* SVProgressHUD.bundle */,
+				392CAB871B9FC0A3001F284A /* SVProgressHUD.h */,
+				392CAB881B9FC0A3001F284A /* SVProgressHUD.m */,
+				392CAB891B9FC0A3001F284A /* SVRadialGradientLayer.h */,
+				392CAB8A1B9FC0A3001F284A /* SVRadialGradientLayer.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		393374341B9C0C09002455BB /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +524,7 @@
 		EB2397D11B44E066004182BC /* VoiceImage */ = {
 			isa = PBXGroup;
 			children = (
+				392CAB821B9FC0A3001F284A /* SVProgressHUD */,
 				393374341B9C0C09002455BB /* Reachability */,
 				39B38F621B954EAB0090A809 /* images */,
 				39EBA4591B8DF3B3009D392F /* YRSideViewController */,
@@ -777,6 +805,7 @@
 				397135801B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png in Resources */,
 				39B38F881B954EAB0090A809 /* Dzst_mainpage_icon-camera@2x.png in Resources */,
 				39B38F981B954EAB0090A809 /* icon.png in Resources */,
+				392CAB8C1B9FC0A3001F284A /* SVProgressHUD.bundle in Resources */,
 				39B38F921B954EAB0090A809 /* Dzst_tag.png in Resources */,
 				39B38F8A1B954EAB0090A809 /* Dzst_mainpage_ps@2x.png in Resources */,
 				EB23980E1B44E1B6004182BC /* APPViewController.xib in Resources */,
@@ -866,6 +895,7 @@
 				EB85AA821B5CDFD600F4F4F3 /* EZAudioUtilities.m in Sources */,
 				EB85AA871B5CDFD600F4F4F3 /* TPCircularBuffer.c in Sources */,
 				EB85AA841B5CDFD600F4F4F3 /* EZOutput.m in Sources */,
+				392CAB8B1B9FC0A3001F284A /* SVIndefiniteAnimatedView.m in Sources */,
 				EBFBBA501B6F08F10065902F /* IATConfig.m in Sources */,
 				EB85AA7C1B5CDFD600F4F4F3 /* EZAudioFile.m in Sources */,
 				EB85AA791B5CDFD600F4F4F3 /* EZAudio.m in Sources */,
@@ -873,11 +903,13 @@
 				39BDA2191B84223F00CBA988 /* APPAppDelegate.m in Sources */,
 				EB85AA7A1B5CDFD600F4F4F3 /* EZAudioDevice.m in Sources */,
 				39EBA2B61B8B58C4009D392F /* AFSecurityPolicy.m in Sources */,
+				392CAB8E1B9FC0A3001F284A /* SVRadialGradientLayer.m in Sources */,
 				39EBA2BA1B8B58C4009D392F /* AFURLSessionManager.m in Sources */,
 				39EBA4601B8DF526009D392F /* SettingViewController.m in Sources */,
 				EB85AA7E1B5CDFD600F4F4F3 /* EZAudioFloatData.m in Sources */,
 				39EBA2B31B8B58C4009D392F /* AFHTTPRequestOperationManager.m in Sources */,
 				EB85AA801B5CDFD600F4F4F3 /* EZAudioPlot.m in Sources */,
+				392CAB8D1B9FC0A3001F284A /* SVProgressHUD.m in Sources */,
 				39809E791B9D6D6E00014A0C /* DropdownMenu.m in Sources */,
 				EB85AA831B5CDFD600F4F4F3 /* EZMicrophone.m in Sources */,
 				39EBA2B91B8B58C4009D392F /* AFURLResponseSerialization.m in Sources */,
@@ -1004,8 +1036,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hou Weifeng (59Z3DV5VL8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hou Weifeng (59Z3DV5VL8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ran Li (4GA4TMZNME)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ran Li (4GA4TMZNME)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
@@ -1031,8 +1063,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hou Weifeng (59Z3DV5VL8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hou Weifeng (59Z3DV5VL8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ran Li (4GA4TMZNME)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ran Li (4GA4TMZNME)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
