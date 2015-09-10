@@ -24,7 +24,6 @@
 		3971357A1B96BF350092B846 /* Dzst_cbl_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */; };
 		3971357B1B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */; };
 		3971357C1B96BF350092B846 /* Dzst_cbl_icon_arrow_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135711B96BF350092B846 /* Dzst_cbl_icon_arrow_normal.png */; };
-		3971357D1B96BF350092B846 /* Dzst_cbl_icon_language.psd in Resources */ = {isa = PBXBuildFile; fileRef = 397135721B96BF350092B846 /* Dzst_cbl_icon_language.psd */; };
 		3971357E1B96BF350092B846 /* Dzst_cbl_icon_QQ.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135731B96BF350092B846 /* Dzst_cbl_icon_QQ.png */; };
 		3971357F1B96BF350092B846 /* Dzst_cbl_icon_Wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135741B96BF350092B846 /* Dzst_cbl_icon_Wechat.png */; };
 		397135801B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135751B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png */; };
@@ -88,7 +87,6 @@
 		39EBA4611B8DF526009D392F /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39EBA45F1B8DF526009D392F /* SettingViewController.xib */; };
 		EB2397D51B44E066004182BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2397D41B44E066004182BC /* main.m */; };
 		EB2397EF1B44E066004182BC /* VoiceImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2397EE1B44E066004182BC /* VoiceImageTests.m */; };
-		EB23980E1B44E1B6004182BC /* APPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB23980D1B44E1B6004182BC /* APPViewController.xib */; };
 		EB2398101B44E733004182BC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB23980F1B44E733004182BC /* LaunchScreen.xib */; };
 		EB2398141B44EEE7004182BC /* TagPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2398121B44EEE7004182BC /* TagPhotoViewController.m */; };
 		EB2398151B44EEE7004182BC /* TagPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB2398131B44EEE7004182BC /* TagPhotoViewController.xib */; };
@@ -97,7 +95,7 @@
 		EB23981D1B450A73004182BC /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EB23981C1B450A73004182BC /* ImageInfo.m */; };
 		EB23981F1B45210C004182BC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB23981E1B45210C004182BC /* AVFoundation.framework */; };
 		EB2398251B453EA1004182BC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2398241B453EA1004182BC /* CoreLocation.framework */; };
-		EB2398281B45442C004182BC /* global.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2398271B45442C004182BC /* global.m */; };
+		EB2398281B45442C004182BC /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2398271B45442C004182BC /* Global.m */; };
 		EB4A48491B4A470800CABEB1 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4A48481B4A470800CABEB1 /* HttpHelper.m */; };
 		EB4A48641B4E068900CABEB1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4A48631B4E068900CABEB1 /* GLKit.framework */; };
 		EB4A48661B4E06A300CABEB1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4A48651B4E06A300CABEB1 /* AudioToolbox.framework */; };
@@ -187,7 +185,6 @@
 		3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_bg.png; sourceTree = "<group>"; };
 		397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_arrow_click.png; sourceTree = "<group>"; };
 		397135711B96BF350092B846 /* Dzst_cbl_icon_arrow_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_arrow_normal.png; sourceTree = "<group>"; };
-		397135721B96BF350092B846 /* Dzst_cbl_icon_language.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dzst_cbl_icon_language.psd; sourceTree = "<group>"; };
 		397135731B96BF350092B846 /* Dzst_cbl_icon_QQ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_QQ.png; sourceTree = "<group>"; };
 		397135741B96BF350092B846 /* Dzst_cbl_icon_Wechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_Wechat.png; sourceTree = "<group>"; };
 		397135751B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_wifi_off.png; sourceTree = "<group>"; };
@@ -271,7 +268,6 @@
 		EB2397ED1B44E066004182BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB2397EE1B44E066004182BC /* VoiceImageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceImageTests.m; sourceTree = "<group>"; };
 		EB2397F81B44E0E2004182BC /* APPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPAppDelegate.h; sourceTree = "<group>"; };
-		EB23980D1B44E1B6004182BC /* APPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APPViewController.xib; sourceTree = "<group>"; };
 		EB23980F1B44E733004182BC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EB2398111B44EEE7004182BC /* TagPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagPhotoViewController.h; sourceTree = "<group>"; };
 		EB2398121B44EEE7004182BC /* TagPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagPhotoViewController.m; sourceTree = "<group>"; };
@@ -283,8 +279,8 @@
 		EB23981C1B450A73004182BC /* ImageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInfo.m; sourceTree = "<group>"; };
 		EB23981E1B45210C004182BC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		EB2398241B453EA1004182BC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		EB2398261B4543F0004182BC /* global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
-		EB2398271B45442C004182BC /* global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = global.m; sourceTree = "<group>"; };
+		EB2398261B4543F0004182BC /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		EB2398271B45442C004182BC /* Global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Global.m; sourceTree = "<group>"; };
 		EB4A48471B4A470800CABEB1 /* HttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpHelper.h; sourceTree = "<group>"; };
 		EB4A48481B4A470800CABEB1 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpHelper.m; sourceTree = "<group>"; };
 		EB4A48631B4E068900CABEB1 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
@@ -411,7 +407,7 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
-		39B38F621B954EAB0090A809 /* images */ = {
+		39B38F621B954EAB0090A809 /* Images */ = {
 			isa = PBXGroup;
 			children = (
 				393374381B9C2A02002455BB /* Dzst_delete_desc.png */,
@@ -419,7 +415,6 @@
 				3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */,
 				397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */,
 				397135711B96BF350092B846 /* Dzst_cbl_icon_arrow_normal.png */,
-				397135721B96BF350092B846 /* Dzst_cbl_icon_language.psd */,
 				397135731B96BF350092B846 /* Dzst_cbl_icon_QQ.png */,
 				397135741B96BF350092B846 /* Dzst_cbl_icon_Wechat.png */,
 				397135751B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png */,
@@ -462,6 +457,7 @@
 				39B38F7D1B954EAB0090A809 /* photo_bg1@2x.png */,
 				39B38F7E1B954EAB0090A809 /* photo_bg2@2x.png */,
 			);
+			name = Images;
 			path = images;
 			sourceTree = "<group>";
 		};
@@ -526,7 +522,7 @@
 			children = (
 				392CAB821B9FC0A3001F284A /* SVProgressHUD */,
 				393374341B9C0C09002455BB /* Reachability */,
-				39B38F621B954EAB0090A809 /* images */,
+				39B38F621B954EAB0090A809 /* Images */,
 				39EBA4591B8DF3B3009D392F /* YRSideViewController */,
 				39EBA29E1B8B58C4009D392F /* AFNetworking */,
 				EB85AA9E1B5CE1F300F4F4F3 /* UI */,
@@ -654,7 +650,6 @@
 				39B38ED21B9024310090A809 /* PickerViewController.xib */,
 				39EBA45F1B8DF526009D392F /* SettingViewController.xib */,
 				EB23980F1B44E733004182BC /* LaunchScreen.xib */,
-				EB23980D1B44E1B6004182BC /* APPViewController.xib */,
 				EB2398131B44EEE7004182BC /* TagPhotoViewController.xib */,
 				EB2398181B44F05B004182BC /* CompleteViewController.xib */,
 			);
@@ -680,8 +675,8 @@
 				EB2398121B44EEE7004182BC /* TagPhotoViewController.m */,
 				EB2398161B44F05B004182BC /* CompleteViewController.h */,
 				EB2398171B44F05B004182BC /* CompleteViewController.m */,
-				EB2398261B4543F0004182BC /* global.h */,
-				EB2398271B45442C004182BC /* global.m */,
+				EB2398261B4543F0004182BC /* Global.h */,
+				EB2398271B45442C004182BC /* Global.m */,
 				EB52892C1B4646D600E35384 /* MyPhotoBrowser.h */,
 				EB52892D1B4646D600E35384 /* MyPhotoBrowser.m */,
 				EB5289361B46718900E35384 /* PhotoDataProvider.h */,
@@ -756,6 +751,7 @@
 					};
 					EB2397E71B44E066004182BC = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = KDU7J4D4DG;
 						TestTargetID = EB2397CE1B44E066004182BC;
 					};
 				};
@@ -808,7 +804,6 @@
 				392CAB8C1B9FC0A3001F284A /* SVProgressHUD.bundle in Resources */,
 				39B38F921B954EAB0090A809 /* Dzst_tag.png in Resources */,
 				39B38F8A1B954EAB0090A809 /* Dzst_mainpage_ps@2x.png in Resources */,
-				EB23980E1B44E1B6004182BC /* APPViewController.xib in Resources */,
 				EB2398151B44EEE7004182BC /* TagPhotoViewController.xib in Resources */,
 				39B38F8E1B954EAB0090A809 /* Dzst_succeed_icon2@2x.png in Resources */,
 				39B38F961B954EAB0090A809 /* Dzst_take-photo_icon_click.png in Resources */,
@@ -823,7 +818,6 @@
 				39B38F8C1B954EAB0090A809 /* Dzst_start1.png in Resources */,
 				39B38F831B954EAB0090A809 /* Dzst_function_icon-yy_press@2x.png in Resources */,
 				39B38F7F1B954EAB0090A809 /* Dzst_function_bg-pic.png in Resources */,
-				3971357D1B96BF350092B846 /* Dzst_cbl_icon_language.psd in Resources */,
 				397135791B96BF350092B846 /* Dzst_cbl_avatar.png in Resources */,
 				39B38F871B954EAB0090A809 /* Dzst_mainpage_czzp@2x.png in Resources */,
 				EB85AA881B5CDFD600F4F4F3 /* CHANGELOG in Resources */,
@@ -899,7 +893,7 @@
 				EBFBBA501B6F08F10065902F /* IATConfig.m in Sources */,
 				EB85AA7C1B5CDFD600F4F4F3 /* EZAudioFile.m in Sources */,
 				EB85AA791B5CDFD600F4F4F3 /* EZAudio.m in Sources */,
-				EB2398281B45442C004182BC /* global.m in Sources */,
+				EB2398281B45442C004182BC /* Global.m in Sources */,
 				39BDA2191B84223F00CBA988 /* APPAppDelegate.m in Sources */,
 				EB85AA7A1B5CDFD600F4F4F3 /* EZAudioDevice.m in Sources */,
 				39EBA2B61B8B58C4009D392F /* AFSecurityPolicy.m in Sources */,
@@ -1036,14 +1030,15 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ran Li (4GA4TMZNME)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ran Li (4GA4TMZNME)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: tiantian wang (SNUH59W38D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tiantian wang (SNUH59W38D)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)/Extern",
 				);
 				INFOPLIST_FILE = VoiceImage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1063,14 +1058,15 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ran Li (4GA4TMZNME)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ran Li (4GA4TMZNME)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: tiantian wang (SNUH59W38D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tiantian wang (SNUH59W38D)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)/Extern",
 				);
 				INFOPLIST_FILE = VoiceImage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1089,8 +1085,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hou Weifeng (59Z3DV5VL8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hou Weifeng (59Z3DV5VL8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1102,7 +1098,7 @@
 				INFOPLIST_FILE = VoiceImageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8ad957b1-25d9-48a9-a37e-9a3b256bc862";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "";
 				TREAT_MISSING_BASELINES_AS_TEST_FAILURES = YES;
 			};
@@ -1112,8 +1108,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hou Weifeng (59Z3DV5VL8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hou Weifeng (59Z3DV5VL8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1121,7 +1117,7 @@
 				INFOPLIST_FILE = VoiceImageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8ad957b1-25d9-48a9-a37e-9a3b256bc862";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "";
 				TREAT_MISSING_BASELINES_AS_TEST_FAILURES = YES;
 			};

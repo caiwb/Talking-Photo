@@ -9,7 +9,7 @@
 #import "APPAppDelegate.h"
 #import "IFlyFlowerCollector.h"
 #import "iflyMSC/IFlyMSC.h"
-#import "global.h"
+#import "Global.h"
 #import "DataBaseHelper.h"
 #import "HttpHelper.h"
 #import "SettingViewController.h"
@@ -19,8 +19,9 @@
 #import "CameraOverlayController.h"
 #import "NewFeatureController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "ImageInfo.h"
 
-@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate ,StartDelegate , CLLocationManagerDelegate>
+@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate ,StartDelegate , CLLocationManagerDelegate, PhotoDataProtocol>
 
 @property (nonatomic, strong) CLLocationManager * locationManager;
 @property (nonatomic, strong) CLGeocoder *geocoder;
@@ -72,20 +73,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    //加载老照片
+    [PhotoDataProvider sharedInstance].delegate = self;
     dispatch_async(dispatch_queue_create("init_data", NULL), ^{
         [self initUser];
         //加载数据库
         [DataBaseHelper initDB];
         //数据库锁
-        myLock = [[NSObject alloc] init];
+        dbLock = [[NSObject alloc] init];
+        
+        assetArray = [NSMutableArray array];
+        
         //加载相册图片 dataRetrieved:中初始化browser
         [[PhotoDataProvider sharedInstance] getAllPictures:self withSelector:@selector(dataRetrieved:)];
+        
     });
     
     while (_isNotLoop == NO) {
         //保持LaunchScreen直到照片加载完成
     }
+    
     
     if (_isFirst == YES) {
         self.window = [[UIWindow alloc] init];
@@ -104,8 +111,7 @@
     [IFlySpeechUtility createUtility:initString];
     
     //异步上传
-    dispatch_queue_t upload_queue = dispatch_queue_create("upload_queue", NULL);
-    dispatch_async(upload_queue, ^{
+    dispatch_async(dispatch_queue_create("upload_queue", NULL), ^{
         NSMutableArray * uploadingArray = nil;
         uploadingArray = [DataBaseHelper selectDataBy:@"status" IsEqualto:[NSString stringWithFormat:@"%d",2]];
         for(id obj in uploadingArray) {
@@ -115,17 +121,14 @@
         }
         while (true)
         {
- 
                 [self uploadDataFromDB];
                 sleep(0.1);
-            
         }
     });
     return YES;
 }
 
 - (void)dataRetrieved:(id)sender {
-    NSLog(@"3--------------%@",[NSThread currentThread]);
     // Create browser
     _browser = [[MyPhotoBrowser alloc] initWithDelegate:[PhotoDataProvider sharedInstance]];
     _browser.displayActionButton = NO;
@@ -344,13 +347,17 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation *location = [locations lastObject];
     NSLog(@"lat%f - lon%f", location.coordinate.latitude, location.coordinate.longitude);
-    
+
     [_locationManager stopUpdatingLocation];
     
     // Reverse Geocoding
     [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error == nil && [placemarks count] > 0) {
             _placemark = [placemarks lastObject];
+            NSString * name = [NSString string];
+            NSString * street = [NSString string];
+            NSString * city = [NSString string];
+            NSString * country = [NSString string];
             name = _placemark.name;
             if (name == nil){
                 name = @"";
@@ -365,6 +372,27 @@
             NSLog(@"%@", error.debugDescription);
         }
     } ];
+}
+
+#pragma mark - PhotoDataProvider delegate method
+-(void)finishLoadAsset
+{
+    NSLog(@"%@",assetArray);
+    dispatch_async(dispatch_queue_create("upload_old_photos", NULL), ^{
+        for (ImageInfo * info in assetArray) {
+            //如果没找到，则插入
+            if ([[DataBaseHelper selectDataBy:@"image_name" IsEqualto:info.name] count] == 0) {
+                NSString * assetLoc = info.assetLoc;
+                assetLoc = [assetLoc substringFromIndex:1];
+                
+                NSRange range = [assetLoc rangeOfString:@">"];
+                
+                assetLoc = [assetLoc substringToIndex:range.location+range.length-1];
+//                [DataBaseHelper insertDataWithId:userId ImageName:info.name ImagePath:[info.fullImageUrl absoluteString] Desc:@"" Time:info.assetTime Loc:assetLoc Token:token Tag:@"" Status:0];
+//                sleep(0.1);
+            }
+        }
+    });
 }
 
 

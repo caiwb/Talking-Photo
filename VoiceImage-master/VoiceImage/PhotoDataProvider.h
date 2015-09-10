@@ -17,6 +17,8 @@
 -(void)selectedModelHidden;
 -(void)viewSinglePhoto;
 
+-(void)finishLoadAsset;
+
 @end
 
 @interface PhotoDataProvider : NSObject<MWPhotoBrowserDelegate>{

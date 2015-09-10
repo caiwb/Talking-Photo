@@ -67,8 +67,8 @@ static id _instance;
 {
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary * params = [NSMutableDictionary dictionary];
-//    NSString * guid = [self GetUUID];
-    NSString * guid = @"f9006832-426d-4a0a-aab5-02e6ab9daf76";
+    NSString * guid = [self GetUUID];
+//    NSString * guid = @"f9006832-426d-4a0a-aab5-02e6ab9daf76";
     params[@"user_id"] = guid;
     params[@"user_name"] = guid;
     params[@"password"] = @"123";

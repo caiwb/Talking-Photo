@@ -60,7 +60,7 @@
 - (id)initWithDelegate:(id <MWPhotoBrowserDelegate>)delegate;
 
 // Reloads the photo browser and refetches data
-- (void)reloadData;
+-(void)reloadData;
 -(void)reloadGridView;
 -(void)scrollToBottom;
 

@@ -11,6 +11,7 @@
 #import "MWPhotoBrowser.h"
 #import "MWPhotoBrowserPrivate.h"
 #import "SDImageCache.h"
+#import "UIView+Extension.h"
 
 #define PADDING                  10
 #define ACTION_SHEET_OLD_ACTIONS 2000
@@ -229,6 +230,8 @@
     controlView = [[UIView alloc] initWithFrame:rect];
     UIImageView* back = [[UIImageView alloc] initWithImage:backImage];
     back.frame = CGRectMake(0, 0, rect.size.width, rect.size.height);
+    back.center = CGPointMake(controlView.center.x, back.center.y);
+    
     [controlView addSubview:back];
     
     size = [speakImage size];

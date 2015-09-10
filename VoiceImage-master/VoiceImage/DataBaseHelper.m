@@ -47,8 +47,10 @@
 
 +(BOOL) insertDataWithId:(NSString *)userID ImageName:(NSString *)imageName ImagePath:(NSString *)imagePath Desc:(NSString *)desc Time:(NSData *)time Loc:(NSString *)loc Token:(NSString *)token Tag:(NSString *)tag Status:(int)status
 {
-    @synchronized(myLock) {
-        isDatabaseOpera = YES;
+    @synchronized(dbLock) {
+        if (!loc) {
+            loc = @"";
+        }
         sqlite3_stmt *statement;
         NSString * databasePath = [self getDBPath];
         const char *dbpath = [databasePath UTF8String];
@@ -62,7 +64,6 @@
             
             if (sqlite3_step(statement)==SQLITE_DONE) {
                 NSLog(@"插入数据成功");
-                isDatabaseOpera = NO;
                 return YES;
             }
             else {
@@ -73,14 +74,13 @@
         }
         else
             NSLog(@"插入数据-数据库初始化失败");
-        isDatabaseOpera = NO;
         return NO;
     }
 }
 
 +(NSMutableArray *) selectDataBy:(NSString *)item IsEqualto:(NSString *)value
 {
-    @synchronized(myLock) {
+    @synchronized(dbLock) {
 
         NSMutableArray * resultArray = [NSMutableArray array];
         sqlite3_stmt *statement;
@@ -126,9 +126,7 @@
 
 +(BOOL) updateData:(NSString *)item ByValue:(int)value WhereImageName:(NSString *)imageName
 {
-    @synchronized(myLock) {
-
-        isDatabaseOpera = YES;
+    @synchronized(dbLock) {
         sqlite3_stmt *statement;
         NSString * databasePath = [DataBaseHelper getDBPath];
         const char *dbpath = [databasePath UTF8String];
@@ -148,7 +146,6 @@
             {
                 if (sqlite3_step(statement)==SQLITE_DONE) {
                     NSLog(@"更新数据成功");
-                    isDatabaseOpera = NO;
                     return YES;
                 }
                 else {
@@ -156,7 +153,6 @@
                 }
             }
         }
-        isDatabaseOpera = NO;
         return NO;
 
     }

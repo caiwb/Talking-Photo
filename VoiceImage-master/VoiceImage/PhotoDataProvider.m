@@ -19,6 +19,7 @@
 
 -(void)getAllPictures:(id)object withSelector:(SEL)selector
 {
+    [assetArray removeAllObjects];
     imageArray=[[NSArray alloc] init];
     mutableArray =[[NSMutableArray alloc]init];
     NSMutableArray* assetURLDictionaries = [[NSMutableArray alloc] init];
@@ -37,7 +38,12 @@
                     info.fullImageUrl = result.defaultRepresentation.url;
                     NSString* name = [[result defaultRepresentation] filename];
                     info.name = name;
-
+                    info.assetTime = [result valueForProperty:ALAssetPropertyDate];
+                    info.assetLoc = [NSString stringWithFormat:@"%@",[result valueForProperty:ALAssetPropertyLocation]];
+                
+                    if (isFindAssetDone == NO) {
+                        [assetArray addObject:info];
+                    }
                     [mutableArray addObject:info];
                 }
             }
@@ -75,6 +81,12 @@
             self.photos = [[photos reverseObjectEnumerator] allObjects];
             self.thumbs = [[thumbs reverseObjectEnumerator] allObjects];;
             
+            if (isFindAssetDone == NO) {
+                [self.delegate finishLoadAsset];
+                NSLog(@"%@",assetArray);
+            }
+            isFindAssetDone = YES;
+            
             [object performSelector:selector withObject:object];
         }
     };
@@ -83,7 +95,6 @@
     [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
                            usingBlock:assetGroupEnumerator
                          failureBlock:^(NSError *error) {NSLog(@"There is an error");}];
-    
     
 }
 
