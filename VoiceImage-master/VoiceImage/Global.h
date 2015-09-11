@@ -41,6 +41,8 @@ extern NSObject * dbLock;
 extern NSMutableArray * assetArray;
 extern BOOL isFindAssetDone;
 
+extern NSString * dbPath;
+
 #define MWPHOTO_FOLD_PHOTO_NOTIFICATION @"MWPHOTO_FOLD_PHOTO_NOTIFICATION"
 
 #endif

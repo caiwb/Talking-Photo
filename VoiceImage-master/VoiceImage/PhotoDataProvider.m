@@ -83,7 +83,7 @@
             
             if (isFindAssetDone == NO) {
                 [self.delegate finishLoadAsset];
-                NSLog(@"%@",assetArray);
+                
             }
             isFindAssetDone = YES;
             

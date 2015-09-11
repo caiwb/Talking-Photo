@@ -244,11 +244,8 @@ static id _instance;
      }];
 }
 
--(void)imagesRetrieved:(id)object
-{
-    [object reloadData];
-    [object reloadGridView];
-}
+
+
 
 //key: o1J4T4R0F1v3X7E5I7A0NcnWpelIaVDL2G7iwVgs
 -(void) AFNetworkingForVoiceTag:(NSString *)desc forInserting:(NSDictionary *)insert orSearching:(id) object

@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *deleteDescBtn;
 @property (weak, nonatomic) IBOutlet UIButton *uploadBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *topBar;
+@property (weak, nonatomic) IBOutlet UIButton *faceDetectBtn;
 
 @end
 
@@ -211,6 +212,10 @@
     
     CompleteViewController *complete = [[CompleteViewController alloc] init];
     [self.navigationController pushViewController:complete animated:YES];
+}
+
+- (IBAction)faceDetect:(id)sender {
+    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

@@ -46,14 +46,17 @@
  */
 -(void)uploadDataFromDB
 {
-    NSMutableArray * dataArray = nil;
-    dataArray = [DataBaseHelper selectDataBy:@"status" IsEqualto:[NSString stringWithFormat:@"%d",0]];
-    if (dataArray) {
-        for (id obj in dataArray) {
-//            NSString * imageName = obj[@"name"];
-            [[HttpHelper sharedHttpHelper] AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImagePath:obj[@"path"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
+    @autoreleasepool {
+        NSMutableArray * dataArray = nil;
+        dataArray = [DataBaseHelper selectDataBy:@"status" IsEqualto:@"0"];
+        if (dataArray) {
+            for (id obj in dataArray) {
+//                NSString * imageName = obj[@"name"];
+                [[HttpHelper sharedHttpHelper] AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImagePath:obj[@"path"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
+            }
         }
     }
+    
 }
 
 -(void)initUser
@@ -112,18 +115,18 @@
     
     //异步上传
     dispatch_async(dispatch_queue_create("upload_queue", NULL), ^{
-        NSMutableArray * uploadingArray = nil;
-        uploadingArray = [DataBaseHelper selectDataBy:@"status" IsEqualto:[NSString stringWithFormat:@"%d",2]];
-        for(id obj in uploadingArray) {
-            
-            NSString * uploadingName = obj[@"name"];
-            [DataBaseHelper updateData:@"status" ByValue:0 WhereImageName:uploadingName];
-        }
-        while (true)
-        {
-                [self uploadDataFromDB];
-                sleep(0.1);
-        }
+            NSMutableArray * uploadingArray = nil;
+            uploadingArray = [DataBaseHelper selectDataBy:@"status" IsEqualto:[NSString stringWithFormat:@"%d",2]];
+            for(id obj in uploadingArray) {
+                
+                NSString * uploadingName = obj[@"name"];
+                [DataBaseHelper updateData:@"status" ByValue:0 WhereImageName:uploadingName];
+            }
+            while (true)
+            {
+                    [self uploadDataFromDB];
+                    sleep(0.1);
+            }
     });
     return YES;
 }
@@ -377,21 +380,31 @@
 #pragma mark - PhotoDataProvider delegate method
 -(void)finishLoadAsset
 {
-    NSLog(@"%@",assetArray);
     dispatch_async(dispatch_queue_create("upload_old_photos", NULL), ^{
-        for (ImageInfo * info in assetArray) {
-            //如果没找到，则插入
-            if ([[DataBaseHelper selectDataBy:@"image_name" IsEqualto:info.name] count] == 0) {
-                NSString * assetLoc = info.assetLoc;
-                assetLoc = [assetLoc substringFromIndex:1];
-                
-                NSRange range = [assetLoc rangeOfString:@">"];
-                
-                assetLoc = [assetLoc substringToIndex:range.location+range.length-1];
-//                [DataBaseHelper insertDataWithId:userId ImageName:info.name ImagePath:[info.fullImageUrl absoluteString] Desc:@"" Time:info.assetTime Loc:assetLoc Token:token Tag:@"" Status:0];
-//                sleep(0.1);
-            }
+        
+        while ([userId isEqualToString:@""]) {
         }
+        NSLog(@"user--------%@",userId);
+//        for (ImageInfo * info in assetArray) {
+//            //如果没找到，则插入
+//            @autoreleasepool {
+//                if ([[DataBaseHelper selectDataBy:@"image_name" IsEqualto:info.name] count] == 0) {
+//                    
+//                    NSString * assetLoc = [NSString stringWithFormat:@"%@",info.assetLoc];
+//                    NSRange range = [assetLoc rangeOfString:@">"];
+//                    if (range.length>0) {
+//                        assetLoc = [assetLoc substringToIndex:range.location+range.length-1];
+//                        assetLoc = [assetLoc substringFromIndex:1];
+//                    }
+//                    if ([assetLoc isEqualToString:@"(null)"]) {
+//                        assetLoc = @"";
+//                    }
+//                    
+////                    [DataBaseHelper insertDataWithId:userId ImageName:info.name ImagePath:[info.fullImageUrl absoluteString] Desc:@"" Time:info.assetTime Loc:assetLoc Token:token Tag:@"" Status:0];
+//                    sleep(0.1);
+//                }
+//            }
+//        }
     });
 }
 

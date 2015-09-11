@@ -7,15 +7,24 @@
 //
 
 #import "DataBaseHelper.h"
+#import "Global.h"
+
+@interface DataBaseHelper()
+
+@end
 
 @implementation DataBaseHelper
 
 +(NSString *) getDBPath
 {
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * documents = [paths objectAtIndex:0];
-    NSString * databasePath = [documents stringByAppendingPathComponent:DBNAME];
-    return databasePath;
+    if ([dbPath isEqualToString:@""]) {
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * documents = [paths objectAtIndex:0];
+        NSString * databasePath = [documents stringByAppendingPathComponent:DBNAME];
+        dbPath = databasePath;
+    }
+    
+    return dbPath;
 }
 
 /**
@@ -73,7 +82,7 @@
             sqlite3_close(upload_database);
         }
         else
-            NSLog(@"插入数据-数据库初始化失败");
+            NSLog(@"插入数据-数据库打开失败");
         return NO;
     }
 }
@@ -82,7 +91,7 @@
 {
     @synchronized(dbLock) {
 
-        NSMutableArray * resultArray = [NSMutableArray array];
+        NSMutableArray * resultArray = [[NSMutableArray alloc] init];
         sqlite3_stmt *statement;
         NSString * databasePath = [DataBaseHelper getDBPath];
         const char *dbpath = [databasePath UTF8String];
@@ -94,8 +103,8 @@
             if (sqlite3_prepare_v2(upload_database, querystatement, -1, &statement, NULL)==SQLITE_OK) {
                 
                 while (sqlite3_step(statement)==SQLITE_ROW) {
-                    NSLog(@"查询成功");
-                    NSMutableDictionary * result = [NSMutableDictionary dictionary];
+                    NSLog(@"查询成功-%@=%@",item,value);
+                    NSMutableDictionary * result = [[NSMutableDictionary alloc] init];
                     result[@"id"] = [[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
                     result[@"name"] = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
     //                //imageData
@@ -117,7 +126,7 @@
             sqlite3_close(upload_database);
         }
         else
-            NSLog(@"查询数据-数据库初始化失败");
+            NSLog(@"查询数据-数据库打开失败");
         
         return resultArray;
     }
