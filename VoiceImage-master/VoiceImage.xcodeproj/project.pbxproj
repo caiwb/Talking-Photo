@@ -85,6 +85,9 @@
 		39EBA45C1B8DF3B3009D392F /* YRSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA45B1B8DF3B3009D392F /* YRSideViewController.m */; };
 		39EBA4601B8DF526009D392F /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA45E1B8DF526009D392F /* SettingViewController.m */; };
 		39EBA4611B8DF526009D392F /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39EBA45F1B8DF526009D392F /* SettingViewController.xib */; };
+		5C3F0EA21BA2A9CF009C9CBD /* RectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F0EA11BA2A9CF009C9CBD /* RectangleView.m */; };
+		5CECCBE71BA2E9F70070927E /* Dzst_face_detect.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CECCBE61BA2E9F60070927E /* Dzst_face_detect.png */; };
+		5CECCBE91BA2EC130070927E /* Dzst_upload.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CECCBE81BA2EC130070927E /* Dzst_upload.png */; };
 		EB2397D51B44E066004182BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2397D41B44E066004182BC /* main.m */; };
 		EB2397EF1B44E066004182BC /* VoiceImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2397EE1B44E066004182BC /* VoiceImageTests.m */; };
 		EB2398101B44E733004182BC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB23980F1B44E733004182BC /* LaunchScreen.xib */; };
@@ -261,6 +264,10 @@
 		39EBA45D1B8DF526009D392F /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		39EBA45E1B8DF526009D392F /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		39EBA45F1B8DF526009D392F /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		5C3F0EA01BA2A9CF009C9CBD /* RectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectangleView.h; sourceTree = "<group>"; };
+		5C3F0EA11BA2A9CF009C9CBD /* RectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectangleView.m; sourceTree = "<group>"; };
+		5CECCBE61BA2E9F60070927E /* Dzst_face_detect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_face_detect.png; sourceTree = "<group>"; };
+		5CECCBE81BA2EC130070927E /* Dzst_upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_upload.png; sourceTree = "<group>"; };
 		EB2397CF1B44E066004182BC /* 大嘴说图.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "大嘴说图.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2397D31B44E066004182BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB2397D41B44E066004182BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -410,6 +417,8 @@
 		39B38F621B954EAB0090A809 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5CECCBE81BA2EC130070927E /* Dzst_upload.png */,
+				5CECCBE61BA2E9F60070927E /* Dzst_face_detect.png */,
 				393374381B9C2A02002455BB /* Dzst_delete_desc.png */,
 				3971356E1B96BF350092B846 /* Dzst_cbl_avatar.png */,
 				3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */,
@@ -675,6 +684,8 @@
 				EB2398121B44EEE7004182BC /* TagPhotoViewController.m */,
 				EB2398161B44F05B004182BC /* CompleteViewController.h */,
 				EB2398171B44F05B004182BC /* CompleteViewController.m */,
+				5C3F0EA01BA2A9CF009C9CBD /* RectangleView.h */,
+				5C3F0EA11BA2A9CF009C9CBD /* RectangleView.m */,
 				EB2398261B4543F0004182BC /* Global.h */,
 				EB2398271B45442C004182BC /* Global.m */,
 				EB52892C1B4646D600E35384 /* MyPhotoBrowser.h */,
@@ -800,6 +811,7 @@
 				39B38F991B954EAB0090A809 /* photo_bg1@2x.png in Resources */,
 				397135801B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png in Resources */,
 				39B38F881B954EAB0090A809 /* Dzst_mainpage_icon-camera@2x.png in Resources */,
+				5CECCBE71BA2E9F70070927E /* Dzst_face_detect.png in Resources */,
 				39B38F981B954EAB0090A809 /* icon.png in Resources */,
 				392CAB8C1B9FC0A3001F284A /* SVProgressHUD.bundle in Resources */,
 				39B38F921B954EAB0090A809 /* Dzst_tag.png in Resources */,
@@ -814,6 +826,7 @@
 				39B38F861B954EAB0090A809 /* Dzst_mainpage_bg@2x.png in Resources */,
 				39EBA4611B8DF526009D392F /* SettingViewController.xib in Resources */,
 				39B38F851B954EAB0090A809 /* Dzst_loading_microsoft-logo@2x.png in Resources */,
+				5CECCBE91BA2EC130070927E /* Dzst_upload.png in Resources */,
 				393374501B9C6EF4002455BB /* Dzst_splash2.png in Resources */,
 				39B38F8C1B954EAB0090A809 /* Dzst_start1.png in Resources */,
 				39B38F831B954EAB0090A809 /* Dzst_function_icon-yy_press@2x.png in Resources */,
@@ -911,6 +924,7 @@
 				39EBA2B41B8B58C4009D392F /* AFHTTPSessionManager.m in Sources */,
 				39EBA2B51B8B58C4009D392F /* AFNetworkReachabilityManager.m in Sources */,
 				3991139E1B9566A000D6F672 /* CameraOverlayController.m in Sources */,
+				5C3F0EA21BA2A9CF009C9CBD /* RectangleView.m in Sources */,
 				EB85AA861B5CDFD600F4F4F3 /* EZRecorder.m in Sources */,
 				39EBA2B21B8B58C4009D392F /* AFHTTPRequestOperation.m in Sources */,
 				EB23981D1B450A73004182BC /* ImageInfo.m in Sources */,

@@ -87,7 +87,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2F-Zw-Yuz">
-                    <rect key="frame" x="23" y="610" width="46" height="30"/>
+                    <rect key="frame" x="23" y="611" width="46" height="30"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <state key="normal" title="人脸">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

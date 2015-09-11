@@ -66,7 +66,7 @@ static id _instance;
 - (void)AFNetworingForRegistry
 {
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
-    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     NSString * guid = [self GetUUID];
 //    NSString * guid = @"f9006832-426d-4a0a-aab5-02e6ab9daf76";
     params[@"user_id"] = guid;
@@ -111,7 +111,7 @@ static id _instance;
 -(void) AFNetworingForLoginWithGUID:(NSString *)guid
 {
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
-    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"user_name"] = guid;
     params[@"password"] = @"123";
     
@@ -146,7 +146,7 @@ static id _instance;
     [DataBaseHelper updateData:@"status" ByValue:2 WhereImageName:imageName];
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
     mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     ALAssetsLibrary   *lib = [[ALAssetsLibrary alloc] init];
     
     params[@"user_id"] = guid;
@@ -210,7 +210,7 @@ static id _instance;
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
 //    mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
 //    mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
-    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
    
     params[@"user_id"] = guid;
     params[@"loc"] = loc;
@@ -244,7 +244,34 @@ static id _instance;
      }];
 }
 
+-(void) AFNetworingForFaceDetectWithImage:(UIImage *)image imageName:(NSString *)imageName
+{
+    AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"user_id"] = userId;
+    params[@"token"] = token;
+    NSData * imageData = UIImageJPEGRepresentation(image, 0);
+    //http request
+    [mgr POST:[NSString stringWithFormat:@"http://%@/face",host] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //参数name为服务器接收文件数据所用参数
+        [formData appendPartWithFileData:imageData name:@"image" fileName:imageName mimeType:@"image"];
+    }
+      success:^(AFHTTPRequestOperation * operation, id responseObject) {
+        NSLog(@"查脸请求成功");
+        BOOL status = responseObject[@"status"];
+        if (status == YES) {
+            [self.delegate isFaceDetectDone:YES faceList:responseObject[@"face"]];
+        }
+        else {
+            [self.delegate isFaceDetectDone:NO faceList:nil];
+        }
+    } failure:^(AFHTTPRequestOperation * operation, NSError * error) {
+        
+        NSLog(@"查脸请求失败：%@",error);
+        [self.delegate isFaceDetectDone:NO faceList:nil];
+    }];
 
+}
 
 
 //key: o1J4T4R0F1v3X7E5I7A0NcnWpelIaVDL2G7iwVgs
@@ -259,7 +286,7 @@ static id _instance;
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
     mgr.requestSerializer = [AFHTTPRequestSerializer serializer];
     mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"api_key"] = @"o1J4T4R0F1v3X7E5I7A0NcnWpelIaVDL2G7iwVgs";
     params[@"text"] = desc;
     params[@"pattern"] = @"pos";

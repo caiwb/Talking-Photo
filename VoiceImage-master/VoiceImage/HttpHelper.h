@@ -15,6 +15,7 @@
 @optional
 
 -(void)isSearchDone:(BOOL)suc;
+-(void)isFaceDetectDone:(BOOL)suc faceList:(NSArray *)faceList;
 
 @end
 
@@ -29,6 +30,7 @@
 -(void) AFNetworingForLoginWithGUID:(NSString *)guid;
 -(void) AFNetworingForUploadWithUserId:(NSString *)guid ImageName:(NSString *)imageName ImagePath:(NSString *)imagePath Desc:(NSString *)desc Tag:(NSString *)tag Time:(NSString *)time Loc:(NSString *)loc Token:(NSString *)token;
 -(void) AFNetworingForSearchWithUserId:(NSString *)guid Desc:(NSString *)desc Tag:(NSString *)tag Loc:(NSString *)loc Token:(NSString *)token RefreshObject:(id)object;
+-(void) AFNetworingForFaceDetectWithImage:(UIImage *)image imageName:(NSString *)imageName;
 
 
 //分词
