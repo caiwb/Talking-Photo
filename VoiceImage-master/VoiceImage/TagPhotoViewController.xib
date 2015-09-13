@@ -66,10 +66,13 @@
                         <action selector="skipClicked:" destination="-1" eventType="touchUpInside" id="ApU-3Z-cT6"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="tags" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdU-6l-Sh5">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdU-6l-Sh5">
                     <rect key="frame" x="0.0" y="469" width="414" height="50"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="5Ov-fI-Yze"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -86,8 +89,12 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6tp-wP-7XT">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2F-Zw-Yuz">
-                    <rect key="frame" x="23" y="611" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2F-Zw-Yuz">
+                    <rect key="frame" x="8" y="680" width="46" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="46" id="ecN-fu-Wno"/>
+                        <constraint firstAttribute="height" constant="30" id="vsV-D0-SdH"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <state key="normal" title="人脸">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -101,17 +108,20 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Mrk-a2-d6m" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2v1-Up-evx"/>
+                <constraint firstItem="s2F-Zw-Yuz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="AaL-eM-8fz"/>
                 <constraint firstAttribute="trailing" secondItem="HEj-y7-UkK" secondAttribute="trailing" constant="8" id="All-nI-fpB"/>
                 <constraint firstAttribute="trailing" secondItem="H20-m6-kg7" secondAttribute="trailing" id="CJa-BM-frp"/>
                 <constraint firstItem="BdU-6l-Sh5" firstAttribute="centerX" secondItem="Mrk-a2-d6m" secondAttribute="centerX" constant="-0.5" id="FSg-7A-sSL"/>
                 <constraint firstAttribute="trailing" secondItem="Mrk-a2-d6m" secondAttribute="trailing" id="I0B-k2-X3N"/>
                 <constraint firstItem="BdU-6l-Sh5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="J63-GJ-5cq"/>
+                <constraint firstAttribute="bottom" secondItem="s2F-Zw-Yuz" secondAttribute="bottom" constant="26" id="L2e-ug-9XR"/>
                 <constraint firstItem="4P8-xQ-Zqt" firstAttribute="centerX" secondItem="DAQ-24-Lu1" secondAttribute="centerX" id="Mwu-Le-1Th"/>
                 <constraint firstAttribute="bottom" secondItem="Mrk-a2-d6m" secondAttribute="bottom" id="UWq-V3-5YO"/>
                 <constraint firstItem="4P8-xQ-Zqt" firstAttribute="centerY" secondItem="DAQ-24-Lu1" secondAttribute="centerY" id="Wsv-F6-jje"/>
                 <constraint firstAttribute="trailing" secondItem="BdU-6l-Sh5" secondAttribute="trailing" id="aJ4-Mn-B6V"/>
                 <constraint firstAttribute="bottom" secondItem="HEj-y7-UkK" secondAttribute="bottom" constant="26" id="acd-7E-hBh"/>
                 <constraint firstItem="DAQ-24-Lu1" firstAttribute="centerX" secondItem="Mrk-a2-d6m" secondAttribute="centerX" id="eQw-XY-Jn1"/>
+                <constraint firstItem="s2F-Zw-Yuz" firstAttribute="top" secondItem="BdU-6l-Sh5" secondAttribute="bottom" constant="92" id="gM9-6e-APO"/>
                 <constraint firstAttribute="trailing" secondItem="m9F-Ss-UDp" secondAttribute="trailing" id="h57-9p-gaK"/>
                 <constraint firstItem="BdU-6l-Sh5" firstAttribute="top" secondItem="H20-m6-kg7" secondAttribute="bottom" constant="8" symbolic="YES" id="iI3-Y0-cCZ"/>
                 <constraint firstAttribute="bottom" secondItem="m9F-Ss-UDp" secondAttribute="bottom" id="k8G-I9-35H"/>
@@ -122,6 +132,11 @@
                 <constraint firstItem="H20-m6-kg7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vse-m6-ada"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="gM9-6e-APO"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="1060.5" y="413.5"/>
         </view>
     </objects>

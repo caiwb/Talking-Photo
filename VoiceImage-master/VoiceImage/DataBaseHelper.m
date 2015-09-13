@@ -57,22 +57,25 @@
 +(BOOL) insertDataWithId:(NSString *)userID ImageName:(NSString *)imageName ImagePath:(NSString *)imagePath Desc:(NSString *)desc Time:(NSData *)time Loc:(NSString *)loc Token:(NSString *)token Tag:(NSString *)tag Status:(int)status
 {
     @synchronized(dbLock) {
+        @autoreleasepool {
         if (!loc) {
             loc = @"";
         }
         sqlite3_stmt *statement;
         NSString * databasePath = [self getDBPath];
         const char *dbpath = [databasePath UTF8String];
-        
+    
         if (sqlite3_open(dbpath, &upload_database)==SQLITE_OK) {
-            
+
             NSString *insertSql = [NSString stringWithFormat:@"INSERT INTO UPLOADTABLE (user_id,image_name,image_path,desc,time,loc,token,tag,status) VALUES(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%d\")",userID,imageName,imagePath,desc,time,loc,token,tag,status];
             const char *insertstaement = [insertSql UTF8String];
-    //        NSLog(@"%s",insertstaement);
+
             sqlite3_prepare_v2(upload_database, insertstaement, -1, &statement, NULL);
-            
+
             if (sqlite3_step(statement)==SQLITE_DONE) {
                 NSLog(@"插入数据成功");
+                sqlite3_finalize(statement);
+                sqlite3_close(upload_database);
                 return YES;
             }
             else {
@@ -84,6 +87,7 @@
         else
             NSLog(@"插入数据-数据库打开失败");
         return NO;
+        }
     }
 }
 
@@ -103,8 +107,8 @@
             if (sqlite3_prepare_v2(upload_database, querystatement, -1, &statement, NULL)==SQLITE_OK) {
                 
                 while (sqlite3_step(statement)==SQLITE_ROW) {
-                    NSLog(@"查询成功-%@=%@",item,value);
                     NSMutableDictionary * result = [[NSMutableDictionary alloc] init];
+                    NSLog(@"查询成功-%@:%@=%@",result[@"name"],item,value);
                     result[@"id"] = [[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
                     result[@"name"] = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
     //                //imageData
@@ -133,7 +137,7 @@
 }
 
 
-+(BOOL) updateData:(NSString *)item ByValue:(int)value WhereImageName:(NSString *)imageName
++(BOOL) updateData:(NSString *)item ByValue:(NSString *)value WhereImageName:(NSString *)imageName
 {
     @synchronized(dbLock) {
         sqlite3_stmt *statement;
@@ -142,19 +146,23 @@
 
         
         if (sqlite3_open(dbpath, &upload_database)==SQLITE_OK) {
-            NSString *querySQL = [NSString stringWithFormat:@"update UPLOADTABLE set %@=\"%d\" where image_name=\"%@\"",item, value, imageName];
+            NSString *querySQL = [NSString stringWithFormat:@"update UPLOADTABLE set %@=\"%@\" where image_name=\"%@\"",item, value, imageName];
             const char *updatestatement = [querySQL UTF8String];
           
             if (sqlite3_prepare_v2(upload_database, updatestatement, -1, &statement, NULL)!=SQLITE_OK)
             {
                 NSLog(@"更新表失败");
+                sqlite3_finalize(statement);
                 sqlite3_close(upload_database);
                 return NO;
             }
             else
             {
                 if (sqlite3_step(statement)==SQLITE_DONE) {
-                    NSLog(@"更新数据成功");
+                    NSLog(@"更新数据成功---%@", value);
+                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(upload_database);
                     return YES;
                 }
                 else {
@@ -162,6 +170,9 @@
                 }
             }
         }
+        
+        sqlite3_finalize(statement);
+        sqlite3_close(upload_database);
         return NO;
 
     }

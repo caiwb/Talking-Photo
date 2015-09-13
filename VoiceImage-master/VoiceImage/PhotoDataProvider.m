@@ -19,7 +19,7 @@
 
 -(void)getAllPictures:(id)object withSelector:(SEL)selector
 {
-    [assetArray removeAllObjects];
+//    [assetArray removeAllObjects];
     imageArray=[[NSArray alloc] init];
     mutableArray =[[NSMutableArray alloc]init];
     NSMutableArray* assetURLDictionaries = [[NSMutableArray alloc] init];

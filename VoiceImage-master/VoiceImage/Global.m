@@ -25,6 +25,7 @@ NSString* searchTag = @"";
 sqlite3* upload_database = nil;
 
 NSObject * dbLock = nil;
+NSObject * uploadLock = nil;
 
 NSMutableArray * assetArray = nil;
 BOOL isFindAssetDone = NO;

@@ -24,15 +24,29 @@
 {
     AMapSearchAPI * _search;
 }
+
+@property (nonatomic, strong) AFHTTPRequestOperationManager * uploadMgr;
+@property (nonatomic, assign) BOOL isUploading;
 @end
 
 static id _instance;
 
 @implementation HttpHelper
 
+-(AFHTTPRequestOperationManager *)uploadMgr
+{
+    if (_uploadMgr == nil) {
+        _uploadMgr = [[AFHTTPRequestOperationManager alloc] init];
+        _uploadMgr.operationQueue = [[NSOperationQueue alloc] init];
+        [_uploadMgr.operationQueue setMaxConcurrentOperationCount:1];
+        _isUploading = NO;
+    }
+    return _uploadMgr;
+}
+
 +(instancetype) sharedHttpHelper
 {
-    if (_instance == nil) { //防止频繁加锁
+    if (_instance == nil) {
         @synchronized(self) {
             if (_instance == nil) {
                 _instance = [[self alloc] init];
@@ -75,8 +89,7 @@ static id _instance;
     params[@"lang"] = @"zh-cn";
 //    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-//
-//    [mgr.requestSerializer setAuthorizationHeaderFieldWithUsername:@"XYZ" password:@"xyzzzz"];
+    
     [mgr POST:[NSString stringWithFormat:@"http://%@/register",host] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         
@@ -143,9 +156,13 @@ static id _instance;
 
 -(void) AFNetworingForUploadWithUserId:(NSString *)guid ImageName:(NSString *)imageName ImagePath:(NSString *)imagePath Desc:(NSString *)desc Tag:(NSString *)tag Time:(NSString *)time Loc:(NSString *)loc Token:(NSString *)mToken
 {
-    [DataBaseHelper updateData:@"status" ByValue:2 WhereImageName:imageName];
-    AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
-    mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
+    if(_isUploading == YES)
+        return;
+    _isUploading = YES;
+    [DataBaseHelper updateData:@"status" ByValue:@"2" WhereImageName:imageName];
+//        AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
+    self.uploadMgr.requestSerializer = [AFHTTPRequestSerializer serializer];
+    self.uploadMgr.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     ALAssetsLibrary   *lib = [[ALAssetsLibrary alloc] init];
     
@@ -164,21 +181,26 @@ static id _instance;
         [lib assetForURL:[NSURL URLWithString:imagePath] resultBlock:^(ALAsset *asset)
          {
              // 使用asset来获取本地图片
-             UIImage * image = [self fullResolutionImageFromALAsset:asset];
-             NSData * imageData = UIImageJPEGRepresentation(image, 0);
              //http request
-             [mgr POST:[NSString stringWithFormat:@"http://%@/upload",host] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+             [self.uploadMgr POST:[NSString stringWithFormat:@"http://%@/upload",host] parameters:params constructingBodyWithBlock:^(__weak id<AFMultipartFormData> formData) {
                  //参数name为服务器接收文件数据所用参数
-                 [formData appendPartWithFileData:imageData name:@"image" fileName:imageName mimeType:@"image"];
-             } success:^(AFHTTPRequestOperation * operation, id responseObject) {
-                 NSLog(@"上传请求成功：%@",responseObject);
-                 //请求成功后将数据库中该条数据status置为1
-                 [DataBaseHelper updateData:@"status" ByValue:1 WhereImageName:imageName];
+//                 UIImage * image = [self fullResolutionImageFromALAsset:asset];
+//                 NSData * imageData = UIImageJPEGRepresentation(image, 0);
+                [formData appendPartWithFileData:UIImageJPEGRepresentation([self fullResolutionImageFromALAsset:asset], 0) name:@"image" fileName:imageName mimeType:@"image"];
                  
+             } success:^(AFHTTPRequestOperation * operation, id responseObject) {
+                 //请求成功后将数据库中该条数据status置为1
+                 @autoreleasepool {
+                     NSLog(@"上传请求成功：%@",responseObject);
+                     _isUploading = NO;
+                     [DataBaseHelper updateData:@"status" ByValue:@"1" WhereImageName:imageName];
+                 }
              } failure:^(AFHTTPRequestOperation * operation, NSError * error) {
-                 NSLog(@"上传请求失败：%@",error);
+                 @autoreleasepool {
+                     _isUploading = NO;
+                     NSLog(@"上传请求失败：%@",error);
+                 }
              }];
-
          }
             failureBlock:^(NSError *error)
          {
@@ -189,18 +211,17 @@ static id _instance;
         params[@"func"] = @"UPDATE";
         params[@"loc"] = @"";
         params[@"time"] = @"";
-        [mgr POST:[NSString stringWithFormat:@"http://%@/upload",host] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+        [self.uploadMgr POST:[NSString stringWithFormat:@"http://%@/upload",host] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
              NSLog(@"更新请求成功：%@",responseObject);
              //请求成功后将数据库中该条数据status置为1
-             [DataBaseHelper updateData:@"status" ByValue:1 WhereImageName:imageName];
+             [DataBaseHelper updateData:@"status" ByValue:@"1" WhereImageName:imageName];
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *error)
          {
              NSLog(@"更新请求失败：%@",error);
              
          }];
-
     }
 }
 
@@ -250,11 +271,12 @@ static id _instance;
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"user_id"] = userId;
     params[@"token"] = token;
-    NSData * imageData = UIImageJPEGRepresentation(image, 0);
     //http request
     [mgr POST:[NSString stringWithFormat:@"http://%@/face",host] parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //参数name为服务器接收文件数据所用参数
+        NSData * imageData = UIImageJPEGRepresentation(image, 0);
         [formData appendPartWithFileData:imageData name:@"image" fileName:imageName mimeType:@"image"];
+        imageData = nil;
     }
       success:^(AFHTTPRequestOperation * operation, id responseObject) {
         NSLog(@"查脸请求成功");

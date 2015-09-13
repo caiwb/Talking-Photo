@@ -8,6 +8,7 @@
 
 #import "RectangleView.h"
 
+//人脸识别方框
 @implementation RectangleView
 
 
@@ -21,9 +22,9 @@
     //填充矩形
     CGContextFillRect(context, rect);
     //设置画笔颜色
-    CGContextSetRGBStrokeColor(context, 250.0, 128.0, 0.0, 1.0);
+    CGContextSetRGBStrokeColor(context,95,158,160,1.0);
     //设置画笔线条粗细
-    CGContextSetLineWidth(context, 5.0);
+    CGContextSetLineWidth(context, 3.0);
     //画矩形边框
     CGContextAddRect(context,rect);
     //执行绘画

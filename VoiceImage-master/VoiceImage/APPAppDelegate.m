@@ -22,6 +22,9 @@
 #import "ImageInfo.h"
 
 @interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate ,StartDelegate , CLLocationManagerDelegate, PhotoDataProtocol>
+{
+    dispatch_queue_t _uploadOldPhotos;
+}
 
 @property (nonatomic, strong) CLLocationManager * locationManager;
 @property (nonatomic, strong) CLGeocoder *geocoder;
@@ -52,11 +55,10 @@
         if (dataArray) {
             for (id obj in dataArray) {
 //                NSString * imageName = obj[@"name"];
-                [[HttpHelper sharedHttpHelper] AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImagePath:obj[@"path"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]];
+                    [[HttpHelper sharedHttpHelper] AFNetworingForUploadWithUserId:obj[@"id"] ImageName:obj[@"name"] ImagePath:obj[@"path"] Desc:obj[@"desc"] Tag:obj[@"tag"] Time:obj[@"time"] Loc:obj[@"loc"] Token:obj[@"token"]]; 
             }
         }
     }
-    
 }
 
 -(void)initUser
@@ -84,6 +86,7 @@
         [DataBaseHelper initDB];
         //数据库锁
         dbLock = [[NSObject alloc] init];
+        uploadLock = [[NSObject alloc] init];
         
         assetArray = [NSMutableArray array];
         
@@ -380,33 +383,40 @@
 #pragma mark - PhotoDataProvider delegate method
 -(void)finishLoadAsset
 {
-    dispatch_async(dispatch_queue_create("upload_old_photos", NULL), ^{
-        
+    if ([assetArray count] == 0)
+        return;
+    _uploadOldPhotos = dispatch_queue_create("upload_old_photos", NULL);
+    dispatch_async(_uploadOldPhotos, ^{
+    
         while ([userId isEqualToString:@""]) {
         }
         NSLog(@"user--------%@",userId);
-//        for (ImageInfo * info in assetArray) {
-//            //如果没找到，则插入
-//            @autoreleasepool {
-//                if ([[DataBaseHelper selectDataBy:@"image_name" IsEqualto:info.name] count] == 0) {
-//                    
-//                    NSString * assetLoc = [NSString stringWithFormat:@"%@",info.assetLoc];
-//                    NSRange range = [assetLoc rangeOfString:@">"];
-//                    if (range.length>0) {
-//                        assetLoc = [assetLoc substringToIndex:range.location+range.length-1];
-//                        assetLoc = [assetLoc substringFromIndex:1];
-//                    }
-//                    if ([assetLoc isEqualToString:@"(null)"]) {
-//                        assetLoc = @"";
-//                    }
-//                    
-////                    [DataBaseHelper insertDataWithId:userId ImageName:info.name ImagePath:[info.fullImageUrl absoluteString] Desc:@"" Time:info.assetTime Loc:assetLoc Token:token Tag:@"" Status:0];
-//                    sleep(0.1);
-//                }
-//            }
-//        }
+        
+        for (ImageInfo * info in assetArray) {
+            //如果没找到，则插入
+            
+                if ([[DataBaseHelper selectDataBy:@"image_name" IsEqualto:info.name] count] == 0) {
+                    
+                    NSString * assetLoc = [NSString stringWithFormat:@"%@",info.assetLoc];
+                    NSRange range = [assetLoc rangeOfString:@">"];
+                    if (range.length>0) {
+                        assetLoc = [assetLoc substringToIndex:range.location+range.length-1];
+                        assetLoc = [assetLoc substringFromIndex:1];
+                    }
+                    if ([assetLoc isEqualToString:@"(null)"]) {
+                        assetLoc = @"";
+                    }
+                    
+                    [DataBaseHelper insertDataWithId:userId ImageName:info.name ImagePath:[info.fullImageUrl absoluteString] Desc:@"" Time:info.assetTime Loc:assetLoc Token:token Tag:@"" Status:0];
+                }
+            
+        }
     });
 }
 
+-(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+
+}
 
 @end

@@ -22,6 +22,6 @@
 
 +(NSMutableArray *) selectDataBy:(NSString *)item IsEqualto:(NSString *)value;
 
-+(BOOL) updateData:(NSString *)item ByValue:(int)value WhereImageName:(NSString *)imageName;
++(BOOL) updateData:(NSString *)item ByValue:(NSString *)value WhereImageName:(NSString *)imageName;
 
 @end

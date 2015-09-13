@@ -36,6 +36,7 @@ extern sqlite3 * upload_database;
 extern NSString * searchTag;
 
 extern NSObject * dbLock;
+extern NSObject * uploadLock;
 
 //image asset array
 extern NSMutableArray * assetArray;

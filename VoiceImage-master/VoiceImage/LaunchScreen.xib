@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Dzst_loading_microsoft-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="8Wv-ty-YOi">
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_loading_microsoft-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="8Wv-ty-YOi">
                     <rect key="frame" x="143" y="627" width="90" height="20"/>
                     <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="76" y="520" width="90" height="20"/>

@@ -276,7 +276,7 @@
         //人脸方框抖动效果
         CAKeyframeAnimation* anim = [CAKeyframeAnimation animation];
         anim.keyPath = @"transform.rotation";
-        anim.values = @[@(angelToRandian(-7)),@(angelToRandian(7)),@(angelToRandian(-7))];
+        anim.values = @[@(angelToRandian(-5)),@(angelToRandian(5)),@(angelToRandian(-5))];
         anim.repeatCount = MAXFLOAT;
         anim.duration = 0.2;
         [gesture.view.layer addAnimation:anim forKey:nil];
