@@ -514,9 +514,12 @@
     }
     NSString * resultFromJson = [ISRDataHelper stringFromJson:resultString];
     self.completeResult = [NSString stringWithFormat:@"%@%@",self.completeResult,resultFromJson];
+    self.desc = [NSString stringWithFormat:@"%@%@", self.desc,resultFromJson];
     
     if (isLast) {
-        NSLog(@"听写结果(json)：%@测试", _completeResult);
+        
+        // -1表示为照片tag
+        // 其他数字表示为响应人脸tag
         if (_namingFaceTag != -1) {
             
             NSLog(@"%@",resultFromJson);
@@ -526,7 +529,7 @@
             _namingFaceTag = -1;
         }
         else {
-            self.desc = [NSString stringWithFormat:@"%@%@", self.desc,resultFromJson];
+            
             self.tagSR.text = self.desc;
             if ([self.desc isEqualToString:@""]) {
                 self.tagSR.text = @"大嘴没听清！";
