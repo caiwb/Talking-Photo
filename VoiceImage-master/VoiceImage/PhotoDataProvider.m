@@ -82,7 +82,7 @@
             self.thumbs = [[thumbs reverseObjectEnumerator] allObjects];;
             
             if (isFindAssetDone == NO) {
-                [self.delegate finishLoadAsset];
+                [self.delegate startUploadOldPhoto];
                 
             }
             isFindAssetDone = YES;
@@ -185,76 +185,6 @@
     
 }
 
-//-(void)getPictureByName:(id)object withSelector:(SEL)selector names:(NSString*)imageName {
-//    
-//    imageArray=[[NSArray alloc] init];
-//    mutableArray =[[NSMutableArray alloc]init];
-//    NSMutableArray* assetURLDictionaries = [[NSMutableArray alloc] init];
-//    library = [[ALAssetsLibrary alloc] init];
-//    
-//    void (^assetEnumerator)( ALAsset *, NSUInteger, BOOL *) = ^(ALAsset *result, NSUInteger index, BOOL *stop) {
-//        if(result != nil) {
-//            if([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
-//                [assetURLDictionaries addObject:[result valueForProperty:ALAssetPropertyURLs]];
-//                //                NSURL *url= (NSURL*) [[result defaultRepresentation]url];
-//                CGImageRef iref = [result thumbnail];
-//                if (iref) {
-//                    NSString* name = [[result defaultRepresentation] filename];
-//                    if ([imageName isEqualToString:name]) {
-//                        UIImage *theThumbnail = [UIImage imageWithCGImage:iref];
-//                        ImageInfo* info = [[ImageInfo alloc] init];
-//                        info.image = theThumbnail;
-//                        info.fullImageUrl = result.defaultRepresentation.url;
-//                        info.name = name;
-//                        [mutableArray addObject:info];
-//                    }
-//                }
-//            }
-//        }
-//        
-//        else {
-//            
-//        }
-//        
-//    };
-//    
-//    NSMutableArray *assetGroups = [[NSMutableArray alloc] init];
-//    void (^ assetGroupEnumerator) ( ALAssetsGroup *, BOOL *)= ^(ALAssetsGroup *group, BOOL *stop) {
-//        if(group != nil) {
-//            [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-//            [group enumerateAssetsUsingBlock:assetEnumerator];
-//            [assetGroups addObject:group];
-//        }
-//        else{
-//            imageArray=[[NSArray alloc] initWithArray:mutableArray];
-//            NSMutableArray *photos = [[NSMutableArray alloc] init];
-//            NSMutableArray *thumbs = [[NSMutableArray alloc] init];
-//            MWPhoto *photo;
-//            
-//            for (ImageInfo *imgInfo in mutableArray) {
-//                photo = [MWPhoto photoWithURL:imgInfo.fullImageUrl];
-//                photo.caption = imgInfo.name;
-//                [photos addObject:photo];
-//                
-//                photo = [MWPhoto photoWithImage: imgInfo.image];
-//                [thumbs addObject:photo];
-//            }
-//            
-//            
-//            self.photos = [[photos reverseObjectEnumerator] allObjects];
-//            self.thumbs = [[thumbs reverseObjectEnumerator] allObjects];
-//            
-//            [object performSelector:selector withObject:object];
-//        }
-//    };
-//    
-//    assetGroups = [[NSMutableArray alloc] init];
-//    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos
-//                           usingBlock:assetGroupEnumerator
-//                         failureBlock:^(NSError *error) {NSLog(@"There is an error--%@",error);}];
-//    
-//}
-
 + (instancetype)sharedInstance
 {
     static PhotoDataProvider *sharedInstance = nil;
@@ -310,8 +240,19 @@
 
 - (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
     //view single photo
+    if([self.delegate respondsToSelector:@selector(viewSinglePhoto)]) {
+        [self.delegate viewSinglePhoto];
+    }
     return [NSString stringWithFormat:@"第 %lu 张照片", (unsigned long)index+1];
 }
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoBrowser:(unsigned long)numberOfPhotos
+{
+    if([self.delegate respondsToSelector:@selector(viewPhotos)]) {
+        [self.delegate viewPhotos];
+    }
+}
+
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)sel {
     

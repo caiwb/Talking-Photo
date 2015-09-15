@@ -16,8 +16,9 @@
 -(void)selectedModelPresented;
 -(void)selectedModelHidden;
 -(void)viewSinglePhoto;
+-(void)viewPhotos;
 
--(void)finishLoadAsset;
+-(void)startUploadOldPhoto;
 
 @end
 

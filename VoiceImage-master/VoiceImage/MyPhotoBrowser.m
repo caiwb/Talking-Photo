@@ -25,7 +25,7 @@
 #define CANCEL_BTN 2
 #define TRASH_BTN 3
 
-@interface MyPhotoBrowser () <MAMapViewDelegate, AMapSearchDelegate,HttpProtocl>
+@interface MyPhotoBrowser () <MAMapViewDelegate, AMapSearchDelegate, HttpProtocol, PhotoDataProtocol>
 {
     AMapSearchAPI *_search;
     int _voiceSource;
@@ -64,8 +64,6 @@
     [super viewDidLoad];
     [PhotoDataProvider sharedInstance].delegate = self;
     isStarted = YES;
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -98,16 +96,16 @@
     [self.view addSubview:self.recordingAudioPlot];
     
     //NavigationBar
-    _cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(leftBarButtonClick:)];
-    _cancel.tag = CANCEL_BTN;
+    _refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(leftBarButtonClick:)];
+    _refresh.tag = CANCEL_BTN;
     _trash = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(leftBarButtonClick:)];
     _trash.tag = TRASH_BTN;
-    self.navigationItem.leftBarButtonItem = _cancel;
+    self.navigationItem.leftBarButtonItem = _refresh;
     
     UIColor * naviBtnColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Dzst_color"]];
     self.navigationItem.rightBarButtonItem.tintColor = naviBtnColor;
     _trash.tintColor = naviBtnColor;
-    _cancel.tintColor = naviBtnColor;
+    _refresh.tintColor = naviBtnColor;
 }
 
 -(void)leftBarButtonClick:(UIButton *)sender
@@ -140,12 +138,17 @@
 
 -(void)selectedModelHidden
 {
-    self.navigationItem.leftBarButtonItem = _cancel;
+    self.navigationItem.leftBarButtonItem = _refresh;
 }
 
 -(void)viewSinglePhoto
 {
+    self.navigationItem.leftBarButtonItem = _trash;
+}
 
+-(void)viewPhotos
+{
+    self.navigationItem.leftBarButtonItem = _refresh;
 }
 
 #pragma PhotoDataProvider delegate method end

@@ -25,7 +25,7 @@
 #define FACE_LABEL_TAG 2
 #define angelToRandian(x) ((x)/180.0*M_PI)
 
-@interface TagPhotoViewController () <CLLocationManagerDelegate, HttpProtocl>
+@interface TagPhotoViewController () <CLLocationManagerDelegate, HttpProtocol>
 
 @property (nonatomic, strong) CLLocationManager * locationManager;
 @property (nonatomic, strong) CLGeocoder *geocoder;

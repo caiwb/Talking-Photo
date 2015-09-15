@@ -106,6 +106,7 @@ static id _instance;
             if (!token) {
                 token = @"";
             }
+            [self.delegate startUploadOldPhoto];
             isOK = YES;
         }
         if (!isOK) {
@@ -138,6 +139,7 @@ static id _instance;
              if (!token) {
                  token = @"";
              }
+             [self.delegate startUploadOldPhoto];
              isOK = YES;
          }
          if (!isOK) {

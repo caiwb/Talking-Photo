@@ -1254,6 +1254,9 @@
                 photosText = NSLocalizedString(@"photos", @"Used in the context: '3 photos'");
             }
             photosText = @"张照片";
+            if([_delegate respondsToSelector:@selector(photoBrowser:titleForPhotos:)]) {
+                [_delegate photoBrowser:self titleForPhotoBrowser:numberOfPhotos];
+            }
             self.title = [NSString stringWithFormat:@"%lu %@", (unsigned long)numberOfPhotos, photosText];
         }
     } else if (numberOfPhotos > 1) {

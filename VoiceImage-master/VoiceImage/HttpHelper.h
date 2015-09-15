@@ -10,18 +10,19 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@protocol HttpProtocl <NSObject>
+@protocol HttpProtocol <NSObject>
 
 @optional
 
 -(void)isSearchDone:(BOOL)suc;
 -(void)isFaceDetectDone:(BOOL)suc faceList:(NSArray *)faceList;
+-(void)startUploadOldPhoto;
 
 @end
 
 @interface HttpHelper : NSObject
 
-@property (nonatomic, weak) id<HttpProtocl> delegate;
+@property (nonatomic, weak) id<HttpProtocol> delegate;
 
 
 +(instancetype) sharedHttpHelper;

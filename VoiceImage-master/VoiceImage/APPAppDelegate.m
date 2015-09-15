@@ -21,7 +21,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "ImageInfo.h"
 
-@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate ,StartDelegate , CLLocationManagerDelegate, PhotoDataProtocol>
+@interface APPAppDelegate () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, YRSideViewDeleagate ,UIAlertViewDelegate ,StartDelegate , CLLocationManagerDelegate, PhotoDataProtocol, HttpProtocol>
 {
     dispatch_queue_t _uploadOldPhotos;
 }
@@ -127,8 +127,8 @@
             }
             while (true)
             {
-                    [self uploadDataFromDB];
-                    sleep(0.1);
+                [self uploadDataFromDB];
+                sleep(0.1);
             }
     });
     return YES;
@@ -381,17 +381,17 @@
 }
 
 #pragma mark - PhotoDataProvider delegate method
--(void)finishLoadAsset
+-(void)startUploadOldPhoto
 {
     if ([assetArray count] == 0)
         return;
-    _uploadOldPhotos = dispatch_queue_create("upload_old_photos", NULL);
-    dispatch_async(_uploadOldPhotos, ^{
-    
-        while ([userId isEqualToString:@""]) {
-        }
+    if ([userId isEqualToString:@""]) {
+        return;
+    }
+    dispatch_async(dispatch_queue_create("upload_old_photos", NULL), ^{
+
         NSLog(@"user--------%@",userId);
-        
+
         for (ImageInfo * info in assetArray) {
             //如果没找到，则插入
             
