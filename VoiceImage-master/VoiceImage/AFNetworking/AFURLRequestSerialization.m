@@ -790,9 +790,9 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 - (void)appendPartWithHeaders:(NSDictionary *)headers
                          body:(NSData *)body
 {
-//    if (!body) {
-//        return;
-//    }
+    if (!body) {
+        return;
+    }
     NSParameterAssert(body);
 
     AFHTTPBodyPart *bodyPart = [[AFHTTPBodyPart alloc] init];
@@ -813,6 +813,7 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 }
 
 - (NSMutableURLRequest *)requestByFinalizingMultipartFormData {
+
     if ([self.bodyStream isEmpty]) {
         return self.request;
     }

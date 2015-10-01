@@ -16,6 +16,9 @@
 -(void)selectedModelPresented;
 -(void)selectedModelHidden;
 -(void)viewSinglePhoto;
+-(void)viewPhotos;
+
+-(void)startUploadOldPhoto;
 
 @end
 

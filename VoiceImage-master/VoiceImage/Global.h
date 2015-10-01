@@ -18,26 +18,16 @@
 #define XFEI_KEY @"o1J4T4R0F1v3X7E5I7A0NcnWpelIaVDL2G7iwVgs"
 
 //host ip
-extern NSString* host;
-
-//database sync
-extern BOOL isDatabaseOpera;
-
-//upload data
-extern NSString* city;
-extern NSString* name;
-extern NSString* country;
-extern NSString* street;
-
-//经纬度
-extern NSString* longitude;
-extern NSString* latitude;
+extern NSString * host;
 
 //location
-extern NSString* loc;
+extern NSString * loc;
+extern NSString * longitude;
+extern NSString * latitude;
 
-extern NSString* userId;
-extern NSString* token;
+//user
+extern NSString * userId;
+extern NSString * token;
 
 //sqlite
 extern sqlite3 * upload_database;
@@ -45,7 +35,14 @@ extern sqlite3 * upload_database;
 //tag for search
 extern NSString * searchTag;
 
-extern NSObject * myLock;
+extern NSObject * dbLock;
+extern NSObject * uploadLock;
+
+//image asset array
+extern NSMutableArray * assetArray;
+extern BOOL isFindAssetDone;
+
+extern NSString * dbPath;
 
 #define MWPHOTO_FOLD_PHOTO_NOTIFICATION @"MWPHOTO_FOLD_PHOTO_NOTIFICATION"
 

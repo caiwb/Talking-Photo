@@ -196,7 +196,6 @@
     }
 
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
-
     [self.operationQueue addOperation:operation];
 
     return operation;

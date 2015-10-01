@@ -11,12 +11,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImageInfo : NSObject{
-}
+@interface ImageInfo : NSObject
 
-@property (nonatomic,strong) NSString* name;
-@property (nonatomic,strong) UIImage* image;
-@property (nonatomic,strong) NSURL* fullImageUrl;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) UIImage * image;
+@property (nonatomic, strong) NSURL * fullImageUrl;
+@property (nonatomic, strong) NSDate * assetTime;
+@property (nonatomic, strong) NSString * assetLoc;
+
 
 @end
 

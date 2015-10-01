@@ -7,15 +7,24 @@
 //
 
 #import "DataBaseHelper.h"
+#import "Global.h"
+
+@interface DataBaseHelper()
+
+@end
 
 @implementation DataBaseHelper
 
 +(NSString *) getDBPath
 {
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * documents = [paths objectAtIndex:0];
-    NSString * databasePath = [documents stringByAppendingPathComponent:DBNAME];
-    return databasePath;
+    if ([dbPath isEqualToString:@""]) {
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * documents = [paths objectAtIndex:0];
+        NSString * databasePath = [documents stringByAppendingPathComponent:DBNAME];
+        dbPath = databasePath;
+    }
+    
+    return dbPath;
 }
 
 /**
@@ -47,22 +56,26 @@
 
 +(BOOL) insertDataWithId:(NSString *)userID ImageName:(NSString *)imageName ImagePath:(NSString *)imagePath Desc:(NSString *)desc Time:(NSData *)time Loc:(NSString *)loc Token:(NSString *)token Tag:(NSString *)tag Status:(int)status
 {
-    @synchronized(myLock) {
-        isDatabaseOpera = YES;
+    @synchronized(dbLock) {
+        @autoreleasepool {
+        if (!loc) {
+            loc = @"";
+        }
         sqlite3_stmt *statement;
         NSString * databasePath = [self getDBPath];
         const char *dbpath = [databasePath UTF8String];
-        
+    
         if (sqlite3_open(dbpath, &upload_database)==SQLITE_OK) {
-            
+
             NSString *insertSql = [NSString stringWithFormat:@"INSERT INTO UPLOADTABLE (user_id,image_name,image_path,desc,time,loc,token,tag,status) VALUES(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%d\")",userID,imageName,imagePath,desc,time,loc,token,tag,status];
             const char *insertstaement = [insertSql UTF8String];
-    //        NSLog(@"%s",insertstaement);
+
             sqlite3_prepare_v2(upload_database, insertstaement, -1, &statement, NULL);
-            
+
             if (sqlite3_step(statement)==SQLITE_DONE) {
                 NSLog(@"插入数据成功");
-                isDatabaseOpera = NO;
+                sqlite3_finalize(statement);
+                sqlite3_close(upload_database);
                 return YES;
             }
             else {
@@ -72,17 +85,17 @@
             sqlite3_close(upload_database);
         }
         else
-            NSLog(@"插入数据-数据库初始化失败");
-        isDatabaseOpera = NO;
+            NSLog(@"插入数据-数据库打开失败");
         return NO;
+        }
     }
 }
 
 +(NSMutableArray *) selectDataBy:(NSString *)item IsEqualto:(NSString *)value
 {
-    @synchronized(myLock) {
+    @synchronized(dbLock) {
 
-        NSMutableArray * resultArray = [NSMutableArray array];
+        NSMutableArray * resultArray = [[NSMutableArray alloc] init];
         sqlite3_stmt *statement;
         NSString * databasePath = [DataBaseHelper getDBPath];
         const char *dbpath = [databasePath UTF8String];
@@ -94,8 +107,8 @@
             if (sqlite3_prepare_v2(upload_database, querystatement, -1, &statement, NULL)==SQLITE_OK) {
                 
                 while (sqlite3_step(statement)==SQLITE_ROW) {
-                    NSLog(@"查询成功");
-                    NSMutableDictionary * result = [NSMutableDictionary dictionary];
+                    NSMutableDictionary * result = [[NSMutableDictionary alloc] init];
+                    NSLog(@"查询成功-%@:%@=%@",result[@"name"],item,value);
                     result[@"id"] = [[NSString alloc] initWithUTF8String:(const char *)sqlite3_column_text(statement, 0)];
                     result[@"name"] = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
     //                //imageData
@@ -117,38 +130,39 @@
             sqlite3_close(upload_database);
         }
         else
-            NSLog(@"查询数据-数据库初始化失败");
+            NSLog(@"查询数据-数据库打开失败");
         
         return resultArray;
     }
 }
 
 
-+(BOOL) updateData:(NSString *)item ByValue:(int)value WhereImageName:(NSString *)imageName
++(BOOL) updateData:(NSString *)item ByValue:(NSString *)value WhereImageName:(NSString *)imageName
 {
-    @synchronized(myLock) {
-
-        isDatabaseOpera = YES;
+    @synchronized(dbLock) {
         sqlite3_stmt *statement;
         NSString * databasePath = [DataBaseHelper getDBPath];
         const char *dbpath = [databasePath UTF8String];
 
         
         if (sqlite3_open(dbpath, &upload_database)==SQLITE_OK) {
-            NSString *querySQL = [NSString stringWithFormat:@"update UPLOADTABLE set %@=\"%d\" where image_name=\"%@\"",item, value, imageName];
+            NSString *querySQL = [NSString stringWithFormat:@"update UPLOADTABLE set %@=\"%@\" where image_name=\"%@\"",item, value, imageName];
             const char *updatestatement = [querySQL UTF8String];
           
             if (sqlite3_prepare_v2(upload_database, updatestatement, -1, &statement, NULL)!=SQLITE_OK)
             {
                 NSLog(@"更新表失败");
+                sqlite3_finalize(statement);
                 sqlite3_close(upload_database);
                 return NO;
             }
             else
             {
                 if (sqlite3_step(statement)==SQLITE_DONE) {
-                    NSLog(@"更新数据成功");
-                    isDatabaseOpera = NO;
+                    NSLog(@"更新数据成功---%@", value);
+                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(upload_database);
                     return YES;
                 }
                 else {
@@ -156,7 +170,9 @@
                 }
             }
         }
-        isDatabaseOpera = NO;
+        
+        sqlite3_finalize(statement);
+        sqlite3_close(upload_database);
         return NO;
 
     }

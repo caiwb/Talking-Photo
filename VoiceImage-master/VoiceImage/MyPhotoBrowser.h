@@ -25,7 +25,7 @@ PhotoDataProtocol>{
 @property (nonatomic, strong) EZAudioPlotGL *recordingAudioPlot;
 @property (nonatomic, strong) IFlySpeechRecognizer *iFlySpeechRecognizer;//不带界面的识别对象
 
-@property (strong, nonatomic) UIBarButtonItem * cancel;
+@property (strong, nonatomic) UIBarButtonItem * refresh;
 @property (strong, nonatomic) UIBarButtonItem * trash;
 
 -(void)setNavBarAppearance:(BOOL)animated;

@@ -19,8 +19,13 @@
 #import "DataBaseHelper.h"
 #import <CoreLocation/CoreLocation.h>
 #import "Reachability.h"
+#import "RectangleView.h"
 
-@interface TagPhotoViewController () <CLLocationManagerDelegate>
+#define FACE_RECT_TAG 1
+#define FACE_LABEL_TAG 2
+#define angelToRandian(x) ((x)/180.0*M_PI)
+
+@interface TagPhotoViewController () <CLLocationManagerDelegate, HttpProtocol>
 
 @property (nonatomic, strong) CLLocationManager * locationManager;
 @property (nonatomic, strong) CLGeocoder *geocoder;
@@ -28,10 +33,44 @@
 @property (weak, nonatomic) IBOutlet UIButton *deleteDescBtn;
 @property (weak, nonatomic) IBOutlet UIButton *uploadBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *topBar;
+@property (weak, nonatomic) IBOutlet UIButton *faceDetectBtn;
+@property (strong , nonatomic) NSMutableArray * faceList;
+@property (strong , nonatomic) NSMutableArray * squareArray;
+@property (copy, nonatomic) NSString * completeResult;
+
+/** namingFaceTag
+/           -1: 对照片tag
+            其他: 对相应的face tag
+ */
+@property (assign , nonatomic) int namingFaceTag;
 
 @end
 
 @implementation TagPhotoViewController
+
+-(NSMutableArray *)faceList
+{
+    if (!_faceList) {
+        _faceList = [[NSMutableArray alloc] init];
+    }
+    return _faceList;
+}
+
+-(NSMutableArray *)squareArray
+{
+    if (!_squareArray) {
+        _squareArray = [[NSMutableArray alloc] init];
+    }
+    return _squareArray;
+}
+
+-(NSString *)completeResult
+{
+    if (!_completeResult) {
+        _completeResult = [[NSString alloc] init];
+    }
+    return _completeResult;
+}
 
 -(void)initRecognizer
 {
@@ -88,8 +127,14 @@
     [self.deleteDescBtn setImage:[UIImage imageNamed:@"Dzst_delect_desc"] forState:UIControlStateNormal];
     self.deleteDescBtn.hidden = YES;
     self.uploadBtn.hidden = YES;
-//    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
+    //face detect
+    self.faceDetectBtn.hidden = YES;
+    [HttpHelper sharedHttpHelper].delegate = self;
+    _namingFaceTag = -1;
+    
     [self.navigationController setNavigationBarHidden:YES];
+    
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
@@ -133,7 +178,6 @@
     self.recordingAudioPlot.hidden = YES;
     self.pressCircle.hidden = YES;
     [self.pressCircle.layer removeAllAnimations];
-//    self.view.userInteractionEnabled = NO;
     [self.microphone stopFetchingAudio];
     [_iFlySpeechRecognizer stopListening];
 }
@@ -213,6 +257,102 @@
     [self.navigationController pushViewController:complete animated:YES];
 }
 
+- (IBAction)faceDetect:(id)sender {
+    if ([self.faceList count] != 0) {
+        return;
+    }
+    [[HttpHelper sharedHttpHelper] AFNetworingForFaceDetectWithImage:self.image imageName:self.imageName];
+}
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
+    
+    if(gesture.state == UIGestureRecognizerStateBegan)
+    {
+        _namingFaceTag = (int)gesture.view.tag - FACE_RECT_TAG;
+        self.completeResult = @"";
+        UILabel * label = (UILabel *)[self.view viewWithTag:_namingFaceTag + FACE_LABEL_TAG];
+        label.text = @"";
+        
+        //人脸方框抖动效果
+        CAKeyframeAnimation* anim = [CAKeyframeAnimation animation];
+        anim.keyPath = @"transform.rotation";
+        anim.values = @[@(angelToRandian(-5)),@(angelToRandian(5)),@(angelToRandian(-5))];
+        anim.repeatCount = MAXFLOAT;
+        anim.duration = 0.2;
+        [gesture.view.layer addAnimation:anim forKey:nil];
+        
+        //TODO: start record the voice
+        self.pressCircle.hidden = NO;
+        [self runSpinAnimationOnView:self.pressCircle duration:1.0f rotations:1.0f repeat:1000];
+        //    [[AudioRecorder sharedInstance] startRecord];
+        
+        self.tagSR.hidden = YES;
+        self.deleteDescBtn.hidden = YES;
+        self.tagSR.text = @"";
+        self.recordingAudioPlot.hidden = NO;
+        [self.recordingAudioPlot clear];
+        [self.microphone startFetchingAudio];
+        
+        if (_iFlySpeechRecognizer == nil){
+            [self initRecognizer];//初始化识别对象
+        }
+        //start SR interface
+        [_iFlySpeechRecognizer cancel];
+        //设置音频来源为麦克风
+        [_iFlySpeechRecognizer setParameter:IFLY_AUDIO_SOURCE_MIC forKey:@"audio_source"];
+        //设置听写结果格式为json
+        [_iFlySpeechRecognizer setParameter:@"json" forKey:[IFlySpeechConstant RESULT_TYPE]];
+        //保存录音文件，保存在sdk工作路径中，如未设置工作路径，则默认保存在library/cache下
+        [_iFlySpeechRecognizer setParameter:@"asr.pcm" forKey:[IFlySpeechConstant ASR_AUDIO_PATH]];
+        [_iFlySpeechRecognizer setDelegate:self];
+        BOOL ret = [_iFlySpeechRecognizer startListening];
+        if (ret == NO){
+            NSLog(@"failed");
+        }
+        
+    }
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        
+        [gesture.view.layer removeAllAnimations];
+        
+        //TODO: stop record the voice
+        self.recordingAudioPlot.hidden = YES;
+        self.pressCircle.hidden = YES;
+        [self.pressCircle.layer removeAllAnimations];
+        [self.microphone stopFetchingAudio];
+        [_iFlySpeechRecognizer stopListening];
+    }
+
+    
+    NSLog(@"---------------------------------%d",_namingFaceTag);
+}
+
+#pragma mark -- http‘s face detect done delegate method
+-(void)isFaceDetectDone:(BOOL)suc faceList:(NSArray *)faceList
+{
+    self.faceList = [NSMutableArray arrayWithArray:faceList];
+
+    for (int i=0; i<faceList.count; i++) {
+        RectangleView * faceRect = [[RectangleView alloc] initWithFrame:CGRectMake([faceList[i][2][0] floatValue], [faceList[i][2][1] floatValue], [faceList[i][2][2] floatValue], [faceList[i][2][3] floatValue])];
+        faceRect.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:faceRect];
+        faceRect.tag = FACE_RECT_TAG+i;
+        CGRect labelRect = CGRectMake(faceRect.frame.origin.x-50+faceRect.frame.size.width/2, faceRect.frame.origin.y-50, 100, 40);
+        UILabel * faceLabel = [[UILabel alloc] initWithFrame:labelRect];
+        [faceLabel setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.3]];
+        faceLabel.text = faceList[i][1];
+        faceLabel.textColor = [UIColor whiteColor];
+        [faceLabel setTextAlignment:NSTextAlignmentCenter];
+        faceLabel.tag = FACE_LABEL_TAG+i;
+        [self.view addSubview:faceLabel];
+        [self.squareArray addObject:faceRect];
+        //给脸框添加长按手势
+        UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        longPressRecognizer.allowableMovement = 30;
+        [faceRect addGestureRecognizer:longPressRecognizer];
+    }
+}
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -252,6 +392,7 @@
                 [UIView beginAnimations:nil context:nil];
                 [UIView setAnimationDuration:5];
                 self.uploadBtn.hidden = NO;
+                self.faceDetectBtn.hidden = NO;
                 [UIView commitAnimations];
                 
                 UIImage *imageToUpload = [UIImage imageWithCGImage:[representation fullResolutionImage] scale:1 orientation:orientation];
@@ -330,7 +471,7 @@
 
 - (void)recorderUpdatedCurrentTime:(EZRecorder *)recorder
 {
-
+    
 }
 
 
@@ -365,24 +506,38 @@
 
 - (void) onResults:(NSArray *) results isLast:(BOOL)isLast
 {
-    
+
     NSMutableString *resultString = [[NSMutableString alloc] init];
     NSDictionary *dic = results[0];
     for (NSString *key in dic) {
         [resultString appendFormat:@"%@",key];
     }
-    NSString * resultFromJson =  [ISRDataHelper stringFromJson:resultString];
-//    self.tagSR.text = [NSString stringWithFormat:@"%@%@", self.tagSR.text,resultFromJson];
+    NSString * resultFromJson = [ISRDataHelper stringFromJson:resultString];
+    self.completeResult = [NSString stringWithFormat:@"%@%@",self.completeResult,resultFromJson];
     self.desc = [NSString stringWithFormat:@"%@%@", self.desc,resultFromJson];
-    self.tagSR.text = self.desc;
-    if ([self.desc isEqualToString:@""]) {
-        self.tagSR.text = @"大嘴没听清！";
-    }
+    
     if (isLast) {
-//        NSLog(@"听写结果(json)：%@测试",  self.tagSR.text);
+        
+        // -1表示为照片tag
+        // 其他数字表示为响应人脸tag
+        if (_namingFaceTag != -1) {
+            
+            NSLog(@"%@",resultFromJson);
+            UILabel * label = (UILabel *)[self.view viewWithTag:_namingFaceTag + FACE_LABEL_TAG];
+            label.text = self.completeResult;
+            NSLog(@"%@",label.text);
+            _namingFaceTag = -1;
+        }
+        else {
+            
+            self.tagSR.text = self.desc;
+            if ([self.desc isEqualToString:@""]) {
+                self.tagSR.text = @"大嘴没听清！";
+            }
+            self.tagSR.hidden = NO;
+            self.deleteDescBtn.hidden = NO;
+        }
     }
-    self.tagSR.hidden = NO;
-    self.deleteDescBtn.hidden = NO;
 }
 
 

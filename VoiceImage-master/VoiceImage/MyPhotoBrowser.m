@@ -17,6 +17,7 @@
 #import <AMapSearchKit/AMapSearchAPI.h>
 #import "DataBaseHelper.h"
 #import "SVProgressHUD.h"
+#import "ImageInfo.h"
 
 #define SEARCH_PHOTO 0
 #define RETAG_PHOTO 1
@@ -24,7 +25,7 @@
 #define CANCEL_BTN 2
 #define TRASH_BTN 3
 
-@interface MyPhotoBrowser () <MAMapViewDelegate, AMapSearchDelegate,HttpProtocl>
+@interface MyPhotoBrowser () <MAMapViewDelegate, AMapSearchDelegate, HttpProtocol, PhotoDataProtocol>
 {
     AMapSearchAPI *_search;
     int _voiceSource;
@@ -95,16 +96,16 @@
     [self.view addSubview:self.recordingAudioPlot];
     
     //NavigationBar
-    _cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(leftBarButtonClick:)];
-    _cancel.tag = CANCEL_BTN;
+    _refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(leftBarButtonClick:)];
+    _refresh.tag = CANCEL_BTN;
     _trash = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(leftBarButtonClick:)];
     _trash.tag = TRASH_BTN;
-    self.navigationItem.leftBarButtonItem = _cancel;
+    self.navigationItem.leftBarButtonItem = _refresh;
     
     UIColor * naviBtnColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Dzst_color"]];
     self.navigationItem.rightBarButtonItem.tintColor = naviBtnColor;
     _trash.tintColor = naviBtnColor;
-    _cancel.tintColor = naviBtnColor;
+    _refresh.tintColor = naviBtnColor;
 }
 
 -(void)leftBarButtonClick:(UIButton *)sender
@@ -137,12 +138,17 @@
 
 -(void)selectedModelHidden
 {
-    self.navigationItem.leftBarButtonItem = _cancel;
+    self.navigationItem.leftBarButtonItem = _refresh;
 }
 
 -(void)viewSinglePhoto
 {
+    self.navigationItem.leftBarButtonItem = _trash;
+}
 
+-(void)viewPhotos
+{
+    self.navigationItem.leftBarButtonItem = _refresh;
 }
 
 #pragma PhotoDataProvider delegate method end
@@ -198,7 +204,7 @@
 }
 
 -(void)startRecord{
-    _voiceSource = 0;
+    _voiceSource = SEARCH_PHOTO;
     self.result = @"";
     self.recordingAudioPlot.hidden = NO;
     [self.view bringSubviewToFront:self.recordingAudioPlot];
@@ -225,7 +231,7 @@
 }
 
 -(void)stopRecord{
-    _voiceSource = 0;
+    _voiceSource = SEARCH_PHOTO;
     self.recordingAudioPlot.hidden = YES;
     [self.microphone stopFetchingAudio];
     [_iFlySpeechRecognizer stopListening];
@@ -235,43 +241,13 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:MWPHOTO_FOLD_PHOTO_NOTIFICATION object:nil];
 }
 
-////not use
-//-(void)searchResponse:(NSData*)data {
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"ENABLE_GRIDVIEW"
-//                                                        object:nil];
-//    
-//    if (data == nil) {
-//        return;
-//    }
-//    NSError *error2;
-//    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error2];
-//    NSLog(@"%@", jsonDict);
-//    BOOL suc = [[jsonDict valueForKey:@"Status"] boolValue];
-//    if (suc) {
-//        NSArray* imagesList = (NSArray*)[jsonDict valueForKey:@"Images"];
-//        NSMutableArray* imgs = [[NSMutableArray alloc] init];
-//        for (NSDictionary* dict in imagesList) {
-//            [imgs addObject:[dict valueForKey:@"ImageName"]];
-//        }
-//
-//        NSArray* arr = [[NSArray alloc] initWithArray:imgs];
-//        [[PhotoDataProvider sharedInstance] getPicturesByName:self withSelector:@selector(imagesRetrieved:) names:arr];
-//    }
-//    else{
-//        [PhotoDataProvider sharedInstance].photos = nil;
-//        [PhotoDataProvider sharedInstance].thumbs = nil;
-//        [self reloadData];
-//        [self reloadGridView];
-//    }
-//}
-
 -(void)imagesRetrieved:(id)object{
     [self reloadData];
     [self reloadGridView];
 }
 
 -(void)startUpdateRecord {
-    _voiceSource = 1;
+    _voiceSource = RETAG_PHOTO;
     self.result = nil;
     self.recordingAudioPlot.hidden = NO;
     [self.view bringSubviewToFront:self.recordingAudioPlot];
@@ -303,7 +279,7 @@
 
 -(void)stopUpdateRecord:(NSString*)imageName imageData:(NSData*)imageData {
     
-    _voiceSource = 1;
+    _voiceSource = RETAG_PHOTO;
     [self.imageNameArray removeAllObjects];
     [self.imageNameArray addObject:imageName];
     
@@ -316,7 +292,7 @@
 
 -(void)stopUpdateRecordList:(NSArray*)imageName imageData:(NSArray*)imageData {
     //TOOD: upload group of images and one voice to website
-    _voiceSource = 1;
+    _voiceSource = RETAG_PHOTO;
     [self.imageNameArray removeAllObjects];
     
     NSArray * indexArr = [[PhotoDataProvider sharedInstance] selected];
@@ -496,5 +472,7 @@
     }
     [SVProgressHUD dismissWithDelay:2];
 }
+
+
 
 @end
