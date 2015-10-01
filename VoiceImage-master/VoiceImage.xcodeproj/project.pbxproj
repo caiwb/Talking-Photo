@@ -20,6 +20,9 @@
 		393374501B9C6EF4002455BB /* Dzst_splash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3933744C1B9C6EF4002455BB /* Dzst_splash2.png */; };
 		393374511B9C6EF4002455BB /* Dzst_splash3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3933744D1B9C6EF4002455BB /* Dzst_splash3.png */; };
 		393374521B9C6EF4002455BB /* Dzst_splash4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3933744E1B9C6EF4002455BB /* Dzst_splash4.png */; };
+		3955F96F1BBCFE6600429596 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3955F96E1BBCFE6600429596 /* libz.1.dylib */; };
+		3955F9711BBCFE7800429596 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3955F9701BBCFE7800429596 /* libstdc++.6.0.9.dylib */; };
+		3955F9731BBCFEA800429596 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3955F9721BBCFEA800429596 /* libsqlite3.dylib */; };
 		397135791B96BF350092B846 /* Dzst_cbl_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3971356E1B96BF350092B846 /* Dzst_cbl_avatar.png */; };
 		3971357A1B96BF350092B846 /* Dzst_cbl_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */; };
 		3971357B1B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */; };
@@ -65,7 +68,6 @@
 		39B38F991B954EAB0090A809 /* photo_bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B38F7D1B954EAB0090A809 /* photo_bg1@2x.png */; };
 		39B38F9A1B954EAB0090A809 /* photo_bg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B38F7E1B954EAB0090A809 /* photo_bg2@2x.png */; };
 		39B38F9C1B954FCC0090A809 /* Dzst_loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B38F9B1B954FCC0090A809 /* Dzst_loading.png */; };
-		39BDA2141B84153E00CBA988 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39BDA2131B84153E00CBA988 /* libsqlite3.dylib */; };
 		39BDA2191B84223F00CBA988 /* APPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BDA2181B84223F00CBA988 /* APPAppDelegate.m */; };
 		39BDA2541B84719A00CBA988 /* DataBaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BDA2531B84719A00CBA988 /* DataBaseHelper.m */; };
 		39EBA2B21B8B58C4009D392F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA2A01B8B58C4009D392F /* AFHTTPRequestOperation.m */; };
@@ -80,7 +82,6 @@
 		39EBA40A1B8D95FC009D392F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA4091B8D95FC009D392F /* Security.framework */; };
 		39EBA40C1B8D9618009D392F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA40B1B8D9618009D392F /* Foundation.framework */; };
 		39EBA40E1B8D961E009D392F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA40D1B8D961E009D392F /* UIKit.framework */; };
-		39EBA4101B8D9633009D392F /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA40F1B8D9633009D392F /* libstdc++.6.0.9.dylib */; };
 		39EBA4131B8D963F009D392F /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA4111B8D963F009D392F /* AMapSearchKit.framework */; };
 		39EBA4141B8D963F009D392F /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA4121B8D963F009D392F /* MAMapKit.framework */; };
 		39EBA45C1B8DF3B3009D392F /* YRSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA45B1B8DF3B3009D392F /* YRSideViewController.m */; };
@@ -132,7 +133,6 @@
 		EBFBBA501B6F08F10065902F /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFBBA4F1B6F08F10065902F /* IATConfig.m */; };
 		EBFBBA521B6F0B100065902F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFBBA511B6F0B100065902F /* CoreTelephony.framework */; };
 		EBFBBA541B6F0B5F0065902F /* libSunFlower.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFBBA531B6F0B5F0065902F /* libSunFlower.a */; };
-		EBFBBA561B6F0B9E0065902F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFBBA551B6F0B9E0065902F /* libz.dylib */; };
 		EBFBBA581B6F0BB50065902F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFBBA571B6F0BB50065902F /* AddressBook.framework */; };
 		EBFBBA5A1B6F0BD00065902F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFBBA591B6F0BD00065902F /* SystemConfiguration.framework */; };
 		EBFBBA5D1B6F19A60065902F /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFBBA5C1B6F19A60065902F /* ISRDataHelper.m */; };
@@ -183,6 +183,13 @@
 		3933744C1B9C6EF4002455BB /* Dzst_splash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_splash2.png; sourceTree = "<group>"; };
 		3933744D1B9C6EF4002455BB /* Dzst_splash3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_splash3.png; sourceTree = "<group>"; };
 		3933744E1B9C6EF4002455BB /* Dzst_splash4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_splash4.png; sourceTree = "<group>"; };
+		3955F95E1BBCD92900429596 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		3955F9601BBCD93800429596 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		3955F9621BBCD94B00429596 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		3955F9641BBCD95200429596 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		3955F96E1BBCFE6600429596 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
+		3955F9701BBCFE7800429596 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "../../../../../usr/lib/libstdc++.6.0.9.dylib"; sourceTree = "<group>"; };
+		3955F9721BBCFEA800429596 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		3971356E1B96BF350092B846 /* Dzst_cbl_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_avatar.png; sourceTree = "<group>"; };
 		3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_bg.png; sourceTree = "<group>"; };
 		397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_arrow_click.png; sourceTree = "<group>"; };
@@ -351,15 +358,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3955F9731BBCFEA800429596 /* libsqlite3.dylib in Frameworks */,
+				3955F9711BBCFE7800429596 /* libstdc++.6.0.9.dylib in Frameworks */,
+				3955F96F1BBCFE6600429596 /* libz.1.dylib in Frameworks */,
 				39EBA4131B8D963F009D392F /* AMapSearchKit.framework in Frameworks */,
 				39EBA4141B8D963F009D392F /* MAMapKit.framework in Frameworks */,
-				39EBA4101B8D9633009D392F /* libstdc++.6.0.9.dylib in Frameworks */,
-				EBFBBA561B6F0B9E0065902F /* libz.dylib in Frameworks */,
 				39EBA40E1B8D961E009D392F /* UIKit.framework in Frameworks */,
 				39EBA40C1B8D9618009D392F /* Foundation.framework in Frameworks */,
 				39EBA40A1B8D95FC009D392F /* Security.framework in Frameworks */,
 				EBFBBA521B6F0B100065902F /* CoreTelephony.framework in Frameworks */,
-				39BDA2141B84153E00CBA988 /* libsqlite3.dylib in Frameworks */,
 				EBFBBA5A1B6F0BD00065902F /* SystemConfiguration.framework in Frameworks */,
 				EBFBBA581B6F0BB50065902F /* AddressBook.framework in Frameworks */,
 				EBFBBA541B6F0B5F0065902F /* libSunFlower.a in Frameworks */,
@@ -621,6 +628,13 @@
 		EB85AA9D1B5CE04900F4F4F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3955F9721BBCFEA800429596 /* libsqlite3.dylib */,
+				3955F9701BBCFE7800429596 /* libstdc++.6.0.9.dylib */,
+				3955F96E1BBCFE6600429596 /* libz.1.dylib */,
+				3955F9641BBCD95200429596 /* libsqlite3.tbd */,
+				3955F9621BBCD94B00429596 /* libstdc++.6.0.9.tbd */,
+				3955F9601BBCD93800429596 /* libsqlite3.0.tbd */,
+				3955F95E1BBCD92900429596 /* libz.tbd */,
 				39EBA4111B8D963F009D392F /* AMapSearchKit.framework */,
 				39EBA4121B8D963F009D392F /* MAMapKit.framework */,
 				39EBA40F1B8D9633009D392F /* libstdc++.6.0.9.dylib */,
@@ -752,7 +766,7 @@
 				TargetAttributes = {
 					EB2397CE1B44E066004182BC = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = R682UNR2K5;
+						DevelopmentTeam = KDU7J4D4DG;
 					};
 					EB2397E71B44E066004182BC = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -1036,13 +1050,14 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ran Li (4GA4TMZNME)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ran Li (4GA4TMZNME)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)/Extern",
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/lib/sunflower";
 				INFOPLIST_FILE = VoiceImage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1063,13 +1078,14 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ran Li (4GA4TMZNME)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ran Li (4GA4TMZNME)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 					"$(PROJECT_DIR)/Extern",
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/lib/sunflower";
 				INFOPLIST_FILE = VoiceImage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

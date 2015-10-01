@@ -80,12 +80,12 @@
 		2615E44C18CD57C700447857 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2615E44A18CD57C700447857 /* NSData+ImageContentType.m */; };
 		2615E44F18CD57E500447857 /* MKAnnotationView+WebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 2615E44D18CD57E500447857 /* MKAnnotationView+WebCache.h */; };
 		2615E45018CD57E500447857 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2615E44E18CD57E500447857 /* MKAnnotationView+WebCache.m */; };
+		3955F96B1BBCFCD000429596 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3955F96A1BBCFCD000429596 /* libz.1.dylib */; };
+		3955F96D1BBCFCDF00429596 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3955F96C1BBCFCDF00429596 /* libstdc++.6.0.9.dylib */; };
 		39EBA3C71B8D6EC7009D392F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA3C61B8D6EC7009D392F /* CoreTelephony.framework */; };
 		39EBA3C91B8D6ED1009D392F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA3C81B8D6ED1009D392F /* SystemConfiguration.framework */; };
 		39EBA3CB1B8D6ED9009D392F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA3CA1B8D6ED9009D392F /* UIKit.framework */; };
 		39EBA3CD1B8D6EE6009D392F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA3CC1B8D6EE6009D392F /* Security.framework */; };
-		39EBA3CF1B8D6EEC009D392F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA3CE1B8D6EEC009D392F /* libz.dylib */; };
-		39EBA3D11B8D6EF4009D392F /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA3D01B8D6EF4009D392F /* libstdc++.6.0.9.dylib */; };
 		39EBA3D41B8D6F00009D392F /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA3D21B8D6F00009D392F /* AMapSearchKit.framework */; };
 		39EBA3D51B8D6F00009D392F /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EBA3D31B8D6F00009D392F /* MAMapKit.framework */; };
 		4C6F96C814AF704100F8389A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C6F96C714AF704100F8389A /* Foundation.framework */; };
@@ -181,6 +181,10 @@
 		2615E44A18CD57C700447857 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+ImageContentType.m"; path = "Libraries/SDWebImage/SDWebImage/NSData+ImageContentType.m"; sourceTree = SOURCE_ROOT; };
 		2615E44D18CD57E500447857 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MKAnnotationView+WebCache.h"; path = "Libraries/SDWebImage/SDWebImage/MKAnnotationView+WebCache.h"; sourceTree = SOURCE_ROOT; };
 		2615E44E18CD57E500447857 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MKAnnotationView+WebCache.m"; path = "Libraries/SDWebImage/SDWebImage/MKAnnotationView+WebCache.m"; sourceTree = SOURCE_ROOT; };
+		3955F9661BBCD96A00429596 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		3955F9681BBCD97200429596 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		3955F96A1BBCFCD000429596 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
+		3955F96C1BBCFCDF00429596 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "../../../../../../usr/lib/libstdc++.6.0.9.dylib"; sourceTree = "<group>"; };
 		39EBA3C61B8D6EC7009D392F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		39EBA3C81B8D6ED1009D392F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		39EBA3CA1B8D6ED9009D392F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -216,10 +220,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3955F96D1BBCFCDF00429596 /* libstdc++.6.0.9.dylib in Frameworks */,
+				3955F96B1BBCFCD000429596 /* libz.1.dylib in Frameworks */,
 				39EBA3D41B8D6F00009D392F /* AMapSearchKit.framework in Frameworks */,
 				39EBA3D51B8D6F00009D392F /* MAMapKit.framework in Frameworks */,
-				39EBA3D11B8D6EF4009D392F /* libstdc++.6.0.9.dylib in Frameworks */,
-				39EBA3CF1B8D6EEC009D392F /* libz.dylib in Frameworks */,
 				39EBA3CD1B8D6EE6009D392F /* Security.framework in Frameworks */,
 				39EBA3CB1B8D6ED9009D392F /* UIKit.framework in Frameworks */,
 				39EBA3C91B8D6ED1009D392F /* SystemConfiguration.framework in Frameworks */,
@@ -303,6 +307,10 @@
 		4C6F96C614AF704100F8389A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3955F96C1BBCFCDF00429596 /* libstdc++.6.0.9.dylib */,
+				3955F96A1BBCFCD000429596 /* libz.1.dylib */,
+				3955F9681BBCD97200429596 /* libstdc++.6.0.9.tbd */,
+				3955F9661BBCD96A00429596 /* libz.tbd */,
 				39EBA3D21B8D6F00009D392F /* AMapSearchKit.framework */,
 				39EBA3D31B8D6F00009D392F /* MAMapKit.framework */,
 				39EBA3D01B8D6EF4009D392F /* libstdc++.6.0.9.dylib */,
