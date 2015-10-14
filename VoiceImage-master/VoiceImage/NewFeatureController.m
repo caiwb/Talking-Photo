@@ -74,14 +74,45 @@
 
 - (void)setupLastImageView:(UIImageView *)imageView
 {
-    // 开启最后一页的交互功能
+    // 最后一页
     imageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startClick)];
-    [imageView addGestureRecognizer:singleTap];
+    UIButton * weixin = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton * qq = [UIButton buttonWithType:UIButtonTypeCustom];
+    weixin.frame = CGRectMake(imageView.bounds.size.width*1/6, imageView.bounds.size.height*3/4, 100, 40);
+    qq.frame = CGRectMake(imageView.bounds.size.width*5/6-100, imageView.bounds.size.height*3/4, 100, 40);
+    [weixin setTitle:@"微信登录" forState:UIControlStateNormal];
+    [weixin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [weixin.layer setMasksToBounds:YES];
+    [weixin.layer setCornerRadius:10.0];
+    [weixin.layer setBorderWidth:1.0];
+    [weixin.layer setBorderColor:CGColorCreate(CGColorSpaceCreateDeviceRGB(), (CGFloat[]){ 225, 225, 225, 1 })];
+    [qq setTitle:@"QQ登录" forState:UIControlStateNormal];
+    [qq setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [qq.layer setMasksToBounds:YES];
+    [qq.layer setCornerRadius:10.0];
+    [qq.layer setBorderWidth:1.0];
+    [qq.layer setBorderColor:CGColorCreate(CGColorSpaceCreateDeviceRGB(), (CGFloat[]){ 225, 225, 225, 1 })];
+    
+    [imageView addSubview:weixin];
+    [imageView addSubview:qq];
+    
+    [weixin addTarget:self action:@selector(loginByWechat) forControlEvents:UIControlEventTouchDown];
+    [qq addTarget:self action:@selector(loginByQQ) forControlEvents:UIControlEventTouchDown];
+
+    
 }
 
+- (void)loginByWechat
+{
+    [self start];
+}
 
-- (void)startClick
+-(void)loginByQQ
+{
+    [self start];
+}
+
+- (void)start
 {
     if (self.delegate != nil) {
         [self.delegate startApp];

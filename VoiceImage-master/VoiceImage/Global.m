@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Global.h"
 
-NSString* host = @"10.172.88.75:8888";
-//NSString* host = @"10.172.88.78:8888";
-//NSString* host = @"192.168.191.1:8888";
+NSString* host = @"192.168.1.100:8888";
 //NSString* host = @"vophoto-test.chinacloudapp.cn:8888";
 
 NSString* userId = @"";

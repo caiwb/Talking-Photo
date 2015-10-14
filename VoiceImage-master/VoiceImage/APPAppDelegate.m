@@ -29,10 +29,9 @@
 @property (nonatomic, strong) CLLocationManager * locationManager;
 @property (nonatomic, strong) CLGeocoder *geocoder;
 @property (nonatomic, strong) CLPlacemark *placemark;
-
+@property (strong, nonatomic) UINavigationController * mainViewController;
 @property (nonatomic, assign) BOOL isNotLoop;//LaunchScreen 持续时间，默认为NO
 @property (nonatomic, assign) BOOL isFirst;
-@property (strong, nonatomic) UINavigationController * mainViewController;
 @property (strong, nonatomic) CameraOverlayController * cameraViewController;
 
 @end

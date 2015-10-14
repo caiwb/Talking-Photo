@@ -20,9 +20,6 @@
 		393374501B9C6EF4002455BB /* Dzst_splash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3933744C1B9C6EF4002455BB /* Dzst_splash2.png */; };
 		393374511B9C6EF4002455BB /* Dzst_splash3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3933744D1B9C6EF4002455BB /* Dzst_splash3.png */; };
 		393374521B9C6EF4002455BB /* Dzst_splash4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3933744E1B9C6EF4002455BB /* Dzst_splash4.png */; };
-		3955F96F1BBCFE6600429596 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3955F96E1BBCFE6600429596 /* libz.1.dylib */; };
-		3955F9711BBCFE7800429596 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3955F9701BBCFE7800429596 /* libstdc++.6.0.9.dylib */; };
-		3955F9731BBCFEA800429596 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3955F9721BBCFEA800429596 /* libsqlite3.dylib */; };
 		397135791B96BF350092B846 /* Dzst_cbl_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3971356E1B96BF350092B846 /* Dzst_cbl_avatar.png */; };
 		3971357A1B96BF350092B846 /* Dzst_cbl_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */; };
 		3971357B1B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */; };
@@ -86,6 +83,17 @@
 		39EBA45C1B8DF3B3009D392F /* YRSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA45B1B8DF3B3009D392F /* YRSideViewController.m */; };
 		39EBA4601B8DF526009D392F /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EBA45E1B8DF526009D392F /* SettingViewController.m */; };
 		39EBA4611B8DF526009D392F /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39EBA45F1B8DF526009D392F /* SettingViewController.xib */; };
+		39F53BFC1BC0C7B80033732A /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F53BFB1BC0C7B80033732A /* libz.1.dylib */; };
+		39F53BFE1BC0C7CF0033732A /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F53BFD1BC0C7CF0033732A /* libstdc++.6.0.9.dylib */; };
+		39F53C001BC0C7E20033732A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F53BFF1BC0C7E20033732A /* libsqlite3.dylib */; };
+		39F53C0A1BCBEDDF0033732A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39F53C091BCBEDDF0033732A /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		39F53C0F1BCCE1380033732A /* MerchantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F53C0D1BCCE1380033732A /* MerchantViewController.m */; settings = {ASSET_TAGS = (); }; };
+		39F53C101BCCE1380033732A /* MerchantViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39F53C0E1BCCE1380033732A /* MerchantViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		39F53C131BCDF1230033732A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F53C121BCDF1230033732A /* StoreKit.framework */; };
+		39F53C381BCDF8950033732A /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F53C311BCDF8950033732A /* IAPHelper.m */; settings = {ASSET_TAGS = (); }; };
+		39F53C391BCDF8950033732A /* IAPShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F53C331BCDF8950033732A /* IAPShare.m */; settings = {ASSET_TAGS = (); }; };
+		39F53C3A1BCDF8950033732A /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F53C351BCDF8950033732A /* NSString+Base64.m */; settings = {ASSET_TAGS = (); }; };
+		39F53C3B1BCDF8950033732A /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F53C371BCDF8950033732A /* SFHFKeychainUtils.m */; settings = {ASSET_TAGS = (); }; };
 		5C3F0EA21BA2A9CF009C9CBD /* RectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F0EA11BA2A9CF009C9CBD /* RectangleView.m */; };
 		5CECCBE71BA2E9F70070927E /* Dzst_face_detect.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CECCBE61BA2E9F60070927E /* Dzst_face_detect.png */; };
 		5CECCBE91BA2EC130070927E /* Dzst_upload.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CECCBE81BA2EC130070927E /* Dzst_upload.png */; };
@@ -184,13 +192,6 @@
 		3933744C1B9C6EF4002455BB /* Dzst_splash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_splash2.png; sourceTree = "<group>"; };
 		3933744D1B9C6EF4002455BB /* Dzst_splash3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_splash3.png; sourceTree = "<group>"; };
 		3933744E1B9C6EF4002455BB /* Dzst_splash4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_splash4.png; sourceTree = "<group>"; };
-		3955F95E1BBCD92900429596 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		3955F9601BBCD93800429596 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		3955F9621BBCD94B00429596 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
-		3955F9641BBCD95200429596 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		3955F96E1BBCFE6600429596 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
-		3955F9701BBCFE7800429596 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "../../../../../usr/lib/libstdc++.6.0.9.dylib"; sourceTree = "<group>"; };
-		3955F9721BBCFEA800429596 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		3971356E1B96BF350092B846 /* Dzst_cbl_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_avatar.png; sourceTree = "<group>"; };
 		3971356F1B96BF350092B846 /* Dzst_cbl_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_bg.png; sourceTree = "<group>"; };
 		397135701B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_cbl_icon_arrow_click.png; sourceTree = "<group>"; };
@@ -271,6 +272,23 @@
 		39EBA45D1B8DF526009D392F /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		39EBA45E1B8DF526009D392F /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		39EBA45F1B8DF526009D392F /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		39F53BFB1BC0C7B80033732A /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
+		39F53BFD1BC0C7CF0033732A /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "../../../../../usr/lib/libstdc++.6.0.9.dylib"; sourceTree = "<group>"; };
+		39F53BFF1BC0C7E20033732A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
+		39F53C091BCBEDDF0033732A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		39F53C0B1BCC05400033732A /* 大嘴说图.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "大嘴说图.entitlements"; sourceTree = "<group>"; };
+		39F53C0C1BCCE1380033732A /* MerchantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantViewController.h; sourceTree = "<group>"; };
+		39F53C0D1BCCE1380033732A /* MerchantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantViewController.m; sourceTree = "<group>"; };
+		39F53C0E1BCCE1380033732A /* MerchantViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MerchantViewController.xib; sourceTree = "<group>"; };
+		39F53C121BCDF1230033732A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		39F53C301BCDF8950033732A /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
+		39F53C311BCDF8950033732A /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
+		39F53C321BCDF8950033732A /* IAPShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPShare.h; sourceTree = "<group>"; };
+		39F53C331BCDF8950033732A /* IAPShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPShare.m; sourceTree = "<group>"; };
+		39F53C341BCDF8950033732A /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
+		39F53C351BCDF8950033732A /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		39F53C361BCDF8950033732A /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		39F53C371BCDF8950033732A /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		5C3F0EA01BA2A9CF009C9CBD /* RectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectangleView.h; sourceTree = "<group>"; };
 		5C3F0EA11BA2A9CF009C9CBD /* RectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectangleView.m; sourceTree = "<group>"; };
 		5CECCBE61BA2E9F60070927E /* Dzst_face_detect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dzst_face_detect.png; sourceTree = "<group>"; };
@@ -361,9 +379,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3955F9731BBCFEA800429596 /* libsqlite3.dylib in Frameworks */,
-				3955F9711BBCFE7800429596 /* libstdc++.6.0.9.dylib in Frameworks */,
-				3955F96F1BBCFE6600429596 /* libz.1.dylib in Frameworks */,
+				39F53C131BCDF1230033732A /* StoreKit.framework in Frameworks */,
+				39F53C001BC0C7E20033732A /* libsqlite3.dylib in Frameworks */,
+				39F53BFE1BC0C7CF0033732A /* libstdc++.6.0.9.dylib in Frameworks */,
+				39F53BFC1BC0C7B80033732A /* libz.1.dylib in Frameworks */,
 				39EBA4131B8D963F009D392F /* AMapSearchKit.framework in Frameworks */,
 				39EBA4141B8D963F009D392F /* MAMapKit.framework in Frameworks */,
 				39EBA40E1B8D961E009D392F /* UIKit.framework in Frameworks */,
@@ -512,6 +531,21 @@
 			path = YRSideViewController;
 			sourceTree = "<group>";
 		};
+		39F53C2F1BCDF8950033732A /* IAPHelper */ = {
+			isa = PBXGroup;
+			children = (
+				39F53C301BCDF8950033732A /* IAPHelper.h */,
+				39F53C311BCDF8950033732A /* IAPHelper.m */,
+				39F53C321BCDF8950033732A /* IAPShare.h */,
+				39F53C331BCDF8950033732A /* IAPShare.m */,
+				39F53C341BCDF8950033732A /* NSString+Base64.h */,
+				39F53C351BCDF8950033732A /* NSString+Base64.m */,
+				39F53C361BCDF8950033732A /* SFHFKeychainUtils.h */,
+				39F53C371BCDF8950033732A /* SFHFKeychainUtils.m */,
+			);
+			path = IAPHelper;
+			sourceTree = "<group>";
+		};
 		EB2397C61B44E066004182BC = {
 			isa = PBXGroup;
 			children = (
@@ -536,6 +570,8 @@
 		EB2397D11B44E066004182BC /* VoiceImage */ = {
 			isa = PBXGroup;
 			children = (
+				39F53C0B1BCC05400033732A /* 大嘴说图.entitlements */,
+				39F53C2F1BCDF8950033732A /* IAPHelper */,
 				392CAB821B9FC0A3001F284A /* SVProgressHUD */,
 				393374341B9C0C09002455BB /* Reachability */,
 				39B38F621B954EAB0090A809 /* Images */,
@@ -544,6 +580,7 @@
 				EB85AA9E1B5CE1F300F4F4F3 /* UI */,
 				EB85AA571B5CDFD600F4F4F3 /* EZAudio */,
 				EB85AA9F1B5CE22700F4F4F3 /* Source */,
+				39F53C091BCBEDDF0033732A /* Images.xcassets */,
 				EB2397D21B44E066004182BC /* Supporting Files */,
 			);
 			path = VoiceImage;
@@ -633,13 +670,10 @@
 		EB85AA9D1B5CE04900F4F4F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3955F9721BBCFEA800429596 /* libsqlite3.dylib */,
-				3955F9701BBCFE7800429596 /* libstdc++.6.0.9.dylib */,
-				3955F96E1BBCFE6600429596 /* libz.1.dylib */,
-				3955F9641BBCD95200429596 /* libsqlite3.tbd */,
-				3955F9621BBCD94B00429596 /* libstdc++.6.0.9.tbd */,
-				3955F9601BBCD93800429596 /* libsqlite3.0.tbd */,
-				3955F95E1BBCD92900429596 /* libz.tbd */,
+				39F53C121BCDF1230033732A /* StoreKit.framework */,
+				39F53BFF1BC0C7E20033732A /* libsqlite3.dylib */,
+				39F53BFD1BC0C7CF0033732A /* libstdc++.6.0.9.dylib */,
+				39F53BFB1BC0C7B80033732A /* libz.1.dylib */,
 				39EBA4111B8D963F009D392F /* AMapSearchKit.framework */,
 				39EBA4121B8D963F009D392F /* MAMapKit.framework */,
 				39EBA40F1B8D9633009D392F /* libstdc++.6.0.9.dylib */,
@@ -675,6 +709,7 @@
 				EB23980F1B44E733004182BC /* LaunchScreen.xib */,
 				EB2398131B44EEE7004182BC /* TagPhotoViewController.xib */,
 				EB2398181B44F05B004182BC /* CompleteViewController.xib */,
+				39F53C0E1BCCE1380033732A /* MerchantViewController.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -690,6 +725,8 @@
 				393374441B9C6566002455BB /* NewFeatureController.m */,
 				39EBA45D1B8DF526009D392F /* SettingViewController.h */,
 				39EBA45E1B8DF526009D392F /* SettingViewController.m */,
+				39F53C0C1BCCE1380033732A /* MerchantViewController.h */,
+				39F53C0D1BCCE1380033732A /* MerchantViewController.m */,
 				39809E771B9D6D6E00014A0C /* DropdownMenu.h */,
 				39809E781B9D6D6E00014A0C /* DropdownMenu.m */,
 				EB23981B1B450A27004182BC /* ImageInfo.h */,
@@ -773,6 +810,11 @@
 					EB2397CE1B44E066004182BC = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = KDU7J4D4DG;
+						SystemCapabilities = {
+							com.apple.OMC = {
+								enabled = 1;
+							};
+						};
 					};
 					EB2397E71B44E066004182BC = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -825,6 +867,7 @@
 				39B38F991B954EAB0090A809 /* photo_bg1@2x.png in Resources */,
 				397135801B96BF350092B846 /* Dzst_cbl_icon_wifi_off.png in Resources */,
 				39B38F881B954EAB0090A809 /* Dzst_mainpage_icon-camera@2x.png in Resources */,
+				39F53C101BCCE1380033732A /* MerchantViewController.xib in Resources */,
 				5CECCBE71BA2E9F70070927E /* Dzst_face_detect.png in Resources */,
 				39B38F981B954EAB0090A809 /* icon.png in Resources */,
 				392CAB8C1B9FC0A3001F284A /* SVProgressHUD.bundle in Resources */,
@@ -836,6 +879,7 @@
 				39B38ED41B9024310090A809 /* PickerViewController.xib in Resources */,
 				3971357F1B96BF350092B846 /* Dzst_cbl_icon_Wechat.png in Resources */,
 				39B38F891B954EAB0090A809 /* Dzst_mainpage_icon_search@2x.png in Resources */,
+				39F53C0A1BCBEDDF0033732A /* Images.xcassets in Resources */,
 				3971357B1B96BF350092B846 /* Dzst_cbl_icon_arrow_click.png in Resources */,
 				39B38F861B954EAB0090A809 /* Dzst_mainpage_bg@2x.png in Resources */,
 				39EBA4611B8DF526009D392F /* SettingViewController.xib in Resources */,
@@ -896,6 +940,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39F53C3A1BCDF8950033732A /* NSString+Base64.m in Sources */,
 				EB85AA851B5CDFD600F4F4F3 /* EZPlot.m in Sources */,
 				EB2398141B44EEE7004182BC /* TagPhotoViewController.m in Sources */,
 				3933744A1B9C667A002455BB /* UIView+Extension.m in Sources */,
@@ -913,6 +958,7 @@
 				39EBA2B81B8B58C4009D392F /* AFURLRequestSerialization.m in Sources */,
 				EB85AA7B1B5CDFD600F4F4F3 /* EZAudioDisplayLink.m in Sources */,
 				39BDA2541B84719A00CBA988 /* DataBaseHelper.m in Sources */,
+				39F53C391BCDF8950033732A /* IAPShare.m in Sources */,
 				EB85AA821B5CDFD600F4F4F3 /* EZAudioUtilities.m in Sources */,
 				EB85AA871B5CDFD600F4F4F3 /* TPCircularBuffer.c in Sources */,
 				EB85AA841B5CDFD600F4F4F3 /* EZOutput.m in Sources */,
@@ -924,6 +970,8 @@
 				39BDA2191B84223F00CBA988 /* APPAppDelegate.m in Sources */,
 				EB85AA7A1B5CDFD600F4F4F3 /* EZAudioDevice.m in Sources */,
 				39EBA2B61B8B58C4009D392F /* AFSecurityPolicy.m in Sources */,
+				39F53C3B1BCDF8950033732A /* SFHFKeychainUtils.m in Sources */,
+				39F53C381BCDF8950033732A /* IAPHelper.m in Sources */,
 				392CAB8E1B9FC0A3001F284A /* SVRadialGradientLayer.m in Sources */,
 				39EBA2BA1B8B58C4009D392F /* AFURLSessionManager.m in Sources */,
 				39EBA4601B8DF526009D392F /* SettingViewController.m in Sources */,
@@ -939,6 +987,7 @@
 				39EBA2B51B8B58C4009D392F /* AFNetworkReachabilityManager.m in Sources */,
 				3991139E1B9566A000D6F672 /* CameraOverlayController.m in Sources */,
 				5C3F0EA21BA2A9CF009C9CBD /* RectangleView.m in Sources */,
+				39F53C0F1BCCE1380033732A /* MerchantViewController.m in Sources */,
 				EB85AA861B5CDFD600F4F4F3 /* EZRecorder.m in Sources */,
 				39EBA2B21B8B58C4009D392F /* AFHTTPRequestOperation.m in Sources */,
 				EB23981D1B450A73004182BC /* ImageInfo.m in Sources */,
@@ -1058,13 +1107,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
+				CODE_SIGN_ENTITLEMENTS = "VoiceImage/大嘴说图.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-=======
-				CODE_SIGN_IDENTITY = "iPhone Developer: tiantian wang (SNUH59W38D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tiantian wang (SNUH59W38D)";
->>>>>>> origin/master
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
@@ -1072,7 +1119,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/lib/sunflower";
 				INFOPLIST_FILE = VoiceImage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1092,13 +1139,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
+				CODE_SIGN_ENTITLEMENTS = "VoiceImage/大嘴说图.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-=======
-				CODE_SIGN_IDENTITY = "iPhone Developer: tiantian wang (SNUH59W38D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tiantian wang (SNUH59W38D)";
->>>>>>> origin/master
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
@@ -1106,7 +1151,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/lib/sunflower";
 				INFOPLIST_FILE = VoiceImage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

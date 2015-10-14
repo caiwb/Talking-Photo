@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,6 +13,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_loading_microsoft-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="8Wv-ty-YOi">
                     <rect key="frame" x="143" y="627" width="90" height="20"/>
+                    <animations/>
                     <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="76" y="520" width="90" height="20"/>
                     </variation>
@@ -21,6 +23,7 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大嘴说图" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzg-op-chV">
                     <rect key="frame" x="152" y="295" width="72" height="22"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -36,6 +39,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="让图片管理从此简单" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrC-fs-TqO">
                     <rect key="frame" x="121" y="325" width="135" height="18"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.38823529411764707" green="0.38823529411764707" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -46,8 +50,9 @@
                         <rect key="frame" x="112" y="314" width="135" height="18"/>
                     </variation>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_loading_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="a2J-cH-B2T">
+                <imageView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dzst_loading_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="a2J-cH-B2T">
                     <rect key="frame" x="140" y="191" width="96" height="96"/>
+                    <animations/>
                     <variation key="widthClass=regular" fixedFrame="YES">
                         <rect key="frame" x="112" y="89" width="96" height="96"/>
                     </variation>
@@ -59,13 +64,14 @@
                     </variation>
                 </imageView>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="rzg-op-chV" firstAttribute="centerX" secondItem="TrC-fs-TqO" secondAttribute="centerX" constant="-0.5" id="60X-Zp-FxC"/>
-                <constraint firstItem="8Wv-ty-YOi" firstAttribute="centerX" secondItem="TrC-fs-TqO" secondAttribute="centerX" constant="-0.5" id="CDP-is-te6"/>
-                <constraint firstAttribute="bottom" secondItem="8Wv-ty-YOi" secondAttribute="bottom" constant="20" symbolic="YES" id="HHL-84-0Wx"/>
+                <constraint firstItem="8Wv-ty-YOi" firstAttribute="centerX" secondItem="TrC-fs-TqO" secondAttribute="centerX" id="Inj-Tu-b8n"/>
                 <constraint firstAttribute="centerY" secondItem="TrC-fs-TqO" secondAttribute="centerY" id="PlT-3P-yJt"/>
                 <constraint firstItem="a2J-cH-B2T" firstAttribute="centerX" secondItem="rzg-op-chV" secondAttribute="centerX" id="aex-Zk-cIs"/>
+                <constraint firstAttribute="bottom" secondItem="8Wv-ty-YOi" secondAttribute="bottom" constant="20" id="cFR-ao-kEV"/>
                 <constraint firstItem="TrC-fs-TqO" firstAttribute="top" secondItem="rzg-op-chV" secondAttribute="bottom" constant="8" symbolic="YES" id="jKK-uq-CDx"/>
                 <constraint firstItem="rzg-op-chV" firstAttribute="top" secondItem="a2J-cH-B2T" secondAttribute="bottom" constant="8" symbolic="YES" id="vkw-7l-XTx"/>
                 <constraint firstAttribute="centerX" secondItem="TrC-fs-TqO" secondAttribute="centerX" constant="-0.5" id="yoY-cA-JQX"/>
